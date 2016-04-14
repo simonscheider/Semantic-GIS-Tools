@@ -18,7 +18,8 @@ import numpy
 class OSMLoad(object):
   ''' Object to get OSM data '''
 
-  pc = '' #This the OSM place category
+  key = '' #This the OSM place category key
+  value = '' #This the OSM place category value
   result = '' #This the result object
   rs = '' #This the reference system object of the current mapview
   placeCategories = {#this is a dictionary of place categories in OSM based on they key value pairs.
@@ -84,8 +85,8 @@ class OSMLoad(object):
         inarray = numpy.array([],
                           numpy.dtype([('intfield', numpy.int32),
                                        ('Name', '|S255'),
-                                       ('Value', '|S' + str(len(str(self.pc[0])))),
-                                       ('Key', '|S' + str(len(str(self.pc[1])))),
+                                       ('Value', '|S' + str(len(str(self. value)))),
+                                       ('Key', '|S' + str(len(str(self.key)))),
                                        ]))
 
         arcpy.da.ExtendTable(outFC, "OID@", inarray, "intfield")
@@ -101,7 +102,7 @@ class OSMLoad(object):
         for node in self.result.nodes:
             point = arcpy.PointGeometry(arcpy.Point(float(node.lon), float(node.lat)),arcpy.SpatialReference(4326)).projectAs(self.rs)
             try:
-              rowsDA.insertRow([node.tags.get("name", "n/a"), str(self.pc[0]), str(self.pc[1]),  point])
+              rowsDA.insertRow([node.tags.get("name", "n/a"), node.tags.get(self.key, "n/a"), self.key,  point])
               c=+1
             except RuntimeError, e:
               arcpy.AddError(str(e))
@@ -154,7 +155,8 @@ class OSMLoad(object):
                 print(tag+": %s" % node.tags.get(tag, "n/a"))
            print("    Lat: %f, Lon: %f" % (node.lat, node.lon))
         self.result = result
-        self.pc = [pc["value"],pc["key"]]
+        self.value = pc["value"]
+        self.key = pc["key"]
 
 def loadOSM(cat, tname):
     o = OSMLoad()
