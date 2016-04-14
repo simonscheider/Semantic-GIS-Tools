@@ -22,10 +22,21 @@ class OSMLoad(object):
   result = '' #This the result object
   rs = '' #This the reference system object of the current mapview
   placeCategories = {#this is a dictionary of place categories in OSM based on they key value pairs.
+  #Possible categories can be retrieved at:
+        "amenity": 	{"key" : "amenity","value" : "", "element" : "node"},
+        "shop": 	{"key" : "shop","value" : "", "element" : "node"},
         "bar": {"key" : "amenity", "value" : "bar", "element" : "node"},
         "police": {"key" : "amenity", "value" : "police", "element" : "node"},
         "optician": {"key" : "shop", "value" : "optician", "element" : "node"},
+        "station": {"key" : "railway", "value" : "station", "element" : "node"},
+        "ptstation": {"key" : "public_transport", "value" : "platform", "element" : "node"},
+        "office": {"key" : "office", "value" : "", "element" : "node"},
+        "leasure": {"key" : "leasure", "value" : "", "element" : "node"},
+        "historic": {"key" : "historic", "value" : "", "element" : "node"},
         }
+  placeList = sorted(placeCategories.keys())
+  base = ""
+  path = ""
 
   def listtoString(self,list):
         l = []
@@ -46,13 +57,28 @@ class OSMLoad(object):
 
     #print getCurentBBinWGS84()
 
-  def OSMtoShape(self, tname):
-        outFC = str(tname) #os.path.join(arcpy.env.workspace,arcpy.ValidateTableName(tname))
-        print outFC
+
+  def genPath(self):
+        self.path = str(arcpy.env.workspace)
+        self.base = arcpy.ValidateTableName("OSM")
+#        if (arcpy.Exists(outFC)):
+#            d = arcpy.Describe(outFC)
+#            path = d.path
+#            base = d.basename
+#        else:
+        outFC = os.path.join(self.path,self.base)
+        nr = 0
+        #if (outFC == path):
+        #    path = os.path.dirname(path)
+        while (arcpy.Exists(outFC)):
+            self.base = self.base+str(nr+1)
+            outFC = os.path.join(self.path,self.base)
+        return outFC
+
+  def OSMtoShape(self, outFC):
          # Create the output feature class in WGS84
         #outFC = os.path.join(arcpy.env.workspace,arcpy.ValidateTableName("OSM"))
         arcpy.CreateFeatureclass_management(os.path.dirname(outFC), os.path.basename(outFC), 'POINT', '', '', '', self.rs)
-
 
         # Join fields to the feature class, using ExtendTable
         inarray = numpy.array([],
@@ -101,9 +127,11 @@ class OSMLoad(object):
         print cat
         #placeCategory = "amenity=police"
 
-        pc = self.placeCategories.get(cat, self.placeCategories["bar"])
-
-        kv = pc["key"]+"="+pc["value"]
+        pc = self.placeCategories[cat]
+        if (pc["value"] == ""): #If querying only by key
+            kv = pc["key"]
+        else:
+            kv = pc["key"]+"="+pc["value"]
         elem = pc["element"]
 
         bbox = ", ".join(self.listtoString(self.getCurrentBBinWGS84()))#"50.600, 7.100, 50.748, 7.157"

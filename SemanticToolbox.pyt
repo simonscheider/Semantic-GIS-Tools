@@ -32,16 +32,16 @@ class LoadOSM(object):
         #cat.columns = [['String', 'OSM categories']
         o = OSMLoad.OSMLoad()
         cat.filter.type = 'ValueList'
-        cat.filter.list = o.placeCategories.keys()
+        cat.filter.list = o.placeCategories.keys().sort()
 
         outfeatures = arcpy.Parameter(
             displayName="Output Feature Class",
             name="outfeatures",
-            datatype = "Feature Class",#"GPFeatureLayer",
+            datatype = "GPFeatureLayer",
             parameterType="Required",
             direction="Output")
         outfeatures.filter.list = ["Point"]
-        outfeatures.value = os.path.join(arcpy.env.workspace,arcpy.ValidateTableName("OSM"))
+        #outfeatures.value = o.genPath()
 
         params = [cat, outfeatures]
         return params
@@ -54,8 +54,8 @@ class LoadOSM(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
-        if (parameters[1].value==None):
-          parameters[1].value = os.path.join(arcpy.env.workspace,arcpy.ValidateTableName("OSM"))
+##        if (parameters[1].value==None):
+##          parameters[1].value = os.path.join(arcpy.env.workspace,arcpy.ValidateTableName("OSM"))
         return
 
     def updateMessages(self, parameters):
@@ -66,5 +66,4 @@ class LoadOSM(object):
     def execute(self, parameters, messages):
         """The source code of the tool."""
         OSMLoad.loadOSM(parameters[0], parameters[1])
-        arcpy.AddMessage(parameters[0].value)
         return
