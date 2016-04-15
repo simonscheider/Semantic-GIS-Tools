@@ -20,6 +20,9 @@ class OSMLoad(object):
 
   key = '' #This the OSM place category key
   value = '' #This the OSM place category value
+  elem = ""
+  tag_set = set()# this is the list of tags that come with the result set
+  max_field_length = 0
   result = '' #This the result object
   rs = '' #This the reference system object of the current mapview
   placeCategories = {#this is a dictionary of place categories in OSM based on they key value pairs.
@@ -30,10 +33,13 @@ class OSMLoad(object):
         "police": {"key" : "amenity", "value" : "police", "element" : "node"},
         "optician": {"key" : "shop", "value" : "optician", "element" : "node"},
         "station": {"key" : "railway", "value" : "station", "element" : "node"},
-        "ptstation": {"key" : "public_transport", "value" : "platform", "element" : "node"},
+        "public transport station": {"key" : "public_transport", "value" : "platform", "element" : "node"},
         "office": {"key" : "office", "value" : "", "element" : "node"},
         "leasure": {"key" : "leasure", "value" : "", "element" : "node"},
         "historic": {"key" : "historic", "value" : "", "element" : "node"},
+        "civic building":  {"key" : "building", "value" : "civic", "element" : "area"},
+        "school building":  {"key" : "building", "value" : "school", "element" : "area"},
+        "building":  {"key" : "building", "value" : "", "element" : "area"},
         }
   placeList = sorted(placeCategories.keys())
   base = ""
@@ -76,34 +82,72 @@ class OSMLoad(object):
             outFC = os.path.join(self.path,self.base)
         return outFC
 
+  def createGeometry(self, element):
+    if (self.elem == "node"):
+         geom = arcpy.PointGeometry(arcpy.Point(float(element.lon), float(element.lat)),arcpy.SpatialReference(4326)).projectAs(self.rs)
+    elif (self.elem == "area"):
+         array = arcpy.Array()
+         for n in element.get_nodes(resolve_missing=True):
+            array.add(arcpy.Point(float(n.lon), float(n.lat)))
+         geom = arcpy.Polygon(array,arcpy.SpatialReference(4326)).projectAs(self.rs)
+    elif (self.elem == "line"):
+         array = arcpy.Array()
+         for n in element.get_nodes(resolve_missing=True):
+            array.add(arcpy.Point(float(n.lon), float(n.lat)))
+         geom = arcpy.Polyline(array,arcpy.SpatialReference(4326)).projectAs(self.rs)
+    return geom
+
   def OSMtoShape(self, outFC):
          # Create the output feature class in WGS84
         #outFC = os.path.join(arcpy.env.workspace,arcpy.ValidateTableName("OSM"))
-        arcpy.CreateFeatureclass_management(os.path.dirname(outFC), os.path.basename(outFC), 'POINT', '', '', '', self.rs)
+        if self.elem == "node":
+            fc = 'POINT'
+            res = self.result.nodes
+        elif self.elem == "area":
+            fc = 'POLYGON'
+            res = self.result.ways
+        elif self.elem == "line":
+            fc = 'POLYLINE'
+            res = self.result.ways
+
+        arcpy.CreateFeatureclass_management(os.path.dirname(outFC), os.path.basename(outFC), fc, '', '', '', self.rs)
 
         # Join fields to the feature class, using ExtendTable
+
+
+        tag_list = list(self.tag_set)
+        tag_fields = map(lambda s: str(arcpy.ValidateFieldName(s)), tag_list)
+        print tag_fields
+        field_array = [('intfield', numpy.int32),
+                        ('Name_d', '|S255'),
+                        ('Value_d', '|S255'),
+                        ('Key_d', '|S255'),
+                        ]
+        for f in tag_fields:
+            field_array.append((f, '|S255'))
+        print field_array
         inarray = numpy.array([],
-                          numpy.dtype([('intfield', numpy.int32),
-                                       ('Name', '|S255'),
-                                       ('Value', '|S' + str(len(str(self. value)))),
-                                       ('Key', '|S' + str(len(str(self.key)))),
-                                       ]))
+                          numpy.dtype(field_array))
 
         arcpy.da.ExtendTable(outFC, "OID@", inarray, "intfield")
 
-
-        rowsDA = arcpy.da.InsertCursor(outFC, ['Name', 'Value', 'Key', 'SHAPE@'])
+        field_list = ['Name_d', 'Value_d', 'Key_d', 'SHAPE@']
+        field_list.extend(tag_fields)
+        print field_list
+        rowsDA = arcpy.da.InsertCursor(outFC, field_list)
 
         #arcpy.SetProgressor('step', 'Converting GPX points...', 0, howManyElements, 1)
         # Loop over each point in the tree and put the information inside a new row
 
-        #Currently only nodes are explored
-        c = 0
-        for node in self.result.nodes:
-            point = arcpy.PointGeometry(arcpy.Point(float(node.lon), float(node.lat)),arcpy.SpatialReference(4326)).projectAs(self.rs)
+        #Geometries and attributes are inserted
+        for element in res:
+            geom = self.createGeometry(element)
+            f = lambda tag: element.tags.get(tag, "n/a")
+            tag_values = map(f,tag_list)
+            l = [element.tags.get("name", "n/a"), element.tags.get(self.key, "n/a"), self.key, geom]
+            l.extend(tag_values)
             try:
-              rowsDA.insertRow([node.tags.get("name", "n/a"), node.tags.get(self.key, "n/a"), self.key,  point])
-              c=+1
+              rowsDA.insertRow(l)
             except RuntimeError, e:
               arcpy.AddError(str(e))
 
@@ -125,7 +169,7 @@ class OSMLoad(object):
 
   def getOSMfeatures(self, cat):
         api = overpy.Overpass()
-        print cat
+        #print cat
         #placeCategory = "amenity=police"
 
         pc = self.placeCategories[cat]
@@ -135,26 +179,40 @@ class OSMLoad(object):
             kv = pc["key"]+"="+pc["value"]
         elem = pc["element"]
 
+        if (elem =="area" or elem == "line"):
+            OSMelem ="way"
+        else:
+            OSMelem ="node"
+
         bbox = ", ".join(self.listtoString(self.getCurrentBBinWGS84()))#"50.600, 7.100, 50.748, 7.157"
 
         #Using Overpass API: http://wiki.openstreetmap.org/wiki/Overpass_API
-        result = api.query(elem+"""("""+bbox+""") ["""+kv+"""];out body;
+        result = api.query(OSMelem+"""("""+bbox+""") ["""+kv+"""];out body;
             """)
         results = []
         if (elem == "node"):
             results = result.nodes
-        elif (elem == "way"):
+        elif (elem == "area" or elem == "line"):
             results = result.ways
 
         print("Number of results:" + str(len(results)))
-        for node in results:
+        self.max_field_length = 0
+        for element in results:
             #print node.tags
            # print node.tags.
-           for tag in node.tags:
-              #  print(tag)
-                print(tag+": %s" % node.tags.get(tag, "n/a"))
-           print("    Lat: %f, Lon: %f" % (node.lat, node.lon))
+           #print element.id
+           for tag in element.tags:
+                #print(tag+": %s" % element.tags.get(tag, "n/a"))
+                self.tag_set.add(tag)
+                self.max_field_length= max(len(element.tags.get(tag, "n/a")),self.max_field_length)
+##           if  (elem == "area" or elem == "line"):
+##              for n in element.get_nodes(resolve_missing=True):
+##                print("    Lat: %f, Lon: %f" % (n.lat, n.lon))
+##           else:
+##                print("    Lat: %f, Lon: %f" % (element.lat, element.lon))
+
         self.result = result
+        self.elem = elem
         self.value = pc["value"]
         self.key = pc["key"]
 
@@ -167,4 +225,6 @@ def loadOSM(cat, tname):
 if __name__ == "__main__":
     cat = arcpy.GetParameterAsText(0)
     tname = arcpy.GetParameterAsText(1)
+    #cat = "bar"
+    #tname = r"C:\Users\simon\Documents\ArcGIS\Default.gdb\LoadOSM"
     loadOSM(cat, tname)
