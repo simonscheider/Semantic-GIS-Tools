@@ -160,7 +160,7 @@ class Tuple(Type):
 
 
 
-class Set(Type):
+class Sett(Type):
     """The set type constructor"""
     def __init__(self, settype, typeName="Set"):
         self.name=typeName
@@ -175,7 +175,7 @@ class Set(Type):
     def subType(self,thing):
         if (isinstance(thing,a)):
             b = True
-        elif (isinstance(thing,Set)):
+        elif (isinstance(thing,Sett)):
             b = (self.of.subType(thing.of))
         else:
             b = False
@@ -187,7 +187,7 @@ class Set(Type):
             if vdict.get(other,self.default)==self.default:
                 vdict[other]=self
             else:
-                r = isinstance(vdict.get(other),Set)
+                r = isinstance(vdict.get(other),Sett)
         else:
             r = self.of.getvariables(other.of,vdict)
         return r
@@ -274,17 +274,17 @@ if __name__ == '__main__':
 def test():
     #Testing the type schema
     field = Fun(Tuple(T(),S()),Q())
-    pointset = Set(Tuple(S(),Tuple(T(),Q())))
+    pointset = Sett(Tuple(S(),Tuple(T(),Q())))
     ai = a("ae")
-    abstractpointset = Set(Tuple(a(),Tuple(a(),a())))
-    abstractpointset2 = Set(Tuple(ai,Tuple(ai,ai)))
+    abstractpointset = Sett(Tuple(a(),Tuple(a(),a())))
+    abstractpointset2 = Sett(Tuple(ai,Tuple(ai,ai)))
 
     field2 = Fun(S(),Fun(T(),Q()))
     abstractfunction = Fun(a(),Fun(a(),a()))
 
     abstractfunction2 = Fun(ai,Fun(ai,ai))
 
-    pointset2 = Set(Tuple(Referent(),Tuple(Referent(),Referent())))
+    pointset2 = Sett(Tuple(Referent(),Tuple(Referent(),Referent())))
 
     function = Fun(S(),Fun(ai,ai))
 
