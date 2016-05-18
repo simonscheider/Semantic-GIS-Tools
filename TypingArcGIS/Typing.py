@@ -19,11 +19,14 @@ class Type:
     def __init__(self, typeName="Type"):
         self.name=typeName
         self.setType =self
+        """This attribute (potentially) contains another type that is to be unified with the current one"""
         self.default = {}
     def __str__(self):
         return self.name
+        """A string representation of this type"""
     def subType(self,thing):
-        """This method compares two types for the subtype relation"""
+        """This method compares whether the current type is a subtype of another. Per default, this is based on the subclass relation (but for different subtypes, this method is overwritten)"""
+        b = False
         if (isinstance(thing,a)):
             #Everything is a subtype of a type variable 'a
             b = True
@@ -33,35 +36,40 @@ class Type:
         #print str(self)+" subtype of "+str(thing)+" ? :"+str(b)
         return b
     def unify(self):
-        """This method tries to unify this type with those types that are set in its attribute 'setType'"""
+        """This method tries to unify the current type with the type that is set in its attribute 'setType' and returns the most specific type. Just prints a message about failure or success."""
         variables ={}
+        #print "hallo..."+str(self.setType.subType(self))+str(self.subType(self.setType))
         if self.subType(self.setType):
             return self
         elif self.setType.subType(self):
+            #print "substitute "+str(self) + "with "+str(self.setType)
             if self.setType.getvariables(self,variables):
+                print "substitute "+str(self) + " with "+str(self.setType)
                 return self.setType
             else:
                 print str(self.__class__.__name__)+" type unification of "+str(self)+" with "+str(self.setType)+" failed because of inconsistent variables"
                 return self
         else:
             return self
+
     def getvariables(self, other, vdict):
-        """This method stores type substitutes for type variables contained in 'other' (needs to be supertype of self) as key (type variable from other) value (type substitute from self) pairs in vdict.
-        If the type variable is already existent in vdict and points to another type, then a syntactic contradiction is raised and returned as boolean value (i.e. type variables need to be consistently substituted)."""
+        """Method to substitute type variables with types. This method associates type variables contained in the type 'other' (needs to be a supertype of self) with the current type and stores type substitutes as key (=type variable from other) value (=type substitute from self) pairs in the dictionary vdict.
+        If the type variable is already existent in vdict and points to a different type, then a syntactic contradiction is raised and returned as boolean value (i.e. type variables need to be consistently substituted)."""
         r = True
-        if (isinstance(other,a) ):
-           if vdict.get(other,self.default)==self.default:
+        if (isinstance(other,a) ): # is a type variable
+           if vdict.get(other,self.default)==self.default: #type variable not yet discovered
                 vdict[other]=self
-           else:
-                r = isinstance(vdict.get(other),self.__class__)
+           else: #type variable already discovered
+                r = isinstance(vdict.get(other),self.__class__) #is the substitute of the same type as the current type?
         return r
+
     def setvariables(self,vdict):
         """Type variable substitution with concrete types."""
         pass
 
 
 class a(Type):
-    """A type variable class"""
+    """A type variable. This class is used to generate empty (variable) types, which can be substituted by any other type."""
     def __init__(self, typeName="'a"):
         self.name="'"+random.choice(string.letters).lower()
         self.setType =self
@@ -114,12 +122,14 @@ class Bool(Referent):
 
 
 class Tuple(Type):
-    """The tuple type constructor"""
+    """The tuple type constructor. This type is used to build n-ary tuples by recursion."""
     def __init__(self, fst, snd, typeName="Tuple"):
         self.name=typeName
         self.setType =self
         self.fst = fst
+        """The head of the tuple"""
         self.snd = snd
+        """The tail of the tuple"""
         self.default = {}
     def __str__(self):
         strr = ""
@@ -137,7 +147,7 @@ class Tuple(Type):
             b = False
         return b
     def getvariables(self, other, vdict):
-        """A recursive Tuple version of type variable substitute check (passes on to lower levels)"""
+        """A recursive Tuple version of type variable substitute check (passes on to lower levels in the type tree)"""
         r = True
         if (isinstance(other,a) ):
            if vdict.get(other,self.default)==self.default:
@@ -149,12 +159,12 @@ class Tuple(Type):
         return r
 
     def setvariables(self,vdict):
-        """A recursive Tuple version of type variable substitution (passes on to lower levels)"""
+        """A recursive Tuple version of type variable substitution (passes on to lower levels in the type tree). """
         if (vdict.get(self.fst,self.default)!=self.default):
             self.fst = vdict[self.fst]
         elif (vdict.get(self.snd,self.default)!=self.default):
             self.snd = vdict[self.snd]
-        else:
+        else: # passing on to lower levels in the type tree
             self.fst.setvariables(vdict)
             self.snd.setvariables(vdict)
 
@@ -166,6 +176,7 @@ class Sett(Type):
         self.name=typeName
         self.setType =self
         self.of = settype
+        """Of links to the type of the elements of the type of set (e.g. "T" in "T Set")"""
         self.default = {}
     def __str__(self):
         strr = ""
@@ -173,6 +184,7 @@ class Sett(Type):
         strr+="Set"
         return strr
     def subType(self,thing):
+        """A recursive Set version of subtype check (passes on to lower levels)"""
         if (isinstance(thing,a)):
             b = True
         elif (isinstance(thing,Sett)):
@@ -206,43 +218,49 @@ class Fun(Type):
         self.name=typeName
         self.setType =self
         self.getIn = input
+        """This is the input type of the function type. Note that function types are always unary, as n-ary functions are recursively defined (with a corresponding function as output."""
         self.getOut = output
+        """This is the output type of the function type"""
         self.setIn = input
         self.default = {}
     def __str__(self):
          strr = ""
          strr+= str(self.getIn)
-         strr+= "=:"#(u"\u2192").encode("utf-8")
+         strr+= "=:"#This is supposed to be the function arrow (u"\u2192").encode("utf-8")
          strr+= str(self.getOut)
          return strr
     def subType(self,thing):
         if (isinstance(thing,a)):
             b = True
-        elif (isinstance(thing,Fun)):
+        elif (isinstance(thing,Fun)):#Are inputs and outputs subtypes of each other?
             b = (self.getIn.subType(thing.getIn) and self.getOut.subType(thing.getOut))
         else:
             b = False
         return b
     def unify(self):
-        """A Fun version of type unification. It first tries to unify the function type with a set input (setIn). Then tries to unify the function with a preset type (setType)"""
+        """A Fun version of type unification. It first tries to unify the function type with a set input ("setIn"). Then it tries to unify the function with a preset type (setType)"""
         variables = {}
-        #print str(self.setIn.subType(self.getIn))
+        #This unifies the function type with an intended input
         if self.setIn.subType(self.getIn) and self.setIn.getvariables(self.getIn,variables):
-            #self.getIn =self.setIn
             #print str(variables)
+            print "substitute "+str(self.getIn) + " with "+str(self.setIn)
             self.setvariables(variables)
         else:
              print "function type unification of "+str(self)+" with input "+str(self.setIn)+" failed because of inconsistent variables"
+
         variables = {}
+         #This unifies the function type as a whole with what is set in setType
         if self.subType(self.setType):
             return self
         elif self.setType.subType(self):
             if self.setType.getvariables(self,variables):
+                print "substitute "+str(self) + " with "+str(self.setType)
                 return self.setType
             else:
                 print "function type unification of "+str(self)+" with "+str(self.setType)+" failed because of inconsistent variables"
                 return self
         else:
+            print "function type unification of "+str(self)+" with "+str(self.setType)+" failed because of incompatible types"
             return self
     def getvariables(self, other, vdict):
         """A recursive Fun version of type variable substitute check (passes on to lower levels)"""
