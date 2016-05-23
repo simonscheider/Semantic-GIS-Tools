@@ -22,7 +22,7 @@ class inst:
     id= "inst"
     succ = {} #The predecessor node in the graph stored when DFS searching. Here called successor because we are backtracking
     link = "" # This is the kind of backlink found when DFS searching through the graph
-    col= "w" # This is the color used in DFS backtracking through the derivation graph
+    col= "w" # This is the color used in DFS backtracking through the derivation graph, inititially "white"
     def __init__(self, type=a(), name="inst"):
         self.type = type
         """Atrribute that links this instance to its type"""
