@@ -224,11 +224,15 @@ class Fun(Type):
         self.setIn = input
         self.default = {}
     def __str__(self):
-         strr = ""
-         strr+= str(self.getIn)
-         strr+= "=:"#This is supposed to be the function arrow (u"\u2192").encode("utf-8")
-         strr+= str(self.getOut)
-         return strr
+        if  (isinstance(self.getIn,Fun)):
+            ins = "("+str(self.getIn)+")"
+        else:
+            ins = str(self.getIn)
+        strr = ""
+        strr+= ins
+        strr+= "=:"#This is supposed to be the function arrow (u"\u2192").encode("utf-8")
+        strr+= str(self.getOut)
+        return strr
     def subType(self,thing):
         if (isinstance(thing,a)):
             b = True
@@ -245,7 +249,7 @@ class Fun(Type):
             #print str(variables)
             print "substitute "+str(self.getIn) + " with "+str(self.setIn)
             self.setvariables(variables)
-        else:
+        elif (not self.getIn.subType(self.setIn)):
              print "function type unification of "+str(self)+" with input "+str(self.setIn)+" failed because of inconsistent variables"
 
         variables = {}
