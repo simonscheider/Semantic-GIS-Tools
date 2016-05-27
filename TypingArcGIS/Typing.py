@@ -67,6 +67,8 @@ class Type:
         """Type variable substitution with concrete types."""
         pass
 
+#####################################################################################
+#These are basic types (including type constructors)
 
 class a(Type):
     """A type variable. This class is used to generate empty (variable) types, which can be substituted by any other type."""
@@ -84,9 +86,15 @@ class Referent(Type):
         self.setType =self
         self.default = {}
 
-
-class S(Referent):
+class Space(Referent):
     """The type of spatial referents"""
+    def __init__(self, typeName="Space"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class S(Space):
+    """The type of spatial points"""
     def __init__(self, typeName="S"):
         self.name=typeName
         self.setType =self
@@ -120,6 +128,7 @@ class Bool(Referent):
         self.setType =self
         self.default = {}
 
+#Type constructors
 
 class Tuple(Type):
     """The tuple type constructor. This type is used to build n-ary tuples by recursion."""
@@ -288,10 +297,62 @@ class Fun(Type):
         else:
             self.getOut.setvariables(vdict)
 
+##################################################################
+#Here we add some important type synonyms (abbreviations for complex types) and subtypes for spatio-temporal data
+
+class R(Sett, Space):
+    def __init__(self, typeName="R"):
+        self.name=typeName
+        self.setType =self
+        self.of = S()
+        """Of links to the type of the elements of the type of set (e.g. "S" in "S Set")"""
+        self.default = {}
+
+class Line(R):
+     def __init__(self, typeName="Line"):
+        self.name=typeName
+        self.setType =self
+        self.of = S()
+        """Of links to the type of the elements of the type of set (e.g. "S" in "S Set")"""
+        self.default = {}
+     def __str__(self):
+        return self.name
+        """A string representation of this type"""
+
+class Area(R):
+    def __init__(self, typeName="Area"):
+        self.name=typeName
+        self.setType =self
+        self.of = S()
+        """Of links to the type of the elements of the type of set (e.g. "S" in "S Set")"""
+        self.default = {}
+    def __str__(self):
+        return self.name
+        """A string representation of this type"""
 
 
-if __name__ == '__main__':
-    test()
+class Map(Sett):
+    def __init__(self, settype=Tuple(Space(),Q()), typeName="Map"):
+        self.name=typeName
+        self.setType =self
+        self.of = settype
+        """Of links to the type of the elements of the type of set (e.g. "T" in "T Set")"""
+        self.default = {}
+        if not (isinstance(settype,Tuple) and isinstance(settype.fst,Space)):
+            raise ValueError('A map needs to have space and some attributes!')
+
+
+class RasterMap(Map):
+    def __init__(self, typeName="RasterMap"):
+        self.name=typeName
+        self.setType =self
+        self.of = Tuple(Area(),Q())
+        """Of links to the type of the elements of the type of set (e.g. "T" in "T Set")"""
+        self.default = {}
+        #if not (isinstance(settype,Tuple) and isinstance(settype.fst,Space)):
+        #    raise ValueError('A map needs to have space and some attributes!')
+
+
 
 def test():
     #Testing the type schema
@@ -310,8 +371,13 @@ def test():
 
     function = Fun(S(),Fun(ai,ai))
 
+    map1 = Map(Tuple(S(), Tuple(T(),Q())))
+    map2 = RasterMap()
+    #map3 = Map(Referent()) # wrong map
 
     #printing
+    print map1
+    print map2
     print field
     print field2
     print pointset
@@ -346,3 +412,5 @@ def test():
     print "unify: "+str(function)+":" +str(function.unify())
 
 
+if __name__ == '__main__':
+    test()
