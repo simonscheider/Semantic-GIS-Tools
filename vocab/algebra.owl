@@ -1,0 +1,1276 @@
+@prefix : <http://ifgi.uni-muenster.de/geoprovenance#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix untitled-ontology-44: <http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#> .
+
+<http://ifgi.uni-muenster.de/geoprovenance#> a owl:Ontology ;
+	owl:imports <http://www.opengis.net/ont/geosparql> ;
+	terms:issued "2015-12-01"^^xsd:date ;
+	dc:publisher """ifgi - Institut für Geoinformatik
+Westfälische Wilhelms-Universität Münster"""@de ;
+	terms:description "Vocabulary to describe provenance and generation procedures of geographic datasets."@en .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/dc/elements/1.1/publisher
+
+dc:publisher a owl:AnnotationProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Datatypes
+# #
+# #################################################################
+# 
+# 
+# http://www.w3.org/2001/XMLSchema#date
+
+xsd:date a rdfs:Datatype .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#derivedFromCurry
+
+:derivedFromCurry a owl:ObjectProperty ;
+	rdfs:subPropertyOf :isDerivedFrom ;
+	rdfs:domain untitled-ontology-44:Curry ;
+	rdfs:range :Operation .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#hasBasicType
+
+:hasBasicType a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:ResearchObject ;
+	rdfs:range :BasicType .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#hasInput
+
+:hasInput a owl:ObjectProperty ;
+	owl:inverseOf untitled-ontology-44:isInputTo .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#hasOutput
+
+:hasOutput a owl:ObjectProperty ;
+	owl:inverseOf :isOutputFrom .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#hasTemporalExtent
+
+:hasTemporalExtent a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:Time ;
+	rdfs:range :TemporalExtent .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#inputToCombination
+
+:inputToCombination a owl:ObjectProperty ;
+	rdfs:subPropertyOf untitled-ontology-44:isInputTo .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#inputToComposition
+
+:inputToComposition a owl:ObjectProperty ;
+	rdfs:subPropertyOf untitled-ontology-44:isInputTo .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#inputToCurry
+
+:inputToCurry a owl:ObjectProperty ;
+	rdfs:subPropertyOf untitled-ontology-44:isInputTo ;
+	rdfs:domain :Field ;
+	rdfs:range untitled-ontology-44:Curry .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#inputToSwitch
+
+:inputToSwitch a owl:ObjectProperty ;
+	rdfs:subPropertyOf untitled-ontology-44:isInputTo .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#isDataSourceOf
+
+:isDataSourceOf a owl:ObjectProperty ;
+	owl:inverseOf untitled-ontology-44:hasDataSource ;
+	rdfs:domain untitled-ontology-44:DataSource .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#isDerivedFrom
+
+:isDerivedFrom a owl:ObjectProperty ;
+	rdfs:domain :DerivationFunction ;
+	rdfs:range :Operation , untitled-ontology-44:Function .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#isMaterializedAt
+
+:isMaterializedAt a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:Function ;
+	rdfs:range untitled-ontology-44:DataSource .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#isOutputFrom
+
+:isOutputFrom a owl:ObjectProperty ;
+	owl:inverseOf untitled-ontology-44:isInputTo ;
+	rdfs:domain :Operation , untitled-ontology-44:Function ;
+	rdfs:range :Operation .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#covers
+
+untitled-ontology-44:covers a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:SpatialExtent ;
+	rdfs:range geosparql:wktLiteral .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasDataSource
+
+untitled-ontology-44:hasDataSource a owl:ObjectProperty ;
+	rdfs:domain :BasicType ;
+	rdfs:range untitled-ontology-44:DataSource .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasExtent
+
+untitled-ontology-44:hasExtent a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:Space ;
+	rdfs:range untitled-ontology-44:SpatialExtent .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasHost
+
+untitled-ontology-44:hasHost a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:DataSource ;
+	rdfs:range untitled-ontology-44:Host .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasResearchObject
+
+untitled-ontology-44:hasResearchObject a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:Experiment ;
+	rdfs:range untitled-ontology-44:ResearchObject .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasUser
+
+untitled-ontology-44:hasUser a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:DataSource ;
+	rdfs:range untitled-ontology-44:User .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasUserName
+
+untitled-ontology-44:hasUserName a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topDataProperty ;
+	rdfs:domain untitled-ontology-44:User .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasValue
+
+untitled-ontology-44:hasValue a owl:ObjectProperty ;
+	rdfs:domain :Identifier , untitled-ontology-44:DataSource ;
+	rdfs:range untitled-ontology-44:Value ;
+	rdfs:label "Named Graph"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#isInputTo
+
+untitled-ontology-44:isInputTo a owl:ObjectProperty ;
+	rdfs:domain :Operation , untitled-ontology-44:Function ;
+	rdfs:range :Operation , untitled-ontology-44:Function .
+# 
+# http://www.w3.org/2002/07/owl#topDataProperty
+
+owl:topDataProperty a owl:ObjectProperty .
+# 
+# http://www.w3.org/ns/prov#generatedAtTime
+
+prov:generatedAtTime a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:DataSource .
+# 
+# http://www.w3.org/ns/prov#hadActivity
+
+prov:hadActivity a owl:ObjectProperty ;
+	rdfs:domain untitled-ontology-44:Function .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#hasIdentifier
+
+:hasIdentifier a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:Value ;
+	rdfs:range xsd:string .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#hasNamedGraph
+
+:hasNamedGraph a owl:DatatypeProperty ;
+	rdfs:domain :TripleStore ;
+	rdfs:range xsd:anyURI .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#hasPath
+
+:hasPath a owl:DatatypeProperty ;
+	rdfs:domain :File ;
+	rdfs:range xsd:string .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#hasRole
+
+:hasRole a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:User ;
+	rdfs:range xsd:string .
+# 
+# http://purl.org/dc/terms/description
+
+terms:description a owl:DatatypeProperty .
+# 
+# http://purl.org/dc/terms/issued
+
+terms:issued a owl:DatatypeProperty .
+# 
+# http://www.opengis.net/ont/geosparql#asWKT
+
+geosparql:asWKT a owl:DatatypeProperty ;
+	owl:equivalentProperty untitled-ontology-44:covers .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#covers
+
+untitled-ontology-44:covers a owl:DatatypeProperty .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#description
+
+untitled-ontology-44:description a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:Experiment , untitled-ontology-44:Object , untitled-ontology-44:Quality , untitled-ontology-44:ResearchObject , untitled-ontology-44:Time , untitled-ontology-44:Value ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasDatabaseName
+
+untitled-ontology-44:hasDatabaseName a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:RelationalDatabase ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasFieldName
+
+untitled-ontology-44:hasFieldName a owl:DatatypeProperty ;
+	rdfs:domain :FileField , untitled-ontology-44:Table ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasHostAddress
+
+untitled-ontology-44:hasHostAddress a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:Host ;
+	rdfs:range xsd:anyURI .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasHostName
+
+untitled-ontology-44:hasHostName a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:Host ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasPassword
+
+untitled-ontology-44:hasPassword a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:User ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasPort
+
+untitled-ontology-44:hasPort a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:DataSource ;
+	rdfs:range xsd:integer .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasTableName
+
+untitled-ontology-44:hasTableName a owl:DatatypeProperty ;
+	rdfs:domain untitled-ontology-44:Table ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#hasUserName
+
+untitled-ontology-44:hasUserName a owl:DatatypeProperty ;
+	rdfs:range xsd:string .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#BasicType
+
+:BasicType a owl:Class ;
+	rdfs:comment "Basic reference system types. "@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#BlockEvent
+
+:BlockEvent a owl:Class ;
+	owl:equivalentClass _:genid1 .
+
+_:genid1 owl:intersectionOf _:genid4 .
+
+_:genid4 a rdf:List ;
+	rdf:first _:genid5 .
+
+_:genid5 owl:intersectionOf _:genid8 .
+
+_:genid8 a rdf:List ;
+	rdf:first _:genid9 .
+
+_:genid9 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :SpaceSet .
+
+_:genid8 rdf:rest _:genid6 .
+
+_:genid6 a rdf:List ;
+	rdf:first _:genid7 .
+
+_:genid7 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :TimeSet .
+
+_:genid6 rdf:rest rdf:nil .
+
+_:genid5 a owl:Class .
+
+_:genid4 rdf:rest _:genid2 .
+
+_:genid2 a rdf:List ;
+	rdf:first _:genid3 .
+
+_:genid3 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Object .
+
+_:genid2 rdf:rest rdf:nil .
+
+_:genid1 a owl:Class .
+
+:BlockEvent rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#BlockObject
+
+:BlockObject a owl:Class ;
+	rdfs:subClassOf :Objects .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#BlockTrajectory
+
+:BlockTrajectory a owl:Class ;
+	owl:equivalentClass _:genid10 .
+
+_:genid10 owl:intersectionOf _:genid13 .
+
+_:genid13 a rdf:List ;
+	rdf:first _:genid14 .
+
+_:genid14 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom :TimeSet .
+
+_:genid13 rdf:rest _:genid11 .
+
+_:genid11 a rdf:List ;
+	rdf:first _:genid12 .
+
+_:genid12 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :SpaceSet .
+
+_:genid11 rdf:rest rdf:nil .
+
+_:genid10 a owl:Class .
+
+:BlockTrajectory rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Combination
+
+:Combination a owl:Class ;
+	rdfs:subClassOf :DerivationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Composition
+
+:Composition a owl:Class ;
+	rdfs:subClassOf :DerivationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#DerivationFunction
+
+:DerivationFunction a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Function .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Event
+
+:Event a owl:Class ;
+	owl:equivalentClass _:genid15 .
+
+_:genid15 owl:intersectionOf _:genid18 .
+
+_:genid18 a rdf:List ;
+	rdf:first _:genid19 .
+
+_:genid19 owl:intersectionOf _:genid22 .
+
+_:genid22 a rdf:List ;
+	rdf:first _:genid23 .
+
+_:genid23 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid22 rdf:rest _:genid20 .
+
+_:genid20 a rdf:List ;
+	rdf:first _:genid21 .
+
+_:genid21 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid20 rdf:rest rdf:nil .
+
+_:genid19 a owl:Class .
+
+_:genid18 rdf:rest _:genid16 .
+
+_:genid16 a rdf:List ;
+	rdf:first _:genid17 .
+
+_:genid17 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Object .
+
+_:genid16 rdf:rest rdf:nil .
+
+_:genid15 a owl:Class .
+
+:Event rdfs:subClassOf :GenerationFunction ;
+	rdfs:label "Event"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Field
+
+:Field a owl:Class ;
+	owl:equivalentClass _:genid24 .
+
+_:genid24 owl:intersectionOf _:genid27 .
+
+_:genid27 a rdf:List ;
+	rdf:first _:genid28 .
+
+_:genid28 owl:intersectionOf _:genid31 .
+
+_:genid31 a rdf:List ;
+	rdf:first _:genid32 .
+
+_:genid32 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid31 rdf:rest _:genid29 .
+
+_:genid29 a rdf:List ;
+	rdf:first _:genid30 .
+
+_:genid30 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid29 rdf:rest rdf:nil .
+
+_:genid28 a owl:Class .
+
+_:genid27 rdf:rest _:genid25 .
+
+_:genid25 a rdf:List ;
+	rdf:first _:genid26 .
+
+_:genid26 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Quality .
+
+_:genid25 rdf:rest rdf:nil .
+
+_:genid24 a owl:Class .
+
+:Field rdfs:subClassOf :GenerationFunction ;
+	rdfs:label "Spatio-temporal Field"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#File
+
+:File a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:DataSource .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#FileField
+
+:FileField a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Value .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#GenerationFunction
+
+:GenerationFunction a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Function ;
+	rdfs:comment "Types of spatio-temporal data generation."@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Id
+
+:Id a owl:Class ;
+	rdfs:subClassOf :DerivationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Identifier
+
+:Identifier a owl:Class .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#IntervalEvent
+
+:IntervalEvent a owl:Class ;
+	owl:equivalentClass _:genid33 .
+
+_:genid33 owl:intersectionOf _:genid36 .
+
+_:genid36 a rdf:List ;
+	rdf:first _:genid37 .
+
+_:genid37 owl:intersectionOf _:genid40 .
+
+_:genid40 a rdf:List ;
+	rdf:first _:genid41 .
+
+_:genid41 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :TimeSet .
+
+_:genid40 rdf:rest _:genid38 .
+
+_:genid38 a rdf:List ;
+	rdf:first _:genid39 .
+
+_:genid39 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid38 rdf:rest rdf:nil .
+
+_:genid37 a owl:Class .
+
+_:genid36 rdf:rest _:genid34 .
+
+_:genid34 a rdf:List ;
+	rdf:first _:genid35 .
+
+_:genid35 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Object .
+
+_:genid34 rdf:rest rdf:nil .
+
+_:genid33 a owl:Class .
+
+:IntervalEvent rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#IntervalObject
+
+:IntervalObject a owl:Class ;
+	rdfs:subClassOf :Objects .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#IntervalTrajectory
+
+:IntervalTrajectory a owl:Class ;
+	owl:equivalentClass _:genid42 .
+
+_:genid42 owl:intersectionOf _:genid45 .
+
+_:genid45 a rdf:List ;
+	rdf:first _:genid46 .
+
+_:genid46 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom :TimeSet .
+
+_:genid45 rdf:rest _:genid43 .
+
+_:genid43 a rdf:List ;
+	rdf:first _:genid44 .
+
+_:genid44 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid43 rdf:rest rdf:nil .
+
+_:genid42 a owl:Class .
+
+:IntervalTrajectory rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Inversion
+
+:Inversion a owl:Class ;
+	rdfs:subClassOf :DerivationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#InvertedField
+
+:InvertedField a owl:Class ;
+	owl:equivalentClass _:genid47 .
+
+_:genid47 owl:intersectionOf _:genid50 .
+
+_:genid50 a rdf:List ;
+	rdf:first _:genid51 .
+
+_:genid51 owl:intersectionOf _:genid54 .
+
+_:genid54 a rdf:List ;
+	rdf:first _:genid55 .
+
+_:genid55 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :SpaceSet .
+
+_:genid54 rdf:rest _:genid52 .
+
+_:genid52 a rdf:List ;
+	rdf:first _:genid53 .
+
+_:genid53 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :TimeSet .
+
+_:genid52 rdf:rest rdf:nil .
+
+_:genid51 a owl:Class .
+
+_:genid50 rdf:rest _:genid48 .
+
+_:genid48 a rdf:List ;
+	rdf:first _:genid49 .
+
+_:genid49 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Quality .
+
+_:genid48 rdf:rest rdf:nil .
+
+_:genid47 a owl:Class .
+
+:InvertedField rdfs:subClassOf :GenerationFunction ;
+	rdfs:label "Inverted Field"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Lattice
+
+:Lattice a owl:Class ;
+	rdfs:subClassOf :GenerationFunction ;
+	rdfs:label "Lattice"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#MarkedEvent
+
+:MarkedEvent a owl:Class ;
+	owl:equivalentClass _:genid56 .
+
+_:genid56 owl:intersectionOf _:genid59 .
+
+_:genid59 a rdf:List ;
+	rdf:first _:genid60 .
+
+_:genid60 owl:intersectionOf _:genid65 .
+
+_:genid65 a rdf:List ;
+	rdf:first _:genid66 .
+
+_:genid66 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Quality .
+
+_:genid65 rdf:rest _:genid63 .
+
+_:genid63 a rdf:List ;
+	rdf:first _:genid64 .
+
+_:genid64 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid63 rdf:rest _:genid61 .
+
+_:genid61 a rdf:List ;
+	rdf:first _:genid62 .
+
+_:genid62 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid61 rdf:rest rdf:nil .
+
+_:genid60 a owl:Class .
+
+_:genid59 rdf:rest _:genid57 .
+
+_:genid57 a rdf:List ;
+	rdf:first _:genid58 .
+
+_:genid58 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Object .
+
+_:genid57 rdf:rest rdf:nil .
+
+_:genid56 a owl:Class .
+
+:MarkedEvent rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#MarkedTrajectory
+
+:MarkedTrajectory a owl:Class ;
+	owl:equivalentClass _:genid67 .
+
+_:genid67 owl:intersectionOf _:genid70 .
+
+_:genid70 a rdf:List ;
+	rdf:first _:genid71 .
+
+_:genid71 owl:intersectionOf _:genid74 .
+
+_:genid74 a rdf:List ;
+	rdf:first _:genid75 .
+
+_:genid75 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Quality .
+
+_:genid74 rdf:rest _:genid72 .
+
+_:genid72 a rdf:List ;
+	rdf:first _:genid73 .
+
+_:genid73 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid72 rdf:rest rdf:nil .
+
+_:genid71 a owl:Class .
+
+_:genid70 rdf:rest _:genid68 .
+
+_:genid68 a rdf:List ;
+	rdf:first _:genid69 .
+
+_:genid69 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid68 rdf:rest rdf:nil .
+
+_:genid67 a owl:Class .
+
+:MarkedTrajectory rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#ObjectSet
+
+:ObjectSet a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Object .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Objects
+
+:Objects a owl:Class ;
+	rdfs:subClassOf :GenerationFunction ;
+	rdfs:label "Objects"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Objident
+
+:Objident a owl:Class ;
+	rdfs:subClassOf :DerivationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Operation
+
+:Operation a owl:Class ;
+	rdfs:comment "Generic operations involving basic and generation types"@en ;
+	rdfs:label "Generic Operation"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#QualitySet
+
+:QualitySet a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Quality .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#RegionalEvent
+
+:RegionalEvent a owl:Class ;
+	owl:equivalentClass _:genid76 .
+
+_:genid76 owl:intersectionOf _:genid79 .
+
+_:genid79 a rdf:List ;
+	rdf:first _:genid80 .
+
+_:genid80 owl:intersectionOf _:genid83 .
+
+_:genid83 a rdf:List ;
+	rdf:first _:genid84 .
+
+_:genid84 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :SpaceSet .
+
+_:genid83 rdf:rest _:genid81 .
+
+_:genid81 a rdf:List ;
+	rdf:first _:genid82 .
+
+_:genid82 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid81 rdf:rest rdf:nil .
+
+_:genid80 a owl:Class .
+
+_:genid79 rdf:rest _:genid77 .
+
+_:genid77 a rdf:List ;
+	rdf:first _:genid78 .
+
+_:genid78 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Object .
+
+_:genid77 rdf:rest rdf:nil .
+
+_:genid76 a owl:Class .
+
+:RegionalEvent rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#RegionalObejct
+
+:RegionalObejct a owl:Class ;
+	rdfs:subClassOf :Objects .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#RegionalTrajectory
+
+:RegionalTrajectory a owl:Class ;
+	owl:equivalentClass _:genid85 .
+
+_:genid85 owl:intersectionOf _:genid88 .
+
+_:genid88 a rdf:List ;
+	rdf:first _:genid89 .
+
+_:genid89 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid88 rdf:rest _:genid86 .
+
+_:genid86 a rdf:List ;
+	rdf:first _:genid87 .
+
+_:genid87 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :SpaceSet .
+
+_:genid86 rdf:rest rdf:nil .
+
+_:genid85 a owl:Class .
+
+:RegionalTrajectory rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#SInputFunction
+
+:SInputFunction a owl:Class ;
+	owl:equivalentClass _:genid90 .
+
+_:genid90 a owl:Restriction ;
+	owl:onProperty untitled-ontology-44:isInputTo ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#SpaceSet
+
+:SpaceSet a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Space .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#SpatialEvent
+
+:SpatialEvent a owl:Class ;
+	owl:equivalentClass _:genid91 .
+
+_:genid91 owl:intersectionOf _:genid94 .
+
+_:genid94 a rdf:List ;
+	rdf:first _:genid95 .
+
+_:genid95 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Object .
+
+_:genid94 rdf:rest _:genid92 .
+
+_:genid92 a rdf:List ;
+	rdf:first _:genid93 .
+
+_:genid93 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid92 rdf:rest rdf:nil .
+
+_:genid91 a owl:Class .
+
+:SpatialEvent rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#SpatialField
+
+:SpatialField a owl:Class ;
+	owl:equivalentClass _:genid96 .
+
+_:genid96 owl:intersectionOf _:genid99 .
+
+_:genid99 a rdf:List ;
+	rdf:first _:genid100 .
+
+_:genid100 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid99 rdf:rest _:genid97 .
+
+_:genid97 a rdf:List ;
+	rdf:first _:genid98 .
+
+_:genid98 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Quality .
+
+_:genid97 rdf:rest rdf:nil .
+
+_:genid96 a owl:Class .
+
+:SpatialField rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#SpatialInvertedField
+
+:SpatialInvertedField a owl:Class ;
+	owl:equivalentClass _:genid101 .
+
+_:genid101 owl:intersectionOf _:genid104 .
+
+_:genid104 a rdf:List ;
+	rdf:first _:genid105 .
+
+_:genid105 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Quality .
+
+_:genid104 rdf:rest _:genid102 .
+
+_:genid102 a rdf:List ;
+	rdf:first _:genid103 .
+
+_:genid103 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom :SpaceSet .
+
+_:genid102 rdf:rest rdf:nil .
+
+_:genid101 a owl:Class .
+
+:SpatialInvertedField rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#SpatialLattice
+
+:SpatialLattice a owl:Class ;
+	rdfs:subClassOf :Lattice .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#SpatialTemporalLattice
+
+:SpatialTemporalLattice a owl:Class ;
+	rdfs:subClassOf :Lattice .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Switch
+
+:Switch a owl:Class ;
+	rdfs:subClassOf :DerivationFunction ;
+	rdfs:label "Switch Function"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#TemporalEvent
+
+:TemporalEvent a owl:Class ;
+	owl:equivalentClass _:genid106 .
+
+_:genid106 owl:intersectionOf _:genid109 .
+
+_:genid109 a rdf:List ;
+	rdf:first _:genid110 .
+
+_:genid110 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Object .
+
+_:genid109 rdf:rest _:genid107 .
+
+_:genid107 a rdf:List ;
+	rdf:first _:genid108 .
+
+_:genid108 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid107 rdf:rest rdf:nil .
+
+_:genid106 a owl:Class .
+
+:TemporalEvent rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#TemporalExtent
+
+:TemporalExtent a owl:Class ;
+	rdfs:label "Temporal Extent"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#TemporalField
+
+:TemporalField a owl:Class ;
+	owl:equivalentClass _:genid111 .
+
+_:genid111 owl:intersectionOf _:genid114 .
+
+_:genid114 a rdf:List ;
+	rdf:first _:genid115 .
+
+_:genid115 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid114 rdf:rest _:genid112 .
+
+_:genid112 a rdf:List ;
+	rdf:first _:genid113 .
+
+_:genid113 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Quality .
+
+_:genid112 rdf:rest rdf:nil .
+
+_:genid111 a owl:Class .
+
+:TemporalField rdfs:subClassOf :GenerationFunction ;
+	rdfs:label "Temporal Field (Time Series)" .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#TemporalInvertedField
+
+:TemporalInvertedField a owl:Class ;
+	owl:equivalentClass _:genid116 .
+
+_:genid116 owl:intersectionOf _:genid119 .
+
+_:genid119 a rdf:List ;
+	rdf:first _:genid120 .
+
+_:genid120 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Quality .
+
+_:genid119 rdf:rest _:genid117 .
+
+_:genid117 a rdf:List ;
+	rdf:first _:genid118 .
+
+_:genid118 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid117 rdf:rest rdf:nil .
+
+_:genid116 a owl:Class .
+
+:TemporalInvertedField rdfs:subClassOf :GenerationFunction .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#TemporalLattice
+
+:TemporalLattice a owl:Class ;
+	rdfs:subClassOf :Lattice .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#TemporalSpatialLattice
+
+:TemporalSpatialLattice a owl:Class ;
+	rdfs:subClassOf :Lattice .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#TimeSet
+
+:TimeSet a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Time .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#Trajectory
+
+:Trajectory a owl:Class ;
+	owl:equivalentClass _:genid121 .
+
+_:genid121 owl:intersectionOf _:genid124 .
+
+_:genid124 a rdf:List ;
+	rdf:first _:genid125 .
+
+_:genid125 a owl:Restriction ;
+	owl:onProperty :hasInput ;
+	owl:someValuesFrom untitled-ontology-44:Time .
+
+_:genid124 rdf:rest _:genid122 .
+
+_:genid122 a rdf:List ;
+	rdf:first _:genid123 .
+
+_:genid123 a owl:Restriction ;
+	owl:onProperty :hasOutput ;
+	owl:someValuesFrom untitled-ontology-44:Space .
+
+_:genid122 rdf:rest rdf:nil .
+
+_:genid121 a owl:Class .
+
+:Trajectory rdfs:subClassOf :GenerationFunction ;
+	rdfs:label "Trajectory"@en .
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#TripleStore
+
+:TripleStore a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:DataSource .
+# 
+# http://www.opengis.net/ont/geosparql#Feature
+
+geosparql:Feature a owl:Class ;
+	owl:equivalentClass untitled-ontology-44:Space .
+# 
+# http://www.opengis.net/ont/geosparql#Geometry
+
+geosparql:Geometry a owl:Class ;
+	owl:equivalentClass untitled-ontology-44:SpatialExtent .
+# 
+# http://www.opengis.net/ont/geosparql#wktLiteral
+
+geosparql:wktLiteral a owl:Class .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Array
+
+untitled-ontology-44:Array a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Value .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#ArrayDatabase
+
+untitled-ontology-44:ArrayDatabase a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Database ;
+	rdfs:label "Array Database"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Curry
+
+untitled-ontology-44:Curry a owl:Class ;
+	rdfs:subClassOf :DerivationFunction ;
+	rdfs:label "Curry Function"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#DataSource
+
+untitled-ontology-44:DataSource a owl:Class ;
+	rdfs:label "Generic Data Source"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Database
+
+untitled-ontology-44:Database a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:DataSource ;
+	rdfs:label "Generic Database Class"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Experiment
+
+untitled-ontology-44:Experiment a owl:Class ;
+	rdfs:label "Experiment"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Function
+
+untitled-ontology-44:Function a owl:Class ;
+	rdfs:label "Generic Function"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Host
+
+untitled-ontology-44:Host a owl:Class ;
+	rdfs:label "Host"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Object
+
+untitled-ontology-44:Object a owl:Class ;
+	rdfs:subClassOf :BasicType ;
+	rdfs:label "Object"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Quality
+
+untitled-ontology-44:Quality a owl:Class ;
+	rdfs:subClassOf :BasicType ;
+	rdfs:label "Quality"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#RelationalDatabase
+
+untitled-ontology-44:RelationalDatabase a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Database ;
+	rdfs:label "Relational Database"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#ResearchObject
+
+untitled-ontology-44:ResearchObject a owl:Class ;
+	rdfs:label "Research Object"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Space
+
+untitled-ontology-44:Space a owl:Class ;
+	rdfs:subClassOf :BasicType ;
+	rdfs:label "Space"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#SpatialExtent
+
+untitled-ontology-44:SpatialExtent a owl:Class ;
+	rdfs:label "Spatial Extent"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Table
+
+untitled-ontology-44:Table a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:Value .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Time
+
+untitled-ontology-44:Time a owl:Class ;
+	rdfs:subClassOf :BasicType ;
+	rdfs:label "Time"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#User
+
+untitled-ontology-44:User a owl:Class ;
+	rdfs:label "User"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#Value
+
+untitled-ontology-44:Value a owl:Class ;
+	rdfs:label "Value"@en .
+# 
+# http://www.semanticweb.org/jones/ontologies/2015/9/untitled-ontology-44#WebService
+
+untitled-ontology-44:WebService a owl:Class ;
+	rdfs:subClassOf untitled-ontology-44:DataSource ;
+	rdfs:label "Web Service"@en .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://ifgi.uni-muenster.de/geoprovenance#
+
+<http://ifgi.uni-muenster.de/geoprovenance#> a owl:NamedIndividual , owl:Thing .
+# 
+# Generated by the OWL API (version 4.1.3.20151118-2017) https://github.com/owlcs/owlapi
