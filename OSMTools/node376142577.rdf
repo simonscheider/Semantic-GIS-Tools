@@ -1,0 +1,46 @@
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix lgdo:    <http://linkedgeodata.org/ontology/> .
+@prefix geo:     <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix lgdm:    <http://linkedgeodata.org/meta/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix spatial:  <http://geovocab.org/spatial#> .
+@prefix gadm-r:  <http://linkedgeodata.org/ld/gadm2/resource/> .
+@prefix gadm-o:  <http://linkedgeodata.org/ld/gadm2/ontology/> .
+@prefix geom:    <http://geovocab.org/geometry#> .
+@prefix meta:    <http://linkedgeodata.org/ld/meta/ontology/> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix lgd:     <http://linkedgeodata.org/triplify/> .
+@prefix ogc:     <http://www.opengis.net/ont/geosparql#> .
+@prefix dbp:     <http://dbpedia.org/resource/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix lgdg:    <http://linkedgeodata.org/geometry/> .
+
+<http://linkedgeodata.org/data/triplify/node376142577?output=ttl>
+      rdfs:label "RDF description of Leipzig Hbf" ;
+      foaf:primaryTopic lgd:node376142577 .
+
+lgd:node376142577
+      a       lgdo:RailwayThing , lgdo:Station , lgdo:PublicTransportThing , lgdo:RailwayStation , spatial:Feature , lgdm:Node ;
+      rdfs:isDefinedBy <http://linkedgeodata.org/triplify/meta/node376142577> ;
+      rdfs:label "Leipzig Hbf" , "Gare centrale de Leipzig"@fr ;
+      geom:geometry lgdg:node376142577 ;
+      lgdo:changeset "32586907"^^xsd:int ;
+      lgdo:gadmSameAs <http://gadm.geovocab.org/services/withinRegion?lat=51.34655&long=12.383086#point> ;
+      lgdo:network "MDV" ;
+      lgdo:operator "DB Station&Service AG" ;
+      <http://linkedgeodata.org/ontology/railway%3Aref>
+              "LL" ;
+      <http://linkedgeodata.org/ontology/railway%3Astation_category>
+              "1" ;
+      lgdo:short_name "Leipzig Hbf" ;
+      lgdo:uic_ref "8010205"^^xsd:int ;
+      lgdo:version "19"^^xsd:int ;
+      lgdo:wheelchair "true"^^xsd:boolean ;
+      lgdo:wikipedia "de:Leipzig Hauptbahnhof" ;
+      dcterms:contributor lgd:user1851521 ;
+      dcterms:modified "2015-07-12T20:41:25"^^xsd:dateTime ;
+      geo:lat 5.13465518E1 ;
+      geo:long 1.23830858E1 .

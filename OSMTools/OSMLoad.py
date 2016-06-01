@@ -13,11 +13,14 @@ import overpy
 import arcpy
 import os
 import numpy
+from rdflib import *
+from SPARQLWrapper import SPARQLWrapper, JSON, XML, N3, RDF
 #import easygui
 
 class OSMLoad(object):
   ''' Object to get OSM data '''
-
+  graph=rdflib.Graph()
+  idlist = [] #List of OSM identifiers in the result set
   key = '' #This the OSM place category key
   value = '' #This the OSM place category value
   elem = ""
@@ -197,11 +200,13 @@ class OSMLoad(object):
 
         print("Number of results:" + str(len(results)))
         self.max_field_length = 0
+
         for element in results:
+            self.idlist.append(element.id)
             #print node.tags
-           # print node.tags.
-           #print element.id
-           for tag in element.tags:
+            # print node.tags.
+            #print element.id
+            for tag in element.tags:
                 #print(tag+": %s" % element.tags.get(tag, "n/a"))
                 self.tag_set.add(tag)
                 self.max_field_length= max(len(element.tags.get(tag, "n/a")),self.max_field_length)
@@ -215,16 +220,55 @@ class OSMLoad(object):
         self.elem = elem
         self.value = pc["value"]
         self.key = pc["key"]
+        self.getLOD()
+
+  def getLOD(self):
+    l = '('
+    c = 0
+    for i in self.idlist:
+        if c != 0:
+            l = l+','
+        l= l+'<http://linkedgeodata.org/triplify/node'+str(i)+'>'
+        c=c+1
+    l = l+')'
+
+    sparql = SPARQLWrapper("http://linkedgeodata.org/sparql")
+    sparql.setQuery("""
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT *
+        WHERE { ?x ?link ?y. FILTER(?x IN """+l+
+        """). }
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    #print results
+    for result in results["results"]["bindings"]:
+    #print result['x']['value'] +" "+result['link']['value'] +" "+result['y']['value']
+        if result['y']['type'] == 'literal':
+            y = Literal(result['y']['value'])
+        else:
+            y = URIRef(result['y']['value'])
+        self.graph.add((URIRef(result['x']['value']), URIRef(result['link']['value']),y))
+
+    #This does not work because there is a restriction in downloading
+    #self.graph.load('http://linkedgeodata.org/data/triplify/node'+str(element.id)+'?output=ttl', format='turtle')
+
+  def printgraph(self):
+    for s,p,o in self.graph:
+        print s,p,o
+
+
 
 def loadOSM(cat, tname):
     o = OSMLoad()
     print cat
     o.getOSMfeatures(cat)
+    o.printgraph()
     o.OSMtoShape(tname)
 
 if __name__ == "__main__":
-    cat = arcpy.GetParameterAsText(0)
-    tname = arcpy.GetParameterAsText(1)
-    #cat = "bar"
-    #tname = r"C:\Users\simon\Documents\ArcGIS\Default.gdb\LoadOSM"
+    #cat = arcpy.GetParameterAsText(0)
+    #tname = arcpy.GetParameterAsText(1)
+    cat = "bar"
+    tname = r"C:\Users\simon\Documents\ArcGIS\Default.gdb\LoadOSM"
     loadOSM(cat, tname)
