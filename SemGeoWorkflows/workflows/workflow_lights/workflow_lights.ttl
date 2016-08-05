@@ -1,0 +1,40 @@
+@prefix : <http://geographicknowledge.de/WorkflowExamples#>.
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix wf: <http://geographicknowledge.de/vocab/Workflow.rdf#>.
+@prefix gis: <http://geographicknowledge.de/vocab/GISConcepts.rdf#>.
+@prefix ada: <http://geographicknowledge.de/vocab/AnalysisData.rdf#>.
+
+# Workflow of China Lights analysis
+# @author: Andrea Ballatore, Simon Scheider
+
+# Workflow metadata (result and data sources)
+:wf2 a wf:Workflow.
+:wf2 wf:source :F101993_night_lights.
+:wf2 wf:source :F102013_night_lights.
+:wf2 wf:source :China_border.
+:wf2 wf:source :Gas_flares.
+:wf2 wf:source :Train_stations.
+:wf2 wf:source :Admin_units.
+:wf2 wf:result :Luminosity_change.
+
+#Reified triples
+#:wf2 wf:edge _:1, _:2, _:3.
+#_:1 rdf:subject :1; rdf:predicate gis:inputdata; rdf:object :China_border.
+
+:wf2_1 gis:inputdata :China_border;
+	gis:erasefeature :Gas_flares;
+	wf:output :Chn_atm0_erase;
+	rdf:type gis:Erase.
+
+:wf2_2 gis:inputdata :Train_stations;
+	wf:output :Ch_Stations_Buffer;
+	rdf:type gis:Buffer.
+
+:wf2_3 gis:inputdata :Chn_atm0_erase;
+	gis:inputdata :Ch_Stations_Buffer;
+	wf:output :CHN_adm0_Erase_Intersect;
+	rdf:type gis:Intersect.

@@ -1,0 +1,55 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix wf: <http://geographicknowledge.de/vocab/Workflow.rdf#>.
+@prefix gis: <http://geographicknowledge.de/vocab/GISConcepts.rdf#>.
+@prefix ada: <http://geographicknowledge.de/vocab/AnalysisData.rdf#>.
+
+
+@prefix : <http://geographicknowledge.de/workflowLCP.rdf#>.
+
+:0 gis:inputdata :My_LandUse_2006;
+	wf:output :Route1_cost;
+	rdf:type gis:PolygontoRaster.
+:1 gis:inputdata :my_BuiltUp; gis:param 10;
+	wf:output :My_bu_dist;
+	rdf:type gis:EuclideanDistance.
+:2 gis:inputdata :My_bu_dist; gis:param :reclassTable;
+	wf:output :my_bu_ext;
+	rdf:type gis:Reclassify.
+:3 gis:inputdata :my_bu_ext, :Route1_cost;
+	wf:output :Route2_cost;
+	rdf:type gis:CellStatistics.
+:4 gis:inputdata :endpoint;
+	wf:output :endraster;
+	rdf:type gis:PointtoRaster.
+:5 gis:costsurface :Route2_cost;
+	gis:sink :endraster;
+	wf:output :Route2_backl;
+	rdf:type gis:CostDistance.
+:7 gis:linkraster :Route2_backl;
+	gis:source :Beginraster;
+	wf:output :CostPat_Begi1;
+	rdf:type gis:CostPath.
+:6 gis:inputdata :beginpoint;
+	wf:output :Beginraster;
+	rdf:type gis:PointtoRaster.
+:8 gis:inputdata :CostPat_Begi1;
+	wf:output :MyRoute;
+	rdf:type gis:toLine.
+
+# Workflow metadata (result and data sources)
+:wf a wf:Workflow.
+:wf wf:result :MyRoute.
+:wf wf:source :My_LandUse_2006.
+:wf wf:source :my_BuiltUp.
+:wf wf:source :endpoint.
+:wf wf:source :beginpoint.
+
+#Reified triples
+:wf wf:edge _:1, _:2, _:3.
+_:1 rdf:subject :0; rdf:predicate gis:inputdata; rdf:object :My_LandUse_2006.
+_:2 rdf:subject :0; rdf:predicate wf:output; rdf:object :Route1_cost.
+_:3 rdf:subject :0; rdf:predicate rdf:type; rdf:object gis:PolygontoRaster.
+#To be continued
