@@ -51,9 +51,16 @@ def load_ontologies( g ):
     g = run_rdfs_inferences( g )
     return g
     
-def enrich_workflow( g, folder ):
+def enrich_workflow( g, toolname ):
     n = n_triples(g)
-    # TODO: 
+    assert toolname
+    import glob
+    inputs = glob.glob('enrichments/enrich_'+toolname+'_in*.ru')
+    outputs = glob.glob('enrichments/enrich_'+toolname+'_out*.ru')
+    for fn in (inputs + outputs):
+        print('Enrichment '+fn)
+        #g.update( file_to_str('prefixes_rdf.txt') + file_to_str(fn) )
+        n_triples(g)
     return g
     
 def test_workflow_lights( g ):
@@ -62,7 +69,7 @@ def test_workflow_lights( g ):
     for fn in [_dir+"workflow_lights.ttl"]:
         print("Load N3 file: "+fn)
         g.parse( fn, format='n3' )
-    g = enrich_workflow( g, _dir )
+    #g = enrich_workflow( g, _dir )
     return g
     
 def test_workflow_lcpath( g ):
@@ -71,8 +78,8 @@ def test_workflow_lcpath( g ):
     for fn in [_dir+"workflow_lcpath.ttl"]:
         print("Load N3 file: "+fn)
         g.parse( fn, format='n3' )
-    
-    g = enrich_workflow( g, _dir )
+    # TODO: run real enrichments
+    g = enrich_workflow( g, 'polygontoraster' )
     return g
     
 def graph_to_file( g ):
