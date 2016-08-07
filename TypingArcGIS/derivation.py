@@ -183,6 +183,24 @@ def test():
     fun     = inst(Fun(S(),Q())) #note: this is a function which is not ! an operation (because it has no input or output instances)
     binop4 = oprtn(Fun(Fun(a(),a()),Q()),fun, inst1) #an operation with a function as input
 
+    #Testing the GIS tool types
+    my_bu_dist = inst(a())
+    my_bu_ext = inst(a())
+    u =inst(a())
+    ed1 = oprtn(EuclideanDistance(), [inst(Q()),inst(a())],my_bu_dist)
+    ed2 = oprtn(EuclideanDistance(), [inst(Q()),inst(a())],u)
+    rc = oprtn(ReClassify(),my_bu_dist,my_bu_ext)
+    route2_cost = inst(a())
+    lma = oprtn(LocalMA(),[my_bu_ext,u],route2_cost)
+
+    g1 = dgraph()
+    g1.add(ed1)
+    g1.add(ed2)
+    g1.add(lma)
+
+    print "Before unification: "+str(g1)
+    g1.TypeUnifyGraph()
+    print "After unification: "+str(g1)
 
     g2 = dgraph()
     g2.add(binop)
@@ -190,9 +208,12 @@ def test():
     g2.add(binop3)
     g2.add(binop4)
 
+
+
     print "Before unification: "+str(g2)
     g2.TypeUnifyGraph()
     print "After unification: "+str(g2)
+
 
 if __name__ == '__main__':
     test()

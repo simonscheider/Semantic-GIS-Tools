@@ -19,7 +19,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON, XML, N3, RDF
 
 class OSMLoad(object):
   ''' Object to get OSM data '''
-  graph=rdflib.Graph()
+  graph=Graph()
   idlist = [] #List of OSM identifiers in the result set
   key = '' #This the OSM place category key
   value = '' #This the OSM place category value

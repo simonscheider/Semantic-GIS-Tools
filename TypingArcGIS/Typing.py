@@ -354,7 +354,191 @@ class RasterMap(Map):
 
 
 
+##################################################################
+#Here we add types of data that are shortcuts to underlying GIS concepts
+
+#Fields
+class Field(Referent):
+    """The type of Fields"""
+    def __init__(self, typeName="Field"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class CostField(Field):
+    """The type of CostFields"""
+    def __init__(self, typeName="CostField"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class RelativeField(Field):
+    """The type of RelativeFields"""
+    def __init__(self, typeName="RelativeField"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class DistanceField(RelativeField):
+    """The type of DistanceFields"""
+    def __init__(self, typeName="DistanceField"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class CostDField(DistanceField):
+    """The type of CostDistanceFields"""
+    def __init__(self, typeName="CostDField"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class EuDField(DistanceField):
+    """The type of Euclidean Distance Fields"""
+    def __init__(self, typeName="EuDField"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class LinkField(RelativeField):
+    """The type of LinkFields"""
+    def __init__(self, typeName="RelativeField"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+#Object
+class Object(D):
+    """The type of Object"""
+    def __init__(self, typeName="Object"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class Objects(D):
+    """The type of Object colllections"""
+    def __init__(self, typeName="Objects"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class NetworkObject(Object):
+    """The type of network Object"""
+    def __init__(self, typeName="NetworkObject"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class Path(NetworkObject):
+    """The type of path"""
+    def __init__(self, typeName="Path"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class CostPath(Path):
+    """The type of least cost path"""
+    def __init__(self, typeName="CostPath"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+class Start(NetworkObject):
+    """The type of start of a path"""
+    def __init__(self, typeName="Start"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+class End(NetworkObject):
+    """The type of end of a path"""
+    def __init__(self, typeName="End"):
+        self.name=typeName
+        self.setType =self
+        self.default = {}
+
+##################################################################
+#Here we add types of GIS operations that are tzped based on GIS concepts
+
+class EuclideanDistance(Fun):
+    """The type of Euclidean distance calculator"""
+    def __init__(self, typeName="EuclideanDistance"):
+        self.name=typeName
+        self.setType =self
+        self.getIn = Q()
+        """This is the input type of the function type. Note that function types are always unary, as n-ary functions are recursively defined (with a corresponding function as output."""
+        self.getOut = Fun(Objects(), EuDField())
+        """This is the output type of the function type"""
+        self.setIn = self.getIn
+        self.default = {}
+
+class Conversion(Fun):
+    """The type of format conversion tool (eg Point to Raster)"""
+    def __init__(self, typeName="Conversion"):
+        sometype = a()
+        self.name=typeName
+        self.setType =self
+        """This tool keeps the concept type identical"""
+        self.getIn = sometype
+        """This is the input type of the function type. Note that function types are always unary, as n-ary functions are recursively defined (with a corresponding function as output."""
+        self.getOut = sometype
+        """This is the output type of the function type"""
+        self.setIn = self.getIn
+        self.default = {}
+
+class ReClassify(Fun):
+    """The type of reclassification tool (Raster)"""
+    def __init__(self, typeName="ReClassify"):
+        sometype = a()
+        someothertype = a()
+        self.name=typeName
+        self.setType =self
+        """This tool is neutral w r. t. to concept types"""
+        self.getIn = sometype
+        """This is the input type of the function type. Note that function types are always unary, as n-ary functions are recursively defined (with a corresponding function as output."""
+        self.getOut = someothertype
+        """This is the output type of the function type"""
+        self.setIn = self.getIn
+        self.default = {}
+
+class LocalMA(Fun):
+    """The type of local Map Algebra Function (Raster)"""
+    def __init__(self, typeName="LocalMA"):
+        self.name=typeName
+        self.setType =self
+        """This tool implies Fields"""
+        self.getIn = Field
+        """This is the input type of the function type. Note that function types are always unary, as n-ary functions are recursively defined (with a corresponding function as output."""
+        self.getOut = Fun(Field,Field)
+        """This is the output type of the function type"""
+        self.setIn = self.getIn
+        self.default = {}
+
+class CostDistance(Fun):
+    """The type of cost distance tool"""
+    def __init__(self, typeName="CostDistance"):
+        self.name=typeName
+        self.setType =self
+        self.getIn = End()
+        """This is the input type of the function type. Note that function types are always unary, as n-ary functions are recursively defined (with a corresponding function as output."""
+        self.getOut = Fun(CostField(),LinkField)
+        """This is the output type of the function type"""
+        self.setIn = self.getIn
+        self.default = {}
+
+class CostPath(Fun):
+    """The type of cost path tool"""
+    def __init__(self, typeName="CostPath"):
+        self.name=typeName
+        self.setType =self
+        self.getIn = Start()
+        """This is the input type of the function type. Note that function types are always unary, as n-ary functions are recursively defined (with a corresponding function as output."""
+        self.getOut = Fun(LinkField(),CostPath)
+        """This is the output type of the function type"""
+        self.setIn = self.getIn
+        self.default = {}
+
 def test():
+
     #Testing the type schema
     field = Fun(Tuple(T(),S()),Q())
     pointset = Sett(Tuple(S(),Tuple(T(),Q())))
