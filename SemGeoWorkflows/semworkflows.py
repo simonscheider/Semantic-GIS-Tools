@@ -23,7 +23,11 @@ import rdflib
 import RDFClosure
 from rdflib.namespace import RDFS, RDF
 
-
+class tools():
+    toolenrichments = []
+    tests =[]
+    def __str__(self):
+        return str(toolenrichments)
 
 def file_to_str(fn):
     with open(fn, 'r') as f:
@@ -35,6 +39,7 @@ def n_triples( g, n=None ):
         print( 'Triples: '+str(len(g)) )
     else:
         print( 'Triples: +'+str(len(g)-n) )
+    return len(g)
 
 def run_rdfs_inferences( g ):
     print('run_rdfs_inferences')
@@ -52,7 +57,7 @@ def load_ontologies( g ):
     n_triples(g)
     return g
 
-def enrich_workflow_tool( g, toolname ):
+def enrich_workflow_tool( g, toolname, tool):
     n = n_triples(g)
     assert toolname
     import glob
@@ -63,11 +68,14 @@ def enrich_workflow_tool( g, toolname ):
         print('Enrichment '+fn)
         g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
         n_triples(g)
+    test = None
     for i in tests:
-        print('Run test'+i)
+        print('Run test '+i)
         res = g.query(file_to_str('rdf_prefixes.txt') + file_to_str(i))
+        test = bool(res)
         #assert b
         print(bool(res))
+    tools.toolenrichments.append([str(tool), toolname, len(g)-n, test])
     return g
 
 def enrich_workflow( g, propagation ):
@@ -209,7 +217,7 @@ def DFSVisit(n, wg, visited, g):
             op = checkTool(i)
             if (i != operation and op!='NA'):
                 print op
-                enrich_workflow_tool( g, op )
+                enrich_workflow_tool( g, op, n)
 
 
 def getNeighbours(wg, n, forward=True):
@@ -242,6 +250,9 @@ def main():
     if 'lcpath' in params: g = test_workflow_lcpath( g )
     graph_to_file(g)
     print('OK')
+    print('Tool enrichments and tests:')
+    for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
+        print i[0], i[1], i[2], i[3]
 
 if __name__ == '__main__':
     main()
