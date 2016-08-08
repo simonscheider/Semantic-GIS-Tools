@@ -64,10 +64,18 @@ def enrich_workflow_tool( g, toolname, tool):
     inputs = glob.glob('enrichments/enrich_'+toolname+'_in*.ru')
     outputs = glob.glob('enrichments/enrich_'+toolname+'_out*.ru')
     tests =glob.glob('enrichments/enrich_'+toolname+'_test*.ru')
-    for fn in (inputs + outputs):
+    growin = 0
+    growout = 0
+    for fn in (inputs):
         print('Enrichment '+fn)
         g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
-        n_triples(g)
+        growin +=len(g)-n
+        n= n_triples(g)
+    for fn in (outputs):
+        print('Enrichment '+fn)
+        g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
+        growout =len(g)-n
+        n= n_triples(g)
     test = None
     for i in tests:
         print('Run test '+i)
@@ -75,7 +83,7 @@ def enrich_workflow_tool( g, toolname, tool):
         test = bool(res)
         #assert b
         print(bool(res))
-    tools.toolenrichments.append([str(tool), toolname, len(g)-n, test])
+    tools.toolenrichments.append([str(tool), toolname, growin, growout, test])
     return g
 
 def enrich_workflow( g, propagation ):
@@ -251,8 +259,36 @@ def main():
     graph_to_file(g)
     print('OK')
     print('Tool enrichments and tests:')
+    print ("Final size: "+str(len(g)))
+    #print "Test node:0"
+    q = """ \n SELECT ?in2 ?ine ?inm ?out ?oute ?outm
+       WHERE {
+            {?node gis:inputdata ?in2.
+            ?in2 ada:hasElement ?ine.
+            ?ine ada:hasMeasure ?inm.
+            FILTER (?node = <http://geographicknowledge.de/workflowLCP.rdf#0>)
+            }
+            UNION
+            {?node wf:output ?out.
+            ?out ada:hasElement ?oute.
+            ?oute ada:hasMeasure ?outm.
+            FILTER (?node = <http://geographicknowledge.de/workflowLCP.rdf#0>)
+            }
+
+       }"""
+    q = file_to_str('rdf_prefixes.txt') + q
+    #res = g.query(q)
+    #for i in res:
+        #pass
+        #print i[0], i[1], i[2],i[3], i[4], i[5]
+    order = ''
+    print "Order of tool enrichments: "
+    for j in tools.toolenrichments:
+        order += ' :'+((((str(j[0])).rpartition('#'))[2]).lower())+' '
+    print order
+    print "Tool Toolname input output Test: "
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
-        print i[0], i[1], i[2], i[3]
+        print i[0], i[1], i[2], i[3], i[4]
 
 if __name__ == '__main__':
     main()

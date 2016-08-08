@@ -15,7 +15,7 @@ WHERE{
 {
 ?node a gis:PolygontoRaster;
 gis:inputdata ?in2.
-FILTER NOT EXISTS{?in2 ada:hasElement ?ine. ?ine ada:hasMeasure ?inm. ?inm a gis:Quality. }#Are data blank nodes present? Then reuse them
+FILTER NOT EXISTS{?in2 ada:hasElement ?ine. ?ine ada:hasMeasure ?inm. }#Are data blank nodes present? Then reuse them
 }
 #}
 }

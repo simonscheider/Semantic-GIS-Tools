@@ -1,6 +1,5 @@
 
 
-
 # Typing gis:CostDistance
 
 
@@ -23,6 +22,8 @@ gis:costsurface ?cs2;
 gis:sink ?sink2.
 ?cs2  ada:hasElement ?cse. ?cse ada:hasMeasure ?csm. #Are data blank nodes present? Then reuse them
 ?sink2 ada:hasElement ?sinke. ?sinke ada:hasMeasure ?sinkm. #Are data blank nodes present? Then reuse them
+FILTER NOT EXISTS{
+?out ada:hasElement ?oute. ?oute ada:hasMeasure ?outm.} #Are data blank nodes present? Then reuse them
 }
 #}
 }

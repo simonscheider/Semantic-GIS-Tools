@@ -3,11 +3,11 @@
 # Typing gis:LocalMapAlgebra
 
 
-#Set output
+#Set output links
 INSERT
 { #GRAPH ?g{
-?out a gis:Raster; ada:hasElement [ ada:hasMeasure [ a gis:QQuality ; gis:ofprop ?inm ]].
-?in2 a gis:Raster.  ?inm a gis:Quality. # This reuses data blank nodes if present
+?outm a gis:QQuality ; gis:ofprop ?inm .
+?inm a gis:Quality.
 #}
 }
 #SELECT *
@@ -18,6 +18,7 @@ WHERE{
 wf:output ?out;
 gis:inputdata ?in2.
 ?in2 ada:hasElement ?ine. ?ine ada:hasMeasure ?inm. #Are data blank nodes present? Then reuse them
+?out ada:hasElement ?oute. ?oute ada:hasMeasure ?outm.
 }
 #}
 }
