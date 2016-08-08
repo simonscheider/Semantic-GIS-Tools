@@ -1,8 +1,8 @@
-@prefix : <http://geographicknowledge.de/vocab/Workflow.rdf#> .
+@prefix : <http://geographicknowledge.de/workflowLCP.rdf#> .
 @prefix ada: <http://geographicknowledge.de/vocab/AnalysisData.rdf#> .
-@prefix default1: <http://geographicknowledge.de/vocab/GISConcepts.rdf#> .
+@prefix default1: <http://geographicknowledge.de/vocab/Workflow.rdf#> .
+@prefix default11: <http://geographicknowledge.de/vocab/GISConcepts.rdf#> .
 @prefix default2: <http://geographicknowledge.de/vocab/AnalysisData.rdf#> .
-@prefix default3: <http://geographicknowledge.de/workflowLCP.rdf#> .
 @prefix gis: <http://geographicknowledge.de/vocab/GISConcepts.rdf#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#> .
@@ -16,9 +16,9 @@
 
 ada:QualityData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -40,9 +40,9 @@ ada:RefDomain a rdfs:Resource,
 
 ada:SpaceData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -61,9 +61,9 @@ ada:TemporalDataSet a rdfs:Resource,
 
 ada:TimeData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -79,9 +79,9 @@ ada:WGS84_C a rdfs:Resource,
                     rdf:first ada:WGS84 ;
                     rdf:rest () ] ] .
 
-ada:data1 a _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+ada:data1 a _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource,
         rdfs:Resource,
@@ -100,14 +100,14 @@ ada:hasMeasureRef a rdfs:Resource,
 ada:hasOWindowPart a rdfs:Resource,
         owl:ObjectProperty ;
     owl:propertyChainAxiom [ a rdfs:Resource ;
-            rdf:first ada:hasElement ;
-            rdf:rest [ a rdfs:Resource ;
-                    rdf:first ada:hasSupport ;
-                    rdf:rest () ] ],
-        [ a rdfs:Resource ;
             rdf:first ada:hasOWindow ;
             rdf:rest [ a rdfs:Resource ;
                     rdf:first ada:hasPart ;
+                    rdf:rest () ] ],
+        [ a rdfs:Resource ;
+            rdf:first ada:hasElement ;
+            rdf:rest [ a rdfs:Resource ;
+                    rdf:first ada:hasSupport ;
                     rdf:rest () ] ] .
 
 ada:measureOf a rdfs:Resource,
@@ -128,77 +128,70 @@ ada:supportOf a rdfs:Resource,
     owl:imports <http://geographicknowledge.de/vocab/AnalysisData.rdf>,
         <http://geographicknowledge.de/vocab/Workflow.rdf> .
 
-gis:Buffer a rdfs:Resource,
+default11:Buffer a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:VectorTopology,
+    rdfs:subClassOf default11:Fun,
+        default11:VectorTopology,
         wf:Operation,
         wf:Resource .
 
-gis:CalculateField a rdfs:Resource,
+default11:CalculateField a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:Table,
+    rdfs:subClassOf default11:Fun,
+        default11:Table,
         wf:Operation,
         wf:Resource .
 
-gis:Clip a rdfs:Resource,
+default11:Clip a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:VectorTopology,
+    rdfs:subClassOf default11:Fun,
+        default11:VectorTopology,
         wf:Operation,
         wf:Resource .
 
-gis:Cost a rdfs:Resource,
+default11:CostDistanceTool a rdfs:Resource,
         owl:Class ;
-    rdfs:comment "A quality that expresses some cost , e.g. in a cost surface" ;
-    rdfs:subClassOf ada:Quality,
-        ada:Reference,
-        wf:Resource .
-
-gis:CostDistanceTool a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:RasterOp,
+    rdfs:subClassOf default11:Fun,
+        default11:RasterOp,
         wf:Operation,
         wf:Resource .
 
-gis:Density a rdfs:Resource,
+default11:Density a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A quality that denotes the spatial density of a set of objects"@en ;
-    rdfs:subClassOf _:N79ae697f52e24df6bd23e6ff37186e38,
+    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
         ada:Quality,
         ada:Reference,
-        gis:RelQ,
+        default11:RelQ,
         wf:Resource .
 
-gis:Erase a rdfs:Resource,
+default11:Erase a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:VectorTopology,
+    rdfs:subClassOf default11:Fun,
+        default11:VectorTopology,
         wf:Operation,
         wf:Resource .
 
-gis:EuclideanDistanceTool a rdfs:Resource,
+default11:EuclideanDistanceTool a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
+    rdfs:subClassOf default11:Fun,
         wf:Operation,
         wf:Resource .
 
-gis:Event a rdfs:Resource,
+default11:Event a rdfs:Resource,
         owl:Class ;
     rdfs:subClassOf ada:Object,
         ada:Reference,
         wf:Resource .
 
-gis:FocalMapAlgebra a rdfs:Resource,
+default11:FocalMapAlgebra a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:RasterOp,
+    rdfs:subClassOf default11:Fun,
+        default11:RasterOp,
         wf:Operation,
         wf:Resource .
 
-gis:LineDataSet a rdfs:Resource,
+default11:LineDataSet a rdfs:Resource,
         owl:Class ;
     rdfs:subClassOf ada:DataSet,
         ada:SpatialDataSet,
@@ -206,33 +199,24 @@ gis:LineDataSet a rdfs:Resource,
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty ada:hasElement ;
-            owl:someValuesFrom gis:LineData ] .
+            owl:someValuesFrom default11:LineData ] .
 
-gis:LinetoRaster a rdfs:Resource,
+default11:LinetoRaster a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Conversion,
-        gis:Fun,
-        gis:toRaster,
+    rdfs:subClassOf default11:Conversion,
+        default11:Fun,
+        default11:toRaster,
         wf:Operation,
         wf:Resource .
 
-gis:Link a rdfs:Resource,
+default11:Mask a rdfs:Resource,
         owl:Class ;
-    rdfs:comment "A quality that denotes a link to a neighboring region "@en ;
-    rdfs:subClassOf _:N79ae697f52e24df6bd23e6ff37186e38,
-        ada:Quality,
-        ada:Reference,
-        gis:RelQ,
-        wf:Resource .
-
-gis:Mask a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:RasterOp,
+    rdfs:subClassOf default11:Fun,
+        default11:RasterOp,
         wf:Operation,
         wf:Resource .
 
-gis:Neighborhood a rdfs:Resource,
+default11:Neighborhood a rdfs:Resource,
         owl:Class ;
     rdfs:comment "Neighborhood of some spatial object"@en ;
     rdfs:subClassOf [ a rdfs:Resource,
@@ -243,16 +227,16 @@ gis:Neighborhood a rdfs:Resource,
         ada:Reference,
         wf:Resource .
 
-gis:Network a rdfs:Resource,
+default11:Network a rdfs:Resource,
         owl:Class ;
     rdfs:subClassOf ada:DataSet,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty ada:hasElement ;
-            owl:someValuesFrom gis:NetworkData ] .
+            owl:someValuesFrom default11:NetworkData ] .
 
-gis:ObjectDataSet a rdfs:Resource,
+default11:ObjectDataSet a rdfs:Resource,
         owl:Class ;
     rdfs:subClassOf ada:DataSet,
         wf:Resource ;
@@ -261,60 +245,49 @@ gis:ObjectDataSet a rdfs:Resource,
             owl:onProperty ada:hasElement ;
             owl:someValuesFrom ada:ObjectData ] .
 
-gis:PointDataSet a rdfs:Resource,
+default11:RasterCalculator a rdfs:Resource,
         owl:Class ;
-    rdfs:comment "This is a point sample of a spatial field" ;
-    rdfs:subClassOf ada:DataSet,
-        ada:SpatialDataSet,
-        wf:Resource ;
-    owl:equivalentClass [ a rdfs:Resource,
-                owl:Restriction ;
-            owl:onProperty ada:hasElement ;
-            owl:someValuesFrom gis:PointData ] .
-
-gis:RasterCalculator a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:LocalMapAlgebra,
-        gis:RasterOp,
+    rdfs:subClassOf default11:Fun,
+        default11:LocalMapAlgebra,
+        default11:RasterOp,
         wf:Operation,
         wf:Resource .
 
-gis:TSeries a rdfs:Resource,
+default11:TSeries a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A time series is a continuous function defined over time and ranging over quality values" ;
-    rdfs:subClassOf gis:Fun,
+    rdfs:subClassOf default11:Fun,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Class ;
             owl:intersectionOf [ a rdfs:Resource ;
                     rdf:first [ a rdfs:Resource,
                                 owl:Restriction ;
-                            owl:onProperty gis:in ;
+                            owl:onProperty default11:in ;
                             owl:someValuesFrom ada:Temporal ] ;
                     rdf:rest [ a rdfs:Resource ;
                             rdf:first [ a rdfs:Resource,
                                         owl:Restriction ;
-                                    owl:onProperty gis:out ;
+                                    owl:onProperty default11:out ;
                                     owl:someValuesFrom ada:Quality ] ;
                             rdf:rest () ] ] ] .
 
-gis:TableJoin a rdfs:Resource,
+default11:TableJoin a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:Table,
+    rdfs:subClassOf default11:Fun,
+        default11:Table,
         wf:Operation,
         wf:Resource .
 
-gis:TrackData a rdfs:Resource,
+default11:TrackData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
         [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty wf:of ;
-            owl:someValuesFrom gis:Trajectory ],
+            owl:someValuesFrom default11:Trajectory ],
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -323,7 +296,7 @@ gis:TrackData a rdfs:Resource,
                     rdf:first [ a rdfs:Resource,
                                 owl:Restriction ;
                             owl:onProperty ada:hasMeasure ;
-                            owl:someValuesFrom gis:Point ] ;
+                            owl:someValuesFrom default11:Point ] ;
                     rdf:rest [ a rdfs:Resource ;
                             rdf:first [ a rdfs:Resource,
                                         owl:Restriction ;
@@ -331,39 +304,39 @@ gis:TrackData a rdfs:Resource,
                                     owl:someValuesFrom ada:Temporal ] ;
                             rdf:rest () ] ] ] .
 
-gis:ZonalMapAlgebra a rdfs:Resource,
+default11:ZonalMapAlgebra a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
+    rdfs:subClassOf default11:Fun,
         wf:Operation,
         wf:Resource .
 
-gis:erasefeature a rdfs:Resource,
+default11:erasefeature a rdfs:Resource,
         owl:ObjectProperty ;
-    rdfs:subPropertyOf gis:inputdata,
+    rdfs:subPropertyOf default11:inputdata,
         wf:input .
 
-gis:ofprop a rdfs:Resource,
+default11:ofprop a rdfs:Resource,
         owl:ObjectProperty ;
     rdfs:comment "A property for propagating types in a workflow" ;
     rdfs:subPropertyOf wf:of .
 
-gis:size a rdfs:Resource,
+default11:size a rdfs:Resource,
         owl:ObjectProperty ;
-    rdfs:domain gis:Region .
+    rdfs:domain default11:Region .
 
-gis:toPoint a rdfs:Resource,
+default11:toPoint a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Conversion,
-        gis:Fun,
-        gis:toVector,
+    rdfs:subClassOf default11:Conversion,
+        default11:Fun,
+        default11:toVector,
         wf:Operation,
         wf:Resource .
 
-gis:toPolygon a rdfs:Resource,
+default11:toPolygon a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Conversion,
-        gis:Fun,
-        gis:toVector,
+    rdfs:subClassOf default11:Conversion,
+        default11:Fun,
+        default11:toVector,
         wf:Operation,
         wf:Resource .
 
@@ -374,151 +347,153 @@ wf:edgeOf a rdfs:Resource,
         owl:ObjectProperty ;
     owl:inverseOf wf:edge .
 
-<http://geographicknowledge.de/workflowLCP.rdf#4> a gis:Conversion,
-        gis:Fun,
-        gis:PointtoRaster,
-        gis:toRaster,
-        wf:Operation,
-        wf:Resource,
-        rdfs:Resource ;
-    gis:inputdata default3:endpoint ;
-    wf:input default3:endpoint ;
-    wf:output default3:endraster .
-
-<http://geographicknowledge.de/workflowLCP.rdf#5> a _:N79ae697f52e24df6bd23e6ff37186e38,
-        _:Nd61519b1bf3e4e078857178b54db825b,
-        ada:Quality,
-        ada:Reference,
-        gis:CostDistance,
-        gis:Distance,
-        gis:Fun,
-        gis:RelQ,
-        wf:Operation,
-        wf:Resource,
-        rdfs:Resource ;
-    gis:costsurface default3:Route2_cost ;
-    gis:inputdata default3:Route2_cost,
-        default3:endraster ;
-    gis:sink default3:endraster ;
-    wf:input default3:Route2_cost,
-        default3:endraster ;
-    wf:output default3:Route2_backl .
-
-<http://geographicknowledge.de/workflowLCP.rdf#6> a gis:Conversion,
-        gis:Fun,
-        gis:PointtoRaster,
-        gis:toRaster,
-        wf:Operation,
-        wf:Resource,
-        rdfs:Resource ;
-    gis:inputdata default3:beginpoint ;
-    wf:input default3:beginpoint ;
-    wf:output default3:Beginraster .
-
-<http://geographicknowledge.de/workflowLCP.rdf#7> a gis:CostPath,
-        gis:Fun,
-        gis:RasterOp,
-        wf:Operation,
-        wf:Resource,
-        rdfs:Resource ;
-    gis:inputdata default3:Beginraster,
-        default3:Route2_backl ;
-    gis:linkraster default3:Route2_backl ;
-    gis:source default3:Beginraster ;
-    wf:input default3:Beginraster,
-        default3:Route2_backl ;
-    wf:output default3:CostPat_Begi1 .
-
-<http://geographicknowledge.de/workflowLCP.rdf#8> a gis:Conversion,
-        gis:Fun,
-        gis:toLine,
-        gis:toVector,
-        wf:Operation,
-        wf:Resource,
-        rdfs:Resource ;
-    gis:inputdata default3:CostPat_Begi1 ;
-    wf:input default3:CostPat_Begi1 ;
-    wf:output default3:MyRoute .
-
-default3:lcpwf a wf:Workflow,
+:lcpwf a wf:Workflow,
         rdfs:Resource ;
     wf:edge [ a rdfs:Resource ;
-            rdf:object default3:My_LandUse_2006 ;
-            rdf:predicate gis:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
-        [ a rdfs:Resource ;
-            rdf:object default3:my_bu_ext ;
+            rdf:object :Beginraster ;
             rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
+        [ a rdfs:Resource ;
+            rdf:object :beginpoint ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
+        [ a rdfs:Resource ;
+            rdf:object :My_bu_dist ;
+            rdf:predicate default11:inputdata ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
         [ a rdfs:Resource ;
-            rdf:object gis:Reclassify ;
-            rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
-        [ a rdfs:Resource ;
-            rdf:object default3:my_bu_ext ;
-            rdf:predicate gis:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
-        [ a rdfs:Resource ;
-            rdf:object default3:Route1_cost ;
-            rdf:predicate gis:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
-        [ a rdfs:Resource ;
-            rdf:object default3:Route2_cost ;
+            rdf:object :My_bu_dist ;
             rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
-        [ a rdfs:Resource ;
-            rdf:object gis:CellStatistics ;
-            rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
-        [ a rdfs:Resource ;
-            rdf:object default3:Route1_cost ;
-            rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
-        [ a rdfs:Resource ;
-            rdf:object gis:PolygontoRaster ;
-            rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
-        [ a rdfs:Resource ;
-            rdf:object default3:my_BuiltUp ;
-            rdf:predicate gis:inputdata ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:Reclassify ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route1_cost ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:CellStatistics ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route1_cost ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:PointtoRaster ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#4> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route2_backl ;
+            rdf:predicate default11:linkraster ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
         [ a rdfs:Resource ;
             rdf:object 10 ;
-            rdf:predicate gis:param ;
+            rdf:predicate default11:param ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
         [ a rdfs:Resource ;
-            rdf:object default3:My_bu_dist ;
+            rdf:object :My_LandUse_2006 ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
+        [ a rdfs:Resource ;
+            rdf:object :my_bu_ext ;
             rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
         [ a rdfs:Resource ;
-            rdf:object gis:EuclideanDistance ;
+            rdf:object :Route2_backl ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:toLine ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#8> ],
+        [ a rdfs:Resource ;
+            rdf:object :CostPat_Begi1 ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#8> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:PolygontoRaster ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:PointtoRaster ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
+        [ a rdfs:Resource ;
+            rdf:object :reclassTable ;
+            rdf:predicate default11:param ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
+        [ a rdfs:Resource ;
+            rdf:object :CostPat_Begi1 ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route2_cost ;
+            rdf:predicate default11:costsurface ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+        [ a rdfs:Resource ;
+            rdf:object :Beginraster ;
+            rdf:predicate default11:source ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:EuclideanDistance ;
             rdf:predicate rdf:type ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
         [ a rdfs:Resource ;
-            rdf:object default3:My_bu_dist ;
-            rdf:predicate gis:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
+            rdf:object :MyRoute ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#8> ],
         [ a rdfs:Resource ;
-            rdf:object default3:reclassTable ;
-            rdf:predicate gis:param ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ] ;
-    wf:result default3:MyRoute ;
-    wf:source default3:My_LandUse_2006,
-        default3:beginpoint,
-        default3:endpoint,
-        default3:my_BuiltUp ;
-    owl:topObjectProperty default3:My_LandUse_2006,
-        default3:beginpoint,
-        default3:endpoint,
-        default3:my_BuiltUp .
+            rdf:object default11:CostPath ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:CostDistance ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+        [ a rdfs:Resource ;
+            rdf:object :my_bu_ext ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
+        [ a rdfs:Resource ;
+            rdf:object :endraster ;
+            rdf:predicate default11:sink ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+        [ a rdfs:Resource ;
+            rdf:object :endraster ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#4> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route2_cost ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
+        [ a rdfs:Resource ;
+            rdf:object :endpoint ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#4> ],
+        [ a rdfs:Resource ;
+            rdf:object :my_BuiltUp ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ] ;
+    wf:result :MyRoute ;
+    wf:source :My_LandUse_2006,
+        :beginpoint,
+        :endpoint,
+        :my_BuiltUp ;
+    owl:topObjectProperty :My_LandUse_2006,
+        :beginpoint,
+        :endpoint,
+        :my_BuiltUp .
 
 rdfs:Literal a rdfs:Resource .
 
 ada:ObjectData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -542,9 +517,9 @@ ada:QualityRS a rdfs:Resource,
 
 ada:TemporalData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -581,168 +556,99 @@ ada:partOf a rdfs:Resource,
     rdfs:domain ada:Reference ;
     rdfs:range ada:Reference .
 
-gis:CostDistance a rdfs:Resource,
-        owl:Class ;
-    rdfs:comment "a quality that denotes a cost distance to a set of objects defined over a cost surface"@en ;
-    rdfs:subClassOf _:N79ae697f52e24df6bd23e6ff37186e38,
-        _:Nd61519b1bf3e4e078857178b54db825b,
-        ada:Quality,
-        ada:Reference,
-        gis:Distance,
-        gis:RelQ,
-        wf:Resource .
-
-gis:CostPath a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:RasterOp,
-        wf:Operation,
-        wf:Resource .
-
-gis:EuclDistance a rdfs:Resource,
+default11:EuclDistance a rdfs:Resource,
         owl:Class ;
     rdfs:comment "a quality that denotes Euclidean distance to a set of objects"@en ;
-    rdfs:subClassOf _:N79ae697f52e24df6bd23e6ff37186e38,
+    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
         ada:Quality,
         ada:Reference,
-        gis:Distance,
-        gis:RelQ,
+        default11:Distance,
+        default11:RelQ,
         wf:Resource .
 
-gis:Existence a rdfs:Resource,
+default11:LineData a rdfs:Resource,
         owl:Class ;
-    rdfs:comment "A quality that denotes the existence of a set of objects in space"@en ;
-    rdfs:subClassOf _:N79ae697f52e24df6bd23e6ff37186e38,
-        ada:Quality,
-        ada:Reference,
-        gis:RelQ,
-        wf:Resource .
-
-gis:Line a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf ada:Reference,
-        ada:Spatial,
-        wf:Resource .
-
-gis:LineData a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         ada:SpatialData,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty ada:hasSupport ;
-            owl:someValuesFrom gis:Line ] .
+            owl:someValuesFrom default11:Line ] .
 
-gis:NetworkData a rdfs:Resource,
+default11:NetworkData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty ada:hasSupport ;
-            owl:someValuesFrom gis:Path ] .
+            owl:someValuesFrom default11:Path ] .
 
-gis:PointData a rdfs:Resource,
+default11:PointData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
-        ada:Data,
-        ada:SpatialData,
-        wf:Resource ;
-    owl:equivalentClass [ a rdfs:Resource,
-                owl:Restriction ;
-            owl:onProperty ada:hasSupport ;
-            owl:someValuesFrom gis:Point ] .
-
-gis:RegionData a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         ada:SpatialData,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty ada:hasSupport ;
-            owl:someValuesFrom gis:Region ] .
+            owl:someValuesFrom default11:Point ] .
 
-gis:Trajectory a rdfs:Resource,
+default11:RegionData a rdfs:Resource,
+        owl:Class ;
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+        ada:Data,
+        ada:SpatialData,
+        wf:Resource ;
+    owl:equivalentClass [ a rdfs:Resource,
+                owl:Restriction ;
+            owl:onProperty ada:hasSupport ;
+            owl:someValuesFrom default11:Region ] .
+
+default11:Trajectory a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A trajectory is a continuous function defined over time and ranging over space" ;
     rdfs:subClassOf [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty wf:of ;
             owl:someValuesFrom ada:Object ],
-        gis:Fun,
+        default11:Fun,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Class ;
             owl:intersectionOf [ a rdfs:Resource ;
                     rdf:first [ a rdfs:Resource,
                                 owl:Restriction ;
-                            owl:onProperty gis:in ;
+                            owl:onProperty default11:in ;
                             owl:someValuesFrom ada:Temporal ] ;
                     rdf:rest [ a rdfs:Resource ;
                             rdf:first [ a rdfs:Resource,
                                         owl:Restriction ;
-                                    owl:onProperty gis:out ;
+                                    owl:onProperty default11:out ;
                                     owl:someValuesFrom ada:Spatial ] ;
                             rdf:rest () ] ] ] .
 
-gis:costsurface a rdf:Property,
-        rdfs:Resource,
+default11:hasEnd a rdfs:Resource,
         owl:ObjectProperty ;
-    rdfs:subPropertyOf gis:costsurface,
-        gis:inputdata,
-        wf:input .
-
-gis:hasEnd a rdfs:Resource,
-        owl:ObjectProperty ;
-    rdfs:domain gis:Path ;
+    rdfs:domain default11:Path ;
     rdfs:range ada:Object .
 
-gis:hasStart a rdfs:Resource,
+default11:hasStart a rdfs:Resource,
         owl:ObjectProperty ;
-    rdfs:domain gis:Path ;
+    rdfs:domain default11:Path ;
     rdfs:range ada:Object .
-
-gis:linkraster a rdf:Property,
-        rdfs:Resource,
-        owl:ObjectProperty ;
-    rdfs:subPropertyOf gis:inputdata,
-        gis:linkraster,
-        wf:input .
-
-gis:sink a rdf:Property,
-        rdfs:Resource,
-        owl:ObjectProperty ;
-    rdfs:subPropertyOf gis:inputdata,
-        gis:sink,
-        wf:input .
-
-gis:source a rdf:Property,
-        rdfs:Resource,
-        owl:ObjectProperty ;
-    rdfs:subPropertyOf gis:inputdata,
-        gis:source,
-        wf:input .
-
-gis:toLine a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf gis:Conversion,
-        gis:Fun,
-        gis:toVector,
-        wf:Operation,
-        wf:Resource .
 
 <http://geographicknowledge.de/vocab/Workflow.rdf> a rdfs:Resource,
         owl:Ontology ;
@@ -857,47 +763,68 @@ ada:elementOf a rdfs:Resource,
     rdfs:domain ada:Data ;
     rdfs:range ada:DataSet .
 
-gis:CellStatistics a rdfs:Resource,
+default11:CellStatistics a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:LocalMapAlgebra,
-        gis:RasterOp,
+    rdfs:subClassOf default11:Fun,
+        default11:LocalMapAlgebra,
+        default11:RasterOp,
         wf:Operation,
         wf:Resource .
 
-gis:EuclideanDistance a rdfs:Resource .
+default11:CostDistance a rdfs:Resource,
+        owl:Class ;
+    rdfs:comment "a quality that denotes a cost distance to a set of objects defined over a cost surface"@en ;
+    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+        _:Nbc2a0a5ba08c47c5a332f04b6b58b70e,
+        ada:Quality,
+        ada:Reference,
+        default11:Distance,
+        default11:RelQ,
+        wf:Resource .
 
-gis:Point a rdfs:Resource,
+default11:CostPath a rdfs:Resource,
+        owl:Class ;
+    rdfs:subClassOf default11:Fun,
+        default11:RasterOp,
+        wf:Operation,
+        wf:Resource .
+
+default11:EuclideanDistance a rdfs:Resource .
+
+default11:Line a rdfs:Resource,
         owl:Class ;
     rdfs:subClassOf ada:Reference,
         ada:Spatial,
         wf:Resource .
 
-gis:PointtoRaster a rdfs:Resource,
+default11:PointDataSet a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Conversion,
-        gis:Fun,
-        gis:toRaster,
+    rdfs:comment "This is a point sample of a spatial field" ;
+    rdfs:subClassOf ada:DataSet,
+        ada:SpatialDataSet,
+        wf:Resource ;
+    owl:equivalentClass [ a rdfs:Resource,
+                owl:Restriction ;
+            owl:onProperty ada:hasElement ;
+            owl:someValuesFrom default11:PointData ] .
+
+default11:PolygontoRaster a rdfs:Resource,
+        owl:Class ;
+    rdfs:subClassOf default11:Conversion,
+        default11:Fun,
+        default11:toRaster,
         wf:Operation,
         wf:Resource .
 
-gis:PolygontoRaster a rdfs:Resource,
+default11:Reclassify a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Conversion,
-        gis:Fun,
-        gis:toRaster,
+    rdfs:subClassOf default11:Fun,
+        default11:LocalMapAlgebra,
+        default11:RasterOp,
         wf:Operation,
         wf:Resource .
 
-gis:Reclassify a rdfs:Resource,
-        owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:LocalMapAlgebra,
-        gis:RasterOp,
-        wf:Operation,
-        wf:Resource .
-
-gis:RegionDataSet a rdfs:Resource,
+default11:RegionDataSet a rdfs:Resource,
         owl:Class ;
     rdfs:subClassOf ada:DataSet,
         ada:SpatialDataSet,
@@ -905,34 +832,70 @@ gis:RegionDataSet a rdfs:Resource,
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty ada:hasElement ;
-            owl:someValuesFrom gis:RegionData ] .
+            owl:someValuesFrom default11:RegionData ] .
 
-gis:SField a rdfs:Resource,
+default11:SField a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A spatial field (a continuous function defined on space ranging over quality values)" ;
     rdfs:subClassOf [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty wf:of ;
             owl:someValuesFrom ada:Temporal ],
-        gis:Fun,
+        default11:Fun,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
                 owl:Class ;
             owl:intersectionOf [ a rdfs:Resource ;
                     rdf:first [ a rdfs:Resource,
                                 owl:Restriction ;
-                            owl:onProperty gis:in ;
+                            owl:onProperty default11:in ;
                             owl:someValuesFrom ada:Spatial ] ;
                     rdf:rest [ a rdfs:Resource ;
                             rdf:first [ a rdfs:Resource,
                                         owl:Restriction ;
-                                    owl:onProperty gis:out ;
+                                    owl:onProperty default11:out ;
                                     owl:someValuesFrom ada:Quality ] ;
                             rdf:rest () ] ] ] .
 
-gis:Table a rdfs:Resource,
+default11:Table a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
+    rdfs:subClassOf default11:Fun,
+        wf:Operation,
+        wf:Resource .
+
+default11:costsurface a rdf:Property,
+        rdfs:Resource,
+        owl:ObjectProperty ;
+    rdfs:subPropertyOf default11:costsurface,
+        default11:inputdata,
+        wf:input .
+
+default11:linkraster a rdf:Property,
+        rdfs:Resource,
+        owl:ObjectProperty ;
+    rdfs:subPropertyOf default11:inputdata,
+        default11:linkraster,
+        wf:input .
+
+default11:sink a rdf:Property,
+        rdfs:Resource,
+        owl:ObjectProperty ;
+    rdfs:subPropertyOf default11:inputdata,
+        default11:sink,
+        wf:input .
+
+default11:source a rdf:Property,
+        rdfs:Resource,
+        owl:ObjectProperty ;
+    rdfs:subPropertyOf default11:inputdata,
+        default11:source,
+        wf:input .
+
+default11:toLine a rdfs:Resource,
+        owl:Class ;
+    rdfs:subClassOf default11:Conversion,
+        default11:Fun,
+        default11:toVector,
         wf:Operation,
         wf:Resource .
 
@@ -942,8 +905,6 @@ wf:edge a rdf:Property,
     rdfs:comment "A property that links to the (reified) statements of a workflow (workflow edges). Use rdf:subject, rdf:predicate and rdf:object to further link the statement with its elements." ;
     rdfs:domain wf:Workflow ;
     rdfs:subPropertyOf wf:edge .
-
-default3:MyRoute a rdfs:Resource .
 
 owl:topObjectProperty a rdf:Property,
         rdfs:Resource ;
@@ -955,72 +916,93 @@ ada:Ordinal a rdfs:Resource,
         ada:RefSys,
         ada:ScaleLevel .
 
-gis:Distance a rdfs:Resource,
+default11:Distance a rdfs:Resource,
         owl:Class ;
     rdfs:comment "a quality that denotes the spatial distance to a set of objects"@en ;
-    rdfs:subClassOf _:N79ae697f52e24df6bd23e6ff37186e38,
+    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
         ada:Quality,
         ada:Reference,
-        gis:RelQ,
+        default11:RelQ,
         wf:Resource .
 
-gis:Path a rdfs:Resource,
-        owl:Class ;
-    rdfs:comment "A single element of a spatial network denoting a spatial path from start object to end object"@en ;
-    rdfs:subClassOf [ a rdfs:Resource,
-                owl:Restriction ;
-            owl:onProperty gis:hasStart ;
-            owl:someValuesFrom ada:Object ],
-        [ a rdfs:Resource,
-                owl:Restriction ;
-            owl:onProperty gis:hasEnd ;
-            owl:someValuesFrom ada:Object ],
-        ada:Object,
-        ada:Reference,
-        wf:Resource .
-
-gis:Region a rdfs:Resource,
+default11:Region a rdfs:Resource,
         owl:Class ;
     rdfs:subClassOf ada:Reference,
         ada:Spatial,
         wf:Resource .
 
-gis:VectorTopology a rdfs:Resource,
+default11:VectorTopology a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
+    rdfs:subClassOf default11:Fun,
         wf:Operation,
         wf:Resource .
 
-gis:in a rdfs:Resource,
+default11:in a rdfs:Resource,
         owl:ObjectProperty ;
     rdfs:comment "input of a function" ;
-    rdfs:domain gis:Fun .
+    rdfs:domain default11:Fun .
 
-gis:out a rdfs:Resource,
+default11:out a rdfs:Resource,
         owl:ObjectProperty ;
-    rdfs:domain gis:Fun .
+    rdfs:domain default11:Fun .
 
-gis:param a rdf:Property,
+default11:param a rdf:Property,
         rdfs:Resource,
         owl:ObjectProperty ;
     rdfs:comment "input parameter" ;
-    rdfs:subPropertyOf gis:param,
+    rdfs:subPropertyOf default11:param,
         wf:input .
 
-<http://geographicknowledge.de/workflowLCP.rdf#0> a gis:Conversion,
-        gis:Fun,
-        gis:PolygontoRaster,
-        gis:toRaster,
+<http://geographicknowledge.de/workflowLCP.rdf#0> a default11:Conversion,
+        default11:Fun,
+        default11:PolygontoRaster,
+        default11:toRaster,
         wf:Operation,
         wf:Resource,
         rdfs:Resource ;
-    gis:inputdata default3:My_LandUse_2006 ;
-    wf:input default3:My_LandUse_2006 ;
-    wf:output default3:Route1_cost .
+    default11:inputdata :My_LandUse_2006 ;
+    wf:input :My_LandUse_2006 ;
+    wf:output :Route1_cost .
 
-default3:CostPat_Begi1 a rdfs:Resource .
+<http://geographicknowledge.de/workflowLCP.rdf#4> a default11:Conversion,
+        default11:Fun,
+        default11:PointtoRaster,
+        default11:toRaster,
+        wf:Operation,
+        wf:Resource,
+        rdfs:Resource ;
+    default11:inputdata :endpoint ;
+    wf:input :endpoint ;
+    wf:output :endraster .
 
-default3:reclassTable a rdfs:Resource .
+<http://geographicknowledge.de/workflowLCP.rdf#6> a default11:Conversion,
+        default11:Fun,
+        default11:PointtoRaster,
+        default11:toRaster,
+        wf:Operation,
+        wf:Resource,
+        rdfs:Resource ;
+    default11:inputdata :beginpoint ;
+    wf:input :beginpoint ;
+    wf:output :Beginraster .
+
+<http://geographicknowledge.de/workflowLCP.rdf#8> a default11:Conversion,
+        default11:Fun,
+        default11:toLine,
+        default11:toVector,
+        wf:Operation,
+        wf:Resource,
+        rdfs:Resource ;
+    default11:inputdata :CostPat_Begi1 ;
+    wf:input :CostPat_Begi1 ;
+    wf:output :MyRoute .
+
+:MyRoute a default11:ObjectData,
+        rdfs:Resource ;
+    ada:hasElement [ ada:hasMeasure [ a default11:Line ] ;
+            ada:hasSupport _:Na63ca2ac9d6f476cb9a98e57253164b8 ] .
+
+:reclassTable a rdfs:Resource .
 
 owl:NamedIndividual a rdfs:Resource .
 
@@ -1028,9 +1010,9 @@ owl:Ontology a rdfs:Resource .
 
 ada:SpatialData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -1047,10 +1029,39 @@ ada:SpatialDataSet a rdfs:Resource,
             owl:onProperty ada:hasElement ;
             owl:someValuesFrom ada:SpatialData ] .
 
-gis:toVector a rdfs:Resource,
+default11:Path a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Conversion,
-        gis:Fun,
+    rdfs:comment "A single element of a spatial network denoting a spatial path from start object to end object"@en ;
+    rdfs:subClassOf [ a rdfs:Resource,
+                owl:Restriction ;
+            owl:onProperty default11:hasEnd ;
+            owl:someValuesFrom ada:Object ],
+        [ a rdfs:Resource,
+                owl:Restriction ;
+            owl:onProperty default11:hasStart ;
+            owl:someValuesFrom ada:Object ],
+        ada:Object,
+        ada:Reference,
+        wf:Resource .
+
+default11:Point a rdfs:Resource,
+        owl:Class ;
+    rdfs:subClassOf ada:Reference,
+        ada:Spatial,
+        wf:Resource .
+
+default11:PointtoRaster a rdfs:Resource,
+        owl:Class ;
+    rdfs:subClassOf default11:Conversion,
+        default11:Fun,
+        default11:toRaster,
+        wf:Operation,
+        wf:Resource .
+
+default11:toVector a rdfs:Resource,
+        owl:Class ;
+    rdfs:subClassOf default11:Conversion,
+        default11:Fun,
         wf:Operation,
         wf:Resource .
 
@@ -1058,52 +1069,75 @@ wf:Workflow a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A class for instances that denote workflows. Workflow instances should be connected to triples of the workflow, using RDF reification."@en .
 
-<http://geographicknowledge.de/workflowLCP.rdf#1> a gis:EuclideanDistance,
-        gis:Fun,
+<http://geographicknowledge.de/workflowLCP.rdf#1> a default11:EuclideanDistance,
+        default11:Fun,
         wf:Operation,
         wf:Resource,
         rdfs:Resource ;
-    gis:inputdata default3:my_BuiltUp ;
-    gis:param 10 ;
-    wf:input default3:my_BuiltUp,
+    default11:inputdata :my_BuiltUp ;
+    default11:param 10 ;
+    wf:input :my_BuiltUp,
         10 ;
-    wf:output default3:My_bu_dist .
+    wf:output :My_bu_dist .
 
-<http://geographicknowledge.de/workflowLCP.rdf#2> a gis:Fun,
-        gis:LocalMapAlgebra,
-        gis:RasterOp,
-        gis:Reclassify,
+<http://geographicknowledge.de/workflowLCP.rdf#2> a default11:Fun,
+        default11:LocalMapAlgebra,
+        default11:RasterOp,
+        default11:Reclassify,
         wf:Operation,
         wf:Resource,
         rdfs:Resource ;
-    gis:inputdata default3:My_bu_dist ;
-    gis:param default3:reclassTable ;
-    wf:input default3:My_bu_dist,
-        default3:reclassTable ;
-    wf:output default3:my_bu_ext .
+    default11:inputdata :My_bu_dist ;
+    default11:param :reclassTable ;
+    wf:input :My_bu_dist,
+        :reclassTable ;
+    wf:output :my_bu_ext .
 
-<http://geographicknowledge.de/workflowLCP.rdf#3> a gis:CellStatistics,
-        gis:Fun,
-        gis:LocalMapAlgebra,
-        gis:RasterOp,
+<http://geographicknowledge.de/workflowLCP.rdf#3> a default11:CellStatistics,
+        default11:Fun,
+        default11:LocalMapAlgebra,
+        default11:RasterOp,
         wf:Operation,
         wf:Resource,
         rdfs:Resource ;
-    gis:inputdata default3:Route1_cost,
-        default3:my_bu_ext ;
-    wf:input default3:Route1_cost,
-        default3:my_bu_ext ;
-    wf:output default3:Route2_cost .
+    default11:inputdata :Route1_cost,
+        :my_bu_ext ;
+    wf:input :Route1_cost,
+        :my_bu_ext ;
+    wf:output :Route2_cost .
 
-default3:Beginraster a rdfs:Resource .
+<http://geographicknowledge.de/workflowLCP.rdf#5> a _:Na270b60b69e74f6e99d6bed4eaf81896,
+        _:Nbc2a0a5ba08c47c5a332f04b6b58b70e,
+        ada:Quality,
+        ada:Reference,
+        default11:CostDistance,
+        default11:Distance,
+        default11:Fun,
+        default11:RelQ,
+        wf:Operation,
+        wf:Resource,
+        rdfs:Resource ;
+    default11:costsurface :Route2_cost ;
+    default11:inputdata :Route2_cost,
+        :endraster ;
+    default11:sink :endraster ;
+    wf:input :Route2_cost,
+        :endraster ;
+    wf:output :Route2_backl .
 
-default3:Route2_backl a rdfs:Resource .
-
-default3:beginpoint a rdfs:Resource .
-
-default3:endpoint a rdfs:Resource .
-
-default3:endraster a rdfs:Resource .
+<http://geographicknowledge.de/workflowLCP.rdf#7> a default11:CostPath,
+        default11:Fun,
+        default11:RasterOp,
+        wf:Operation,
+        wf:Resource,
+        rdfs:Resource ;
+    default11:inputdata :Beginraster,
+        :Route2_backl ;
+    default11:linkraster :Route2_backl ;
+    default11:source :Beginraster ;
+    wf:input :Beginraster,
+        :Route2_backl ;
+    wf:output :CostPat_Begi1 .
 
 ada:Nominal a rdfs:Resource,
         owl:Class ;
@@ -1114,71 +1148,40 @@ ada:RefType a rdfs:Resource,
         owl:Class ;
     rdfs:subClassOf ada:RefSys .
 
-gis:LocalMapAlgebra a rdfs:Resource,
+default11:LocalMapAlgebra a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
-        gis:RasterOp,
+    rdfs:subClassOf default11:Fun,
+        default11:RasterOp,
         wf:Operation,
         wf:Resource .
 
-gis:Raster a rdfs:Resource,
-        owl:Class ;
-    rdfs:comment "The raster data type in GIS" ;
-    rdfs:subClassOf ada:DataSet,
-        ada:SpatialDataSet,
-        gis:RegionDataSet,
-        wf:Resource .
-
-wf:output a rdf:Property,
-        rdfs:Resource,
-        owl:ObjectProperty ;
-    rdfs:domain wf:Operation ;
-    rdfs:subPropertyOf wf:output .
-
-default3:My_LandUse_2006 a gis:RegionDataSet,
+:CostPat_Begi1 a default11:Raster,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:N67fd94a740054761ba1cd7ea3fcb2260 ;
-            ada:hasSupport [ a gis:Region ] ] .
+    ada:hasElement [ ada:hasMeasure [ a default11:Existence ;
+                    wf:of _:Na63ca2ac9d6f476cb9a98e57253164b8 ] ] .
 
-default3:My_bu_dist a gis:Raster,
+:My_LandUse_2006 a default11:RegionDataSet,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:N8c29177d8ae346efac4b6125584d2ab3 ] .
+    ada:hasElement [ ada:hasMeasure _:N9d469be699f040a18b2384eed4fedf6c ;
+            ada:hasSupport [ a default11:Region ] ] .
 
-default3:Route1_cost a gis:Raster,
+:My_bu_dist a default11:Raster,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:Nf19da3e031ed4e8b91d021e01b6d2989 ],
-        [ ada:hasMeasure _:N4034667b7730439f8a6b5450f502a1d1 ] .
+    ada:hasElement [ ada:hasMeasure _:N8dcd89d7c5a04c0e8f990c0f2eeac916 ] .
 
-default3:Route2_cost a gis:Raster,
+:Route1_cost a default11:Raster,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure [ a gis:QQuality ;
-                    gis:ofprop _:Nf19da3e031ed4e8b91d021e01b6d2989 ;
-                    wf:of _:Ndffd67e0ed454030b2961feeca024114 ] ],
-        [ ada:hasMeasure [ a gis:QQuality ;
-                    gis:ofprop _:N3ffe0c48ee29486f974f8290281ac955 ;
-                    wf:of _:N5932061241e04a7fae175ea82106c8b5,
-                        default3:my_BuiltUp ] ],
-        [ ada:hasMeasure [ a gis:QQuality ;
-                    gis:ofprop _:N4034667b7730439f8a6b5450f502a1d1 ] ],
-        [ ada:hasMeasure [ a gis:QQuality ;
-                    gis:ofprop _:N5847916aa48d4631bde6b2e42b992d97 ] ],
-        [ ada:hasMeasure [ a gis:QQuality ;
-                    gis:ofprop _:N5847916aa48d4631bde6b2e42b992d97 ] ],
-        [ ada:hasMeasure [ a gis:QQuality ;
-                    gis:ofprop _:N4034667b7730439f8a6b5450f502a1d1 ] ] .
+    ada:hasElement [ ada:hasMeasure _:Ne8f752bdd4694d1680fdae82003dedf2 ],
+        [ ada:hasMeasure _:Na7f31f5480494c18af2874f2332064cf ] .
 
-default3:my_bu_ext a gis:Raster,
+:my_bu_ext a default11:Raster,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure [ a gis:QQuality ;
-                    gis:ofprop _:N8c29177d8ae346efac4b6125584d2ab3 ;
-                    wf:of _:N5932061241e04a7fae175ea82106c8b5,
-                        default3:my_BuiltUp ] ],
-        [ ada:hasMeasure _:N3ffe0c48ee29486f974f8290281ac955 ],
-        [ ada:hasMeasure _:N5847916aa48d4631bde6b2e42b992d97 ] .
-
-rdf:type a rdf:Property,
-        rdfs:Resource ;
-    rdfs:subPropertyOf rdf:type .
+    ada:hasElement [ ada:hasMeasure _:N32b329a30189480b80bcced4dca7c0a8 ],
+        [ ada:hasMeasure _:N5bcd7a39cbcf415ca7a4abde6026ad5a ],
+        [ ada:hasMeasure [ a default11:QQuality ;
+                    default11:ofprop _:N8dcd89d7c5a04c0e8f990c0f2eeac916 ;
+                    wf:of _:N4bd53346d7794b58b9847eb402234705,
+                        :my_BuiltUp ] ] .
 
 ada:ScaleLevel a rdfs:Resource,
         owl:Class ;
@@ -1195,12 +1198,87 @@ ada:Temporal a rdfs:Resource,
             owl:onProperty ada:referencedBy ;
             owl:someValuesFrom ada:TimeRS ] .
 
-gis:toRaster a rdfs:Resource,
+default11:Cost a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Conversion,
-        gis:Fun,
+    rdfs:comment "A quality that expresses some cost , e.g. in a cost surface" ;
+    rdfs:subClassOf ada:Quality,
+        ada:Reference,
+        wf:Resource .
+
+default11:Existence a rdfs:Resource,
+        owl:Class ;
+    rdfs:comment "A quality that denotes the existence of a set of objects in space"@en ;
+    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+        ada:Quality,
+        ada:Reference,
+        default11:RelQ,
+        wf:Resource .
+
+default11:toRaster a rdfs:Resource,
+        owl:Class ;
+    rdfs:subClassOf default11:Conversion,
+        default11:Fun,
         wf:Operation,
         wf:Resource .
+
+:Beginraster a default11:Raster,
+        rdfs:Resource ;
+    ada:hasElement [ ada:hasMeasure [ a default11:Existence,
+                        default11:QQuality ;
+                    default11:ofprop _:N71ab5326d0de4f028af1e99305499283 ;
+                    wf:of :beginpoint ] ],
+        [ ada:hasMeasure [ a default11:Existence,
+                        default11:QQuality ;
+                    default11:ofprop _:N71ab5326d0de4f028af1e99305499283 ;
+                    wf:of :beginpoint ] ] .
+
+:Route2_backl a default11:Raster,
+        rdfs:Resource ;
+    ada:hasElement [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:N36616ac3e8e04f138dad71915f74708a,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:N76b3506ca8794174a200455344b3d258,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:N36616ac3e8e04f138dad71915f74708a,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:N946b7fec38a04ef09613d4b15f167caa,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:Nba235d132d1f43b99e9afbd31f881d1b,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:N7421d3926bf7476b92bd50cbfd3b8a49,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:Nea3a4534b1364c66a546fee514491971,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:Nea3a4534b1364c66a546fee514491971,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:N76b3506ca8794174a200455344b3d258,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:N7421d3926bf7476b92bd50cbfd3b8a49,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:Nba235d132d1f43b99e9afbd31f881d1b,
+                        :endraster ] ],
+        [ ada:hasMeasure [ a default11:Link ;
+                    wf:of _:N946b7fec38a04ef09613d4b15f167caa,
+                        :endraster ] ] .
+
+:Route2_cost a default11:Raster,
+        rdfs:Resource ;
+    ada:hasElement [ ada:hasMeasure _:N7421d3926bf7476b92bd50cbfd3b8a49 ],
+        [ ada:hasMeasure _:Nba235d132d1f43b99e9afbd31f881d1b ],
+        [ ada:hasMeasure _:N76b3506ca8794174a200455344b3d258 ],
+        [ ada:hasMeasure _:N36616ac3e8e04f138dad71915f74708a ],
+        [ ada:hasMeasure _:Nea3a4534b1364c66a546fee514491971 ],
+        [ ada:hasMeasure _:N946b7fec38a04ef09613d4b15f167caa ] .
 
 owl:Thing a rdfs:Resource,
         owl:Class .
@@ -1241,10 +1319,10 @@ ada:hasMeasure a rdf:Property,
     rdfs:range ada:Reference ;
     rdfs:subPropertyOf ada:hasMeasure .
 
-gis:RelQ a rdfs:Resource,
+default11:RelQ a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A relational quality"@en ;
-    rdfs:subClassOf _:N79ae697f52e24df6bd23e6ff37186e38,
+    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
         ada:Quality,
         ada:Reference,
         wf:Resource .
@@ -1255,21 +1333,40 @@ wf:input a rdf:Property,
     rdfs:domain wf:Operation ;
     rdfs:subPropertyOf wf:input .
 
+:beginpoint a default11:PointDataSet,
+        rdfs:Resource ;
+    ada:hasElement [ ada:hasMeasure _:N71ab5326d0de4f028af1e99305499283 ;
+            ada:hasSupport [ a default11:Point ] ] .
+
+:endpoint a default11:PointDataSet,
+        rdfs:Resource ;
+    ada:hasElement [ ada:hasMeasure _:N18a69a2fc0994cee9bb95c6af61b1f64 ;
+            ada:hasSupport [ a default11:Point ] ] .
+
 () a rdfs:Resource .
 
-gis:QQuality a rdfs:Resource,
+default11:Raster a rdfs:Resource,
         owl:Class ;
-    rdfs:comment "A quality derived from another quality (e.g. by copying it)"@en ;
-    rdfs:subClassOf _:N79ae697f52e24df6bd23e6ff37186e38,
-        ada:Quality,
-        ada:Reference,
-        gis:RelQ,
+    rdfs:comment "The raster data type in GIS" ;
+    rdfs:subClassOf ada:DataSet,
+        ada:SpatialDataSet,
+        default11:RegionDataSet,
         wf:Resource .
 
-default3:my_BuiltUp a ada:DataSet,
+:my_BuiltUp a ada:DataSet,
         rdfs:Resource ;
     ada:hasElement [ ada:hasMeasure [ a ada:Spatial ] ;
             ada:hasSupport [ a ada:Object ] ] .
+
+wf:output a rdf:Property,
+        rdfs:Resource,
+        owl:ObjectProperty ;
+    rdfs:domain wf:Operation ;
+    rdfs:subPropertyOf wf:output .
+
+rdf:type a rdf:Property,
+        rdfs:Resource ;
+    rdfs:subPropertyOf rdf:type .
 
 ada:Object a rdfs:Resource,
         owl:Class ;
@@ -1287,23 +1384,25 @@ ada:hasSupport a rdfs:Resource,
     rdfs:domain ada:Data ;
     rdfs:range ada:Reference .
 
-gis:RasterOp a rdfs:Resource,
+default11:RasterOp a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
+    rdfs:subClassOf default11:Fun,
         wf:Operation,
         wf:Resource .
 
-gis:inputdata a rdf:Property,
-        rdfs:Resource,
-        owl:ObjectProperty ;
-    rdfs:comment "Whenever the input is data, and not a single value or a function" ;
-    rdfs:subPropertyOf gis:inputdata,
-        wf:input .
-
-gis:Conversion a rdfs:Resource,
+default11:Conversion a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf gis:Fun,
+    rdfs:subClassOf default11:Fun,
         wf:Operation,
+        wf:Resource .
+
+default11:Link a rdfs:Resource,
+        owl:Class ;
+    rdfs:comment "A quality that denotes a link to a neighboring region "@en ;
+    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+        ada:Quality,
+        ada:Reference,
+        default11:RelQ,
         wf:Resource .
 
 ada:DataSet a rdfs:Resource,
@@ -1323,21 +1422,48 @@ ada:Quality a rdfs:Resource,
             owl:onProperty ada:referencedBy ;
             owl:someValuesFrom ada:QualityRS ] .
 
+default11:QQuality a rdfs:Resource,
+        owl:Class ;
+    rdfs:comment "A quality derived from another quality (e.g. by copying it)"@en ;
+    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+        ada:Quality,
+        ada:Reference,
+        default11:RelQ,
+        wf:Resource .
+
 ada:RefSys a rdfs:Resource,
         owl:Class ;
     rdfs:comment "The class of reference systems"@en ;
     owl:disjointWith ada:Reference .
 
+default11:inputdata a rdf:Property,
+        rdfs:Resource,
+        owl:ObjectProperty ;
+    rdfs:comment "Whenever the input is data, and not a single value or a function" ;
+    rdfs:subPropertyOf default11:inputdata,
+        wf:input .
+
 ada:Data a rdfs:Resource,
         owl:Class ;
     rdfs:comment "The class of data items. Data items bind together different attributes of an observation, just like table records or primary keys."@en ;
-    rdfs:subClassOf _:N2ce2c987616746f2af38326afbc17372,
-        _:N357437402a564a7aaca015f68563ba23,
-        _:N4cac413f6b0746c98f5182db1f6f8742,
+    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
+        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
         wf:Resource ;
     owl:disjointWith ada:DataSet,
         ada:RefSys,
         ada:Reference .
+
+:endraster a default11:Raster,
+        rdfs:Resource ;
+    ada:hasElement [ ada:hasMeasure [ a default11:Existence,
+                        default11:QQuality ;
+                    default11:ofprop _:N18a69a2fc0994cee9bb95c6af61b1f64 ;
+                    wf:of :endpoint ] ],
+        [ ada:hasMeasure [ a default11:Existence,
+                        default11:QQuality ;
+                    default11:ofprop _:N18a69a2fc0994cee9bb95c6af61b1f64 ;
+                    wf:of :endpoint ] ] .
 
 ada:Reference a rdfs:Resource,
         owl:Class ;
@@ -1350,12 +1476,12 @@ wf:Operation a rdfs:Resource,
         owl:Class ;
     rdfs:comment "GIS Operations "@en,
         "The event of applying some tool to inputs generating outputs inside a workflow"@en ;
-    rdfs:subClassOf gis:Fun,
+    rdfs:subClassOf default11:Fun,
         wf:Resource .
 
 owl:Restriction a rdfs:Resource .
 
-gis:Fun a rdfs:Resource,
+default11:Fun a rdfs:Resource,
         owl:Class ;
     rdfs:comment "The class of functions. This is a general notion for any operation in and outside a database. Has input and output."@en ;
     rdfs:subClassOf wf:Resource .
@@ -1366,55 +1492,90 @@ wf:Resource a rdfs:Resource,
 
 owl:Class a rdfs:Resource .
 
-_:N3ffe0c48ee29486f974f8290281ac955 a gis:QQuality,
-        gis:Quality ;
-    gis:ofprop _:N8c29177d8ae346efac4b6125584d2ab3 ;
-    wf:of _:N5932061241e04a7fae175ea82106c8b5,
-        default3:my_BuiltUp .
+_:N32b329a30189480b80bcced4dca7c0a8 a default11:QQuality,
+        default11:Quality ;
+    default11:ofprop _:N8dcd89d7c5a04c0e8f990c0f2eeac916 ;
+    wf:of _:N4bd53346d7794b58b9847eb402234705,
+        :my_BuiltUp .
 
-_:N67fd94a740054761ba1cd7ea3fcb2260 a gis:Quality ;
-    wf:of _:Ndffd67e0ed454030b2961feeca024114 .
+_:N9d469be699f040a18b2384eed4fedf6c a default11:Quality ;
+    wf:of _:Nd3eca31ba292420794bf4dd2d494f3f5 .
 
-_:Nd61519b1bf3e4e078857178b54db825b a rdfs:Resource,
+_:Na63ca2ac9d6f476cb9a98e57253164b8 a default11:Path ;
+    default11:hasEnd :endpoint ;
+    default11:hasStart :beginpoint .
+
+_:Na7f31f5480494c18af2874f2332064cf a default11:Existence,
+        default11:QQuality,
+        default11:Quality ;
+    default11:ofprop _:N9d469be699f040a18b2384eed4fedf6c ;
+    wf:of _:Nd3eca31ba292420794bf4dd2d494f3f5 .
+
+_:Nbc2a0a5ba08c47c5a332f04b6b58b70e a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty wf:of ;
-    owl:someValuesFrom gis:Raster .
+    owl:someValuesFrom default11:Raster .
 
-_:Nf19da3e031ed4e8b91d021e01b6d2989 a gis:Existence,
-        gis:QQuality,
-        gis:Quality ;
-    gis:ofprop _:N67fd94a740054761ba1cd7ea3fcb2260 ;
-    wf:of _:Ndffd67e0ed454030b2961feeca024114 .
+_:N18a69a2fc0994cee9bb95c6af61b1f64 a default11:Quality .
 
-_:N4034667b7730439f8a6b5450f502a1d1 a gis:Quality .
+_:N36616ac3e8e04f138dad71915f74708a a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:Ne8f752bdd4694d1680fdae82003dedf2 .
 
-_:N5847916aa48d4631bde6b2e42b992d97 a gis:Quality .
+_:N5bcd7a39cbcf415ca7a4abde6026ad5a a default11:Quality .
 
-_:N8c29177d8ae346efac4b6125584d2ab3 a gis:EuclDistance,
-        gis:Quality ;
-    wf:of _:N5932061241e04a7fae175ea82106c8b5,
-        default3:my_BuiltUp .
+_:N71ab5326d0de4f028af1e99305499283 a default11:Quality .
 
-_:Ndffd67e0ed454030b2961feeca024114 a gis:SField .
+_:N7421d3926bf7476b92bd50cbfd3b8a49 a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:N5bcd7a39cbcf415ca7a4abde6026ad5a .
 
-_:N5932061241e04a7fae175ea82106c8b5 a gis:SField .
+_:N76b3506ca8794174a200455344b3d258 a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:N5bcd7a39cbcf415ca7a4abde6026ad5a .
 
-_:N79ae697f52e24df6bd23e6ff37186e38 a rdfs:Resource,
+_:N8dcd89d7c5a04c0e8f990c0f2eeac916 a default11:EuclDistance,
+        default11:Quality ;
+    wf:of _:N4bd53346d7794b58b9847eb402234705,
+        :my_BuiltUp .
+
+_:N946b7fec38a04ef09613d4b15f167caa a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:Ne8f752bdd4694d1680fdae82003dedf2 .
+
+_:Nba235d132d1f43b99e9afbd31f881d1b a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:N32b329a30189480b80bcced4dca7c0a8 ;
+    wf:of _:N4bd53346d7794b58b9847eb402234705,
+        :my_BuiltUp .
+
+_:Nd3eca31ba292420794bf4dd2d494f3f5 a default11:SField .
+
+_:Ne8f752bdd4694d1680fdae82003dedf2 a default11:Quality .
+
+_:Nea3a4534b1364c66a546fee514491971 a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:Na7f31f5480494c18af2874f2332064cf ;
+    wf:of _:Nd3eca31ba292420794bf4dd2d494f3f5 .
+
+_:N4bd53346d7794b58b9847eb402234705 a default11:SField .
+
+_:Na270b60b69e74f6e99d6bed4eaf81896 a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty wf:of ;
     owl:someValuesFrom ada:DataSet .
 
-_:N2ce2c987616746f2af38326afbc17372 a rdfs:Resource,
+_:N52af7de797704b7296e670ab81037ac9 a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty ada:hasSupport ;
     owl:someValuesFrom owl:Thing .
 
-_:N357437402a564a7aaca015f68563ba23 a rdfs:Resource,
+_:N57c69aa62da84b2490b9e02e2dd7c5b0 a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty ada:hasMeasure ;
     owl:someValuesFrom owl:Thing .
 
-_:N4cac413f6b0746c98f5182db1f6f8742 a rdfs:Resource,
+_:Ne9c62e7c4e864065aa44c1a1efb4089d a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty ada:elementOf ;
     owl:someValuesFrom owl:Thing .

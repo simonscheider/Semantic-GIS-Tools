@@ -110,13 +110,31 @@ def checkTool(operation):
 #list of propagations
 lcppropagations = ['qquality','path']
 
+def reifyWorkflow(file, wfname):
+    edge = rdflib.URIRef('http://geographicknowledge.de/vocab/Workflow.rdf#edge')
+    subject = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#subject')
+    predicate = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate')
+    object = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#object')
+    wf = rdflib.Graph()
+    wfuri = rdflib.URIRef(wfname)
+    wf.parse(file, format='n3')
+    for s,p,o in wf:
+        if(s!= wfuri):
+            e = rdflib.BNode()
+            wf.add((wfuri, edge, e))
+            wf.add((e, subject, s))
+            wf.add((e, predicate, p))
+            wf.add((e, object, o))
+    n_triples(wf)
+    return wf
+
 def test_workflow_lcpath( g ):
-    wfname = '<http://geographicknowledge.de/workflowLCP.rdf#lcpwf>'
+    wfname = 'http://geographicknowledge.de/workflowLCP.rdf#lcpwf'
     print('> test_workflow_lights')
     _dir = "workflows/workflow_lcpath/"
     for fn in [_dir+"workflow_lcpath.ttl"]:
         print("Load N3 file: "+fn)
-        g.parse( fn, format='n3' )
+        g = reifyWorkflow(fn, wfname)+g
     g = run_rdfs_inferences( g )
     #prepare workflowgraph for DFS search. Order is important, because search requires rdfs inference
     wg = getWorkflowGraph(g,wfname)
@@ -138,6 +156,7 @@ def graph_to_file( g ):
 
 #Methods for workflow DFS search
 def getWorkflowGraph(g, wfname):
+    print ("get workflow graph:"+wfname)
     """Extracts a separate workflow graph of a given (named) workflow"""
     q = """ \n CONSTRUCT {?subject ?predicate ?object.}
        WHERE {
@@ -145,7 +164,7 @@ def getWorkflowGraph(g, wfname):
             ?edge rdf:subject ?subject.
             ?edge rdf:predicate ?predicate.
             ?edge rdf:object ?object.
-          FILTER (?wfname = """+wfname+""")
+          FILTER (?wfname = <"""+wfname+""">)
        }"""
     q = file_to_str('rdf_prefixes.txt') + q
     #print q
