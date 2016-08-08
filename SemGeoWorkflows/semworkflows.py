@@ -143,6 +143,7 @@ def test_workflow_lcpath( g ):
     root = getRoot(wg)
     visited = set()
     # Run tool enrichments in the order of DFS backtracking through workflow graph
+    print "Search through workflow and enrich!"
     DFSVisit(root, wg, visited, g)
     #Propagations are run in any order
     for i in lcppropagations:
@@ -156,7 +157,7 @@ def graph_to_file( g ):
 
 #Methods for workflow DFS search
 def getWorkflowGraph(g, wfname):
-    print ("get workflow graph:"+wfname)
+    print ("extract workflow graph (for DFS):"+wfname)
     """Extracts a separate workflow graph of a given (named) workflow"""
     q = """ \n CONSTRUCT {?subject ?predicate ?object.}
        WHERE {

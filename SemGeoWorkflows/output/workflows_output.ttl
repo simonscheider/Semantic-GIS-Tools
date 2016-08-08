@@ -16,9 +16,9 @@
 
 ada:QualityData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -40,9 +40,9 @@ ada:RefDomain a rdfs:Resource,
 
 ada:SpaceData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -61,9 +61,9 @@ ada:TemporalDataSet a rdfs:Resource,
 
 ada:TimeData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -79,9 +79,9 @@ ada:WGS84_C a rdfs:Resource,
                     rdf:first ada:WGS84 ;
                     rdf:rest () ] ] .
 
-ada:data1 a _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+ada:data1 a _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource,
         rdfs:Resource,
@@ -100,14 +100,14 @@ ada:hasMeasureRef a rdfs:Resource,
 ada:hasOWindowPart a rdfs:Resource,
         owl:ObjectProperty ;
     owl:propertyChainAxiom [ a rdfs:Resource ;
-            rdf:first ada:hasOWindow ;
-            rdf:rest [ a rdfs:Resource ;
-                    rdf:first ada:hasPart ;
-                    rdf:rest () ] ],
-        [ a rdfs:Resource ;
             rdf:first ada:hasElement ;
             rdf:rest [ a rdfs:Resource ;
                     rdf:first ada:hasSupport ;
+                    rdf:rest () ] ],
+        [ a rdfs:Resource ;
+            rdf:first ada:hasOWindow ;
+            rdf:rest [ a rdfs:Resource ;
+                    rdf:first ada:hasPart ;
                     rdf:rest () ] ] .
 
 ada:measureOf a rdfs:Resource,
@@ -159,7 +159,7 @@ default11:CostDistanceTool a rdfs:Resource,
 default11:Density a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A quality that denotes the spatial density of a set of objects"@en ;
-    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+    rdfs:subClassOf _:N4880bd7a224b47b8bae1127bd4bb48f4,
         ada:Quality,
         ada:Reference,
         default11:RelQ,
@@ -281,13 +281,13 @@ default11:TableJoin a rdfs:Resource,
 
 default11:TrackData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
         [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty wf:of ;
             owl:someValuesFrom default11:Trajectory ],
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -350,133 +350,133 @@ wf:edgeOf a rdfs:Resource,
 :lcpwf a wf:Workflow,
         rdfs:Resource ;
     wf:edge [ a rdfs:Resource ;
-            rdf:object :Beginraster ;
-            rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
-        [ a rdfs:Resource ;
-            rdf:object :beginpoint ;
+            rdf:object :CostPat_Begi1 ;
             rdf:predicate default11:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#8> ],
         [ a rdfs:Resource ;
-            rdf:object :My_bu_dist ;
-            rdf:predicate default11:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
-        [ a rdfs:Resource ;
-            rdf:object :My_bu_dist ;
+            rdf:object :Route1_cost ;
             rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
         [ a rdfs:Resource ;
             rdf:object default11:Reclassify ;
             rdf:predicate rdf:type ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
         [ a rdfs:Resource ;
-            rdf:object :Route1_cost ;
-            rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
-        [ a rdfs:Resource ;
-            rdf:object default11:CellStatistics ;
-            rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
-        [ a rdfs:Resource ;
-            rdf:object :Route1_cost ;
-            rdf:predicate default11:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
-        [ a rdfs:Resource ;
-            rdf:object default11:PointtoRaster ;
-            rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#4> ],
-        [ a rdfs:Resource ;
-            rdf:object :Route2_backl ;
-            rdf:predicate default11:linkraster ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
-        [ a rdfs:Resource ;
-            rdf:object 10 ;
-            rdf:predicate default11:param ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
-        [ a rdfs:Resource ;
             rdf:object :My_LandUse_2006 ;
             rdf:predicate default11:inputdata ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
         [ a rdfs:Resource ;
-            rdf:object :my_bu_ext ;
+            rdf:object :Route2_cost ;
             rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
         [ a rdfs:Resource ;
-            rdf:object :Route2_backl ;
+            rdf:object :My_bu_dist ;
             rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
         [ a rdfs:Resource ;
             rdf:object default11:toLine ;
             rdf:predicate rdf:type ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#8> ],
         [ a rdfs:Resource ;
-            rdf:object :CostPat_Begi1 ;
+            rdf:object default11:EuclideanDistance ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
+        [ a rdfs:Resource ;
+            rdf:object 10 ;
+            rdf:predicate default11:param ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
+        [ a rdfs:Resource ;
+            rdf:object :endraster ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#4> ],
+        [ a rdfs:Resource ;
+            rdf:object :Beginraster ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:CostPath ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route2_backl ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+        [ a rdfs:Resource ;
+            rdf:object :my_BuiltUp ;
             rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
+        [ a rdfs:Resource ;
+            rdf:object :reclassTable ;
+            rdf:predicate default11:param ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:PointtoRaster ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
+        [ a rdfs:Resource ;
+            rdf:object :endraster ;
+            rdf:predicate default11:sink ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+        [ a rdfs:Resource ;
+            rdf:object :my_bu_ext ;
+            rdf:predicate wf:output ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
+        [ a rdfs:Resource ;
+            rdf:object :MyRoute ;
+            rdf:predicate wf:output ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#8> ],
         [ a rdfs:Resource ;
             rdf:object default11:PolygontoRaster ;
             rdf:predicate rdf:type ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#0> ],
         [ a rdfs:Resource ;
-            rdf:object default11:PointtoRaster ;
-            rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
-        [ a rdfs:Resource ;
-            rdf:object :reclassTable ;
-            rdf:predicate default11:param ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
-        [ a rdfs:Resource ;
             rdf:object :CostPat_Begi1 ;
             rdf:predicate wf:output ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
         [ a rdfs:Resource ;
-            rdf:object :Route2_cost ;
-            rdf:predicate default11:costsurface ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
-        [ a rdfs:Resource ;
-            rdf:object :Beginraster ;
-            rdf:predicate default11:source ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
-        [ a rdfs:Resource ;
-            rdf:object default11:EuclideanDistance ;
+            rdf:object default11:CellStatistics ;
             rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ],
-        [ a rdfs:Resource ;
-            rdf:object :MyRoute ;
-            rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#8> ],
-        [ a rdfs:Resource ;
-            rdf:object default11:CostPath ;
-            rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
-        [ a rdfs:Resource ;
-            rdf:object default11:CostDistance ;
-            rdf:predicate rdf:type ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
-        [ a rdfs:Resource ;
-            rdf:object :my_bu_ext ;
-            rdf:predicate default11:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
-        [ a rdfs:Resource ;
-            rdf:object :endraster ;
-            rdf:predicate default11:sink ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
-        [ a rdfs:Resource ;
-            rdf:object :endraster ;
-            rdf:predicate wf:output ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#4> ],
-        [ a rdfs:Resource ;
-            rdf:object :Route2_cost ;
-            rdf:predicate wf:output ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
         [ a rdfs:Resource ;
             rdf:object :endpoint ;
             rdf:predicate default11:inputdata ;
             rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#4> ],
         [ a rdfs:Resource ;
-            rdf:object :my_BuiltUp ;
+            rdf:object default11:PointtoRaster ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#4> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route2_cost ;
+            rdf:predicate default11:costsurface ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+        [ a rdfs:Resource ;
+            rdf:object :beginpoint ;
             rdf:predicate default11:inputdata ;
-            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#1> ] ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#6> ],
+        [ a rdfs:Resource ;
+            rdf:object default11:CostDistance ;
+            rdf:predicate rdf:type ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#5> ],
+        [ a rdfs:Resource ;
+            rdf:object :Beginraster ;
+            rdf:predicate default11:source ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route2_backl ;
+            rdf:predicate default11:linkraster ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#7> ],
+        [ a rdfs:Resource ;
+            rdf:object :Route1_cost ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ],
+        [ a rdfs:Resource ;
+            rdf:object :My_bu_dist ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#2> ],
+        [ a rdfs:Resource ;
+            rdf:object :my_bu_ext ;
+            rdf:predicate default11:inputdata ;
+            rdf:subject <http://geographicknowledge.de/workflowLCP.rdf#3> ] ;
     wf:result :MyRoute ;
     wf:source :My_LandUse_2006,
         :beginpoint,
@@ -491,9 +491,9 @@ rdfs:Literal a rdfs:Resource .
 
 ada:ObjectData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -517,9 +517,9 @@ ada:QualityRS a rdfs:Resource,
 
 ada:TemporalData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -559,7 +559,7 @@ ada:partOf a rdfs:Resource,
 default11:EuclDistance a rdfs:Resource,
         owl:Class ;
     rdfs:comment "a quality that denotes Euclidean distance to a set of objects"@en ;
-    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+    rdfs:subClassOf _:N4880bd7a224b47b8bae1127bd4bb48f4,
         ada:Quality,
         ada:Reference,
         default11:Distance,
@@ -568,9 +568,9 @@ default11:EuclDistance a rdfs:Resource,
 
 default11:LineData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         ada:SpatialData,
         wf:Resource ;
@@ -581,9 +581,9 @@ default11:LineData a rdfs:Resource,
 
 default11:NetworkData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -593,9 +593,9 @@ default11:NetworkData a rdfs:Resource,
 
 default11:PointData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         ada:SpatialData,
         wf:Resource ;
@@ -606,9 +606,9 @@ default11:PointData a rdfs:Resource,
 
 default11:RegionData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         ada:SpatialData,
         wf:Resource ;
@@ -774,8 +774,8 @@ default11:CellStatistics a rdfs:Resource,
 default11:CostDistance a rdfs:Resource,
         owl:Class ;
     rdfs:comment "a quality that denotes a cost distance to a set of objects defined over a cost surface"@en ;
-    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
-        _:Nbc2a0a5ba08c47c5a332f04b6b58b70e,
+    rdfs:subClassOf _:N4880bd7a224b47b8bae1127bd4bb48f4,
+        _:N7628756e5bbe4097b5f4ec0e34b3c389,
         ada:Quality,
         ada:Reference,
         default11:Distance,
@@ -919,7 +919,7 @@ ada:Ordinal a rdfs:Resource,
 default11:Distance a rdfs:Resource,
         owl:Class ;
     rdfs:comment "a quality that denotes the spatial distance to a set of objects"@en ;
-    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+    rdfs:subClassOf _:N4880bd7a224b47b8bae1127bd4bb48f4,
         ada:Quality,
         ada:Reference,
         default11:RelQ,
@@ -1000,7 +1000,7 @@ default11:param a rdf:Property,
 :MyRoute a default11:ObjectData,
         rdfs:Resource ;
     ada:hasElement [ ada:hasMeasure [ a default11:Line ] ;
-            ada:hasSupport _:Na63ca2ac9d6f476cb9a98e57253164b8 ] .
+            ada:hasSupport _:N92a9531d32cb42548eae972715c09407 ] .
 
 :reclassTable a rdfs:Resource .
 
@@ -1010,9 +1010,9 @@ owl:Ontology a rdfs:Resource .
 
 ada:SpatialData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -1106,8 +1106,8 @@ wf:Workflow a rdfs:Resource,
         :my_bu_ext ;
     wf:output :Route2_cost .
 
-<http://geographicknowledge.de/workflowLCP.rdf#5> a _:Na270b60b69e74f6e99d6bed4eaf81896,
-        _:Nbc2a0a5ba08c47c5a332f04b6b58b70e,
+<http://geographicknowledge.de/workflowLCP.rdf#5> a _:N4880bd7a224b47b8bae1127bd4bb48f4,
+        _:N7628756e5bbe4097b5f4ec0e34b3c389,
         ada:Quality,
         ada:Reference,
         default11:CostDistance,
@@ -1158,29 +1158,29 @@ default11:LocalMapAlgebra a rdfs:Resource,
 :CostPat_Begi1 a default11:Raster,
         rdfs:Resource ;
     ada:hasElement [ ada:hasMeasure [ a default11:Existence ;
-                    wf:of _:Na63ca2ac9d6f476cb9a98e57253164b8 ] ] .
+                    wf:of _:N92a9531d32cb42548eae972715c09407 ] ] .
 
 :My_LandUse_2006 a default11:RegionDataSet,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:N9d469be699f040a18b2384eed4fedf6c ;
+    ada:hasElement [ ada:hasMeasure _:N03fa57cf16fb4bfc821511f558d02fb0 ;
             ada:hasSupport [ a default11:Region ] ] .
 
 :My_bu_dist a default11:Raster,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:N8dcd89d7c5a04c0e8f990c0f2eeac916 ] .
+    ada:hasElement [ ada:hasMeasure _:N712c1603cf454e8eb3e24c8e6e31e166 ] .
 
 :Route1_cost a default11:Raster,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:Ne8f752bdd4694d1680fdae82003dedf2 ],
-        [ ada:hasMeasure _:Na7f31f5480494c18af2874f2332064cf ] .
+    ada:hasElement [ ada:hasMeasure _:N6527bb4dd077463d88cf8922f9dbfc8f ],
+        [ ada:hasMeasure _:N2069147d8b40442783c4ddc382a711b4 ] .
 
 :my_bu_ext a default11:Raster,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:N32b329a30189480b80bcced4dca7c0a8 ],
-        [ ada:hasMeasure _:N5bcd7a39cbcf415ca7a4abde6026ad5a ],
+    ada:hasElement [ ada:hasMeasure _:N79233d31342a4a74a8f4b796e3981ee6 ],
+        [ ada:hasMeasure _:Na4e598f2c5dd422dacc994441918e4a0 ],
         [ ada:hasMeasure [ a default11:QQuality ;
-                    default11:ofprop _:N8dcd89d7c5a04c0e8f990c0f2eeac916 ;
-                    wf:of _:N4bd53346d7794b58b9847eb402234705,
+                    default11:ofprop _:N712c1603cf454e8eb3e24c8e6e31e166 ;
+                    wf:of _:Nb5bbc7ae80a7425d929bcf1c2c848546,
                         :my_BuiltUp ] ] .
 
 ada:ScaleLevel a rdfs:Resource,
@@ -1208,7 +1208,16 @@ default11:Cost a rdfs:Resource,
 default11:Existence a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A quality that denotes the existence of a set of objects in space"@en ;
-    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+    rdfs:subClassOf _:N4880bd7a224b47b8bae1127bd4bb48f4,
+        ada:Quality,
+        ada:Reference,
+        default11:RelQ,
+        wf:Resource .
+
+default11:Link a rdfs:Resource,
+        owl:Class ;
+    rdfs:comment "A quality that denotes a link to a neighboring region "@en ;
+    rdfs:subClassOf _:N4880bd7a224b47b8bae1127bd4bb48f4,
         ada:Quality,
         ada:Reference,
         default11:RelQ,
@@ -1225,60 +1234,42 @@ default11:toRaster a rdfs:Resource,
         rdfs:Resource ;
     ada:hasElement [ ada:hasMeasure [ a default11:Existence,
                         default11:QQuality ;
-                    default11:ofprop _:N71ab5326d0de4f028af1e99305499283 ;
+                    default11:ofprop _:Nf916a46a07ed430e95980ccfd9a9e21e ;
                     wf:of :beginpoint ] ],
         [ ada:hasMeasure [ a default11:Existence,
                         default11:QQuality ;
-                    default11:ofprop _:N71ab5326d0de4f028af1e99305499283 ;
+                    default11:ofprop _:Nf916a46a07ed430e95980ccfd9a9e21e ;
                     wf:of :beginpoint ] ] .
 
 :Route2_backl a default11:Raster,
         rdfs:Resource ;
     ada:hasElement [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:N36616ac3e8e04f138dad71915f74708a,
+                    wf:of _:Nd5b5f497f8c041488175c2f530986299,
                         :endraster ] ],
         [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:N76b3506ca8794174a200455344b3d258,
+                    wf:of _:N3c626ac97d2348919b6d04b474763ab7,
                         :endraster ] ],
         [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:N36616ac3e8e04f138dad71915f74708a,
+                    wf:of _:Ndbd0e102532f4faeb1db1e525e339e93,
                         :endraster ] ],
         [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:N946b7fec38a04ef09613d4b15f167caa,
+                    wf:of _:Nc55232b000dc473db8303f58e752113e,
                         :endraster ] ],
         [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:Nba235d132d1f43b99e9afbd31f881d1b,
+                    wf:of _:N0f6c9fdf2a0c4475bee7f14b5d61eee3,
                         :endraster ] ],
         [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:N7421d3926bf7476b92bd50cbfd3b8a49,
-                        :endraster ] ],
-        [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:Nea3a4534b1364c66a546fee514491971,
-                        :endraster ] ],
-        [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:Nea3a4534b1364c66a546fee514491971,
-                        :endraster ] ],
-        [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:N76b3506ca8794174a200455344b3d258,
-                        :endraster ] ],
-        [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:N7421d3926bf7476b92bd50cbfd3b8a49,
-                        :endraster ] ],
-        [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:Nba235d132d1f43b99e9afbd31f881d1b,
-                        :endraster ] ],
-        [ ada:hasMeasure [ a default11:Link ;
-                    wf:of _:N946b7fec38a04ef09613d4b15f167caa,
+                    wf:of _:Ne8b4d109b2ff4614a415a7459a42e26f,
                         :endraster ] ] .
 
 :Route2_cost a default11:Raster,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:N7421d3926bf7476b92bd50cbfd3b8a49 ],
-        [ ada:hasMeasure _:Nba235d132d1f43b99e9afbd31f881d1b ],
-        [ ada:hasMeasure _:N76b3506ca8794174a200455344b3d258 ],
-        [ ada:hasMeasure _:N36616ac3e8e04f138dad71915f74708a ],
-        [ ada:hasMeasure _:Nea3a4534b1364c66a546fee514491971 ],
-        [ ada:hasMeasure _:N946b7fec38a04ef09613d4b15f167caa ] .
+    ada:hasElement [ ada:hasMeasure _:Ndbd0e102532f4faeb1db1e525e339e93 ],
+        [ ada:hasMeasure _:Ne8b4d109b2ff4614a415a7459a42e26f ],
+        [ ada:hasMeasure _:Nd5b5f497f8c041488175c2f530986299 ],
+        [ ada:hasMeasure _:N0f6c9fdf2a0c4475bee7f14b5d61eee3 ],
+        [ ada:hasMeasure _:Nc55232b000dc473db8303f58e752113e ],
+        [ ada:hasMeasure _:N3c626ac97d2348919b6d04b474763ab7 ] .
 
 owl:Thing a rdfs:Resource,
         owl:Class .
@@ -1322,7 +1313,7 @@ ada:hasMeasure a rdf:Property,
 default11:RelQ a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A relational quality"@en ;
-    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+    rdfs:subClassOf _:N4880bd7a224b47b8bae1127bd4bb48f4,
         ada:Quality,
         ada:Reference,
         wf:Resource .
@@ -1335,12 +1326,12 @@ wf:input a rdf:Property,
 
 :beginpoint a default11:PointDataSet,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:N71ab5326d0de4f028af1e99305499283 ;
+    ada:hasElement [ ada:hasMeasure _:Nf916a46a07ed430e95980ccfd9a9e21e ;
             ada:hasSupport [ a default11:Point ] ] .
 
 :endpoint a default11:PointDataSet,
         rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure _:N18a69a2fc0994cee9bb95c6af61b1f64 ;
+    ada:hasElement [ ada:hasMeasure _:N9690249409a34d5fb9a3ef2cae667d7f ;
             ada:hasSupport [ a default11:Point ] ] .
 
 () a rdfs:Resource .
@@ -1396,14 +1387,16 @@ default11:Conversion a rdfs:Resource,
         wf:Operation,
         wf:Resource .
 
-default11:Link a rdfs:Resource,
-        owl:Class ;
-    rdfs:comment "A quality that denotes a link to a neighboring region "@en ;
-    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
-        ada:Quality,
-        ada:Reference,
-        default11:RelQ,
-        wf:Resource .
+:endraster a default11:Raster,
+        rdfs:Resource ;
+    ada:hasElement [ ada:hasMeasure [ a default11:Existence,
+                        default11:QQuality ;
+                    default11:ofprop _:N9690249409a34d5fb9a3ef2cae667d7f ;
+                    wf:of :endpoint ] ],
+        [ ada:hasMeasure [ a default11:Existence,
+                        default11:QQuality ;
+                    default11:ofprop _:N9690249409a34d5fb9a3ef2cae667d7f ;
+                    wf:of :endpoint ] ] .
 
 ada:DataSet a rdfs:Resource,
         owl:Class ;
@@ -1425,7 +1418,7 @@ ada:Quality a rdfs:Resource,
 default11:QQuality a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A quality derived from another quality (e.g. by copying it)"@en ;
-    rdfs:subClassOf _:Na270b60b69e74f6e99d6bed4eaf81896,
+    rdfs:subClassOf _:N4880bd7a224b47b8bae1127bd4bb48f4,
         ada:Quality,
         ada:Reference,
         default11:RelQ,
@@ -1446,24 +1439,13 @@ default11:inputdata a rdf:Property,
 ada:Data a rdfs:Resource,
         owl:Class ;
     rdfs:comment "The class of data items. Data items bind together different attributes of an observation, just like table records or primary keys."@en ;
-    rdfs:subClassOf _:N52af7de797704b7296e670ab81037ac9,
-        _:N57c69aa62da84b2490b9e02e2dd7c5b0,
-        _:Ne9c62e7c4e864065aa44c1a1efb4089d,
+    rdfs:subClassOf _:N01b54c31f5ee4f4da94445326f79a66f,
+        _:N540bba94fedb42979f4df237644f3070,
+        _:Nea6e7123597a4e1488f95f04a68c7d4a,
         wf:Resource ;
     owl:disjointWith ada:DataSet,
         ada:RefSys,
         ada:Reference .
-
-:endraster a default11:Raster,
-        rdfs:Resource ;
-    ada:hasElement [ ada:hasMeasure [ a default11:Existence,
-                        default11:QQuality ;
-                    default11:ofprop _:N18a69a2fc0994cee9bb95c6af61b1f64 ;
-                    wf:of :endpoint ] ],
-        [ ada:hasMeasure [ a default11:Existence,
-                        default11:QQuality ;
-                    default11:ofprop _:N18a69a2fc0994cee9bb95c6af61b1f64 ;
-                    wf:of :endpoint ] ] .
 
 ada:Reference a rdfs:Resource,
         owl:Class ;
@@ -1492,91 +1474,91 @@ wf:Resource a rdfs:Resource,
 
 owl:Class a rdfs:Resource .
 
-_:N32b329a30189480b80bcced4dca7c0a8 a default11:QQuality,
-        default11:Quality ;
-    default11:ofprop _:N8dcd89d7c5a04c0e8f990c0f2eeac916 ;
-    wf:of _:N4bd53346d7794b58b9847eb402234705,
-        :my_BuiltUp .
+_:N03fa57cf16fb4bfc821511f558d02fb0 a default11:Quality ;
+    wf:of _:N402b6c30cc0947de97f3acbb7b1ff1b7 .
 
-_:N9d469be699f040a18b2384eed4fedf6c a default11:Quality ;
-    wf:of _:Nd3eca31ba292420794bf4dd2d494f3f5 .
+_:N0f6c9fdf2a0c4475bee7f14b5d61eee3 a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:N79233d31342a4a74a8f4b796e3981ee6 .
 
-_:Na63ca2ac9d6f476cb9a98e57253164b8 a default11:Path ;
-    default11:hasEnd :endpoint ;
-    default11:hasStart :beginpoint .
+_:N3c626ac97d2348919b6d04b474763ab7 a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:N79233d31342a4a74a8f4b796e3981ee6 .
 
-_:Na7f31f5480494c18af2874f2332064cf a default11:Existence,
+_:N6527bb4dd077463d88cf8922f9dbfc8f a default11:Existence,
         default11:QQuality,
         default11:Quality ;
-    default11:ofprop _:N9d469be699f040a18b2384eed4fedf6c ;
-    wf:of _:Nd3eca31ba292420794bf4dd2d494f3f5 .
+    default11:ofprop _:N03fa57cf16fb4bfc821511f558d02fb0 ;
+    wf:of _:N402b6c30cc0947de97f3acbb7b1ff1b7 .
 
-_:Nbc2a0a5ba08c47c5a332f04b6b58b70e a rdfs:Resource,
+_:N7628756e5bbe4097b5f4ec0e34b3c389 a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty wf:of ;
     owl:someValuesFrom default11:Raster .
 
-_:N18a69a2fc0994cee9bb95c6af61b1f64 a default11:Quality .
+_:N92a9531d32cb42548eae972715c09407 a default11:Path ;
+    default11:hasEnd :endpoint ;
+    default11:hasStart :beginpoint .
 
-_:N36616ac3e8e04f138dad71915f74708a a default11:Cost,
-        default11:QQuality ;
-    default11:ofprop _:Ne8f752bdd4694d1680fdae82003dedf2 .
-
-_:N5bcd7a39cbcf415ca7a4abde6026ad5a a default11:Quality .
-
-_:N71ab5326d0de4f028af1e99305499283 a default11:Quality .
-
-_:N7421d3926bf7476b92bd50cbfd3b8a49 a default11:Cost,
-        default11:QQuality ;
-    default11:ofprop _:N5bcd7a39cbcf415ca7a4abde6026ad5a .
-
-_:N76b3506ca8794174a200455344b3d258 a default11:Cost,
-        default11:QQuality ;
-    default11:ofprop _:N5bcd7a39cbcf415ca7a4abde6026ad5a .
-
-_:N8dcd89d7c5a04c0e8f990c0f2eeac916 a default11:EuclDistance,
+_:Na4e598f2c5dd422dacc994441918e4a0 a default11:QQuality,
         default11:Quality ;
-    wf:of _:N4bd53346d7794b58b9847eb402234705,
+    default11:ofprop _:N712c1603cf454e8eb3e24c8e6e31e166 ;
+    wf:of _:Nb5bbc7ae80a7425d929bcf1c2c848546,
         :my_BuiltUp .
 
-_:N946b7fec38a04ef09613d4b15f167caa a default11:Cost,
+_:Nc55232b000dc473db8303f58e752113e a default11:Cost,
         default11:QQuality ;
-    default11:ofprop _:Ne8f752bdd4694d1680fdae82003dedf2 .
-
-_:Nba235d132d1f43b99e9afbd31f881d1b a default11:Cost,
-        default11:QQuality ;
-    default11:ofprop _:N32b329a30189480b80bcced4dca7c0a8 ;
-    wf:of _:N4bd53346d7794b58b9847eb402234705,
+    default11:ofprop _:Na4e598f2c5dd422dacc994441918e4a0 ;
+    wf:of _:Nb5bbc7ae80a7425d929bcf1c2c848546,
         :my_BuiltUp .
 
-_:Nd3eca31ba292420794bf4dd2d494f3f5 a default11:SField .
-
-_:Ne8f752bdd4694d1680fdae82003dedf2 a default11:Quality .
-
-_:Nea3a4534b1364c66a546fee514491971 a default11:Cost,
+_:Nd5b5f497f8c041488175c2f530986299 a default11:Cost,
         default11:QQuality ;
-    default11:ofprop _:Na7f31f5480494c18af2874f2332064cf ;
-    wf:of _:Nd3eca31ba292420794bf4dd2d494f3f5 .
+    default11:ofprop _:N2069147d8b40442783c4ddc382a711b4 .
 
-_:N4bd53346d7794b58b9847eb402234705 a default11:SField .
+_:Ndbd0e102532f4faeb1db1e525e339e93 a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:N2069147d8b40442783c4ddc382a711b4 .
 
-_:Na270b60b69e74f6e99d6bed4eaf81896 a rdfs:Resource,
+_:Ne8b4d109b2ff4614a415a7459a42e26f a default11:Cost,
+        default11:QQuality ;
+    default11:ofprop _:N6527bb4dd077463d88cf8922f9dbfc8f ;
+    wf:of _:N402b6c30cc0947de97f3acbb7b1ff1b7 .
+
+_:N2069147d8b40442783c4ddc382a711b4 a default11:Quality .
+
+_:N402b6c30cc0947de97f3acbb7b1ff1b7 a default11:SField .
+
+_:N712c1603cf454e8eb3e24c8e6e31e166 a default11:EuclDistance,
+        default11:Quality ;
+    wf:of _:Nb5bbc7ae80a7425d929bcf1c2c848546,
+        :my_BuiltUp .
+
+_:N79233d31342a4a74a8f4b796e3981ee6 a default11:Quality .
+
+_:N9690249409a34d5fb9a3ef2cae667d7f a default11:Quality .
+
+_:Nf916a46a07ed430e95980ccfd9a9e21e a default11:Quality .
+
+_:Nb5bbc7ae80a7425d929bcf1c2c848546 a default11:SField .
+
+_:N4880bd7a224b47b8bae1127bd4bb48f4 a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty wf:of ;
     owl:someValuesFrom ada:DataSet .
 
-_:N52af7de797704b7296e670ab81037ac9 a rdfs:Resource,
+_:N01b54c31f5ee4f4da94445326f79a66f a rdfs:Resource,
         owl:Restriction ;
-    owl:onProperty ada:hasSupport ;
+    owl:onProperty ada:elementOf ;
     owl:someValuesFrom owl:Thing .
 
-_:N57c69aa62da84b2490b9e02e2dd7c5b0 a rdfs:Resource,
+_:N540bba94fedb42979f4df237644f3070 a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty ada:hasMeasure ;
     owl:someValuesFrom owl:Thing .
 
-_:Ne9c62e7c4e864065aa44c1a1efb4089d a rdfs:Resource,
+_:Nea6e7123597a4e1488f95f04a68c7d4a a rdfs:Resource,
         owl:Restriction ;
-    owl:onProperty ada:elementOf ;
+    owl:onProperty ada:hasSupport ;
     owl:someValuesFrom owl:Thing .
 
