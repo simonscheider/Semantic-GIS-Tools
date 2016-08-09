@@ -14,7 +14,7 @@
 	rdf:type gis:PolygontoRaster.
 :1 gis:inputdata :my_BuiltUp; gis:param 10;
 	wf:output :My_bu_dist;
-	rdf:type gis:EuclideanDistance.
+	rdf:type gis:EuclideanDistanceTool.
 :2 gis:inputdata :My_bu_dist; gis:param :reclassTable;
 	wf:output :my_bu_ext;
 	rdf:type gis:Reclassify.

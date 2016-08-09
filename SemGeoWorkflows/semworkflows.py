@@ -135,7 +135,7 @@ def checkTool(operation):
     @param operation a GIS operation
     """
     #The list of tools to be used for tool enrichment
-    lcptools = [ 'euclideandistance', 'polygontoraster','localmapalgebra','pointtoraster','costdistance','costpath','toline']
+    lcptools = [ 'euclideandistancetool', 'polygontoraster','localmapalgebra','pointtoraster','costdistance','costpath','toline']
     operation = (((str(operation)).rpartition('#'))[2]).lower() #this extracts the toolname from its URI
     if operation in lcptools:
         return operation

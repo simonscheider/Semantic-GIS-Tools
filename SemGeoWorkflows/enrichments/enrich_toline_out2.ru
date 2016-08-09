@@ -4,19 +4,19 @@
 INSERT 
 { 
 #GRAPH ?g{
-?out a gis:ObjectData; ada:hasElement _:oute.
-_:oute ada:hasSupport ?object; 
-ada:hasMeasure _:line . _:line a gis:Line.
-?in2 a gis:Raster. 
+?out a gis:ObjectData. 
+?oute ada:hasSupport ?object. 
+?in a gis:Raster. 
 }
 #}
 #SELECT *
 WHERE{
 #GRAPH ?g{
 ?node a gis:toLine;
-gis:inputdata ?in2;
+gis:inputdata ?in;
 wf:output ?out.
-?in2 ada:hasElement ?ine. ?ine ada:hasMeasure ?inm.  ?inm  a gis:Existence; wf:of ?object. #Are data blank nodes present? Then reuse them
+?in ada:hasElement ?ine. ?ine ada:hasMeasure ?inm.  ?inm  a gis:Existence; wf:of ?object. #Are data blank nodes present? Then reuse them
+?out ada:hasElement ?oute. 
 #OPTIONAL
 }
 #}

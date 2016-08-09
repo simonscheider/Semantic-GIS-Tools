@@ -6,7 +6,7 @@
 INSERT 
 { 
 #GRAPH ?g{
-?out a gis:Raster; ada:hasElement [ada:hasMeasure _:outm]. 
+?out ada:hasElement [ada:hasMeasure _:outm]. 
 }
 #}
 #SELECT *

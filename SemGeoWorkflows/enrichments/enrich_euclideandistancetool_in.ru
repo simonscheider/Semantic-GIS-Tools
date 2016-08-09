@@ -1,7 +1,5 @@
 
 
-# Typing gis:EuclideanDistance
-
 #Set Input
 INSERT 
 { #GRAPH ?g{ 
@@ -12,7 +10,7 @@ INSERT
 WHERE{
 #GRAPH ?g{
 {
-?node a gis:EuclideanDistance;
+?node a gis:EuclideanDistanceTool;
 gis:inputdata ?in.
 FILTER NOT EXISTS{?in ada:hasElement ?ine . ?ine ada:hasSupport ?ins. ?ine ada:hasMeasure ?inm }#Are data blank nodes present? Then reuse them
 }
