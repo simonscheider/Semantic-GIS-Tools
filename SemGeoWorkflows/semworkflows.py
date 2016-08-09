@@ -136,6 +136,7 @@ def test_workflow_lights( g ):
         g.parse( fn, format='n3' )
         g = reifyWorkflow(fn, wfname) + g
     g = run_rdfs_inferences( g )
+    g = enrich_with_backtracking( g, wfname )
     #g = enrich_workflow_tool( g, _dir )
     return g
 
@@ -175,6 +176,18 @@ def reifyWorkflow(file, wfname):
     n_triples(wf)
     return wf
 
+def enrich_with_backtracking( g, wfname ):
+    print("Search through workflow and enrich!")
+    wg = getWorkflowGraph(g,wfname)
+    wg = load_ontologies(wg)
+    wg = run_rdfs_inferences(wg)
+    root = getRoot(wg)
+    visited = set()
+    # Run tool enrichments in the order of DFS backtracking through workflow graph
+    print("Search through workflow and enrich!")
+    DFSVisit(root, wg, visited, g)
+    return g
+
 def test_workflow_lcpath( g ):
     """ 
     Runs enrichments and tests for Least Cost Path example workflow 
@@ -187,14 +200,14 @@ def test_workflow_lcpath( g ):
         g = reifyWorkflow(fn, wfname) + g
     g = run_rdfs_inferences( g )
     #prepare workflowgraph for DFS search. Order is important, because search requires rdfs inference
-    wg = getWorkflowGraph(g,wfname)
-    wg = load_ontologies(wg)
-    wg = run_rdfs_inferences(wg)
-    root = getRoot(wg)
-    visited = set()
+    #wg = getWorkflowGraph(g,wfname)
+    #wg = load_ontologies(wg)
+    #wg = run_rdfs_inferences(wg)
+    #root = getRoot(wg)
+    #visited = set()
     # Run tool enrichments in the order of DFS backtracking through workflow graph
-    print("Search through workflow and enrich!")
-    DFSVisit(root, wg, visited, g)
+    #DFSVisit(root, wg, visited, g)
+    g = enrich_with_backtracking(g, wfname)
     #Propagations are run in any order
     #list of propagations
     lcppropagations = ['qquality','path']
@@ -262,11 +275,11 @@ def DFSVisit(n, wg, visited, g):
     operation = rdflib.URIRef("http://geographicknowledge.de/vocab/Workflow.rdf#Operation")
     #get the operation types of the current node, check available enrichments for them, then enrich
     if (n, RDF.type, operation) in wg:
-        print(n)
+        print('DFS candidate op: '+n)
         for i in (wg.objects(subject=n, predicate=RDF.type)):
             op = checkTool(i)
             if (i != operation and op!='NA'):
-                print(op)
+                print('DFS op: '+op)
                 enrich_workflow_tool( g, op, n)
 
 
