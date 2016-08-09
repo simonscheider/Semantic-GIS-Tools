@@ -4,15 +4,12 @@
 Tests of Semantic Workflows.
 
 The script
-
 1) loads RDF files in memory
 2) runs semantic enrichments
-2) runs tests
-3) writes the final graph into a file
+3) runs tests
+4) writes the final graph into a Turtle file.
 
-
-
-Based on Python 2.7 with:
+The code is written in Python 2.7 and depends on:
 
 * RDFLib (# pip install rdflib)
 * RDFClosure (install manually from https://github.com/RDFLib/OWL-RL)
