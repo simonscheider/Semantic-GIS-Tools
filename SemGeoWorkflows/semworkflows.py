@@ -36,16 +36,16 @@ class tools():
         return str(toolenrichments)
 
 def file_to_str(fn):
-	""" 
-	Loads the content of a text file into a string
-	@return a string
-	"""
+    """ 
+    Loads the content of a text file into a string
+    @return a string
+    """
     with open(fn, 'r') as f:
         content=f.read().strip()
     return content
 
 def n_triples( g, n=None ):
-	""" Prints the number of triples in graph g """
+    """ Prints the number of triples in graph g """
     if n is None:
         print( 'Triples: '+str(len(g)) )
     else:
@@ -115,7 +115,7 @@ def enrich_workflow( g, propagation ):
     return g
 
 def test_workflow_lights( g ):
-	""" Runs enrichments and tests for China night lights example workflow """
+    """ Runs enrichments and tests for China night lights example workflow """
     print('> test_workflow_lights')
     _dir = "workflows/workflow_lights/"
     for fn in [_dir+"workflow_lights.ttl"]:
@@ -127,9 +127,9 @@ def test_workflow_lights( g ):
 
 def checkTool(operation):
     """
-	Checks whether enrichment rules are available for operation class
-	@param operation a GIS operation
-	"""
+    Checks whether enrichment rules are available for operation class
+    @param operation a GIS operation
+    """
     #The list of tools to be used for tool enrichment
     lcptools = [ 'euclideandistance', 'polygontoraster','localmapalgebra','pointtoraster','costdistance','costpath','toline']
     operation = (((str(operation)).rpartition('#'))[2]).lower() #this extracts the toolname from its URI
@@ -142,7 +142,7 @@ def checkTool(operation):
 lcppropagations = ['qquality','path']
 
 def reifyWorkflow(file, wfname):
-	""" Adds reifications necessary to make a workflow wfname searchable """
+    """ Adds reifications necessary to make a workflow wfname searchable """
     edge = rdflib.URIRef('http://geographicknowledge.de/vocab/Workflow.rdf#edge')
     subject = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#subject')
     predicate = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate')
@@ -161,7 +161,7 @@ def reifyWorkflow(file, wfname):
     return wf
 
 def test_workflow_lcpath( g ):
-	""" Runs enrichments and tests for Least Cost Path example workflow """
+    """ Runs enrichments and tests for Least Cost Path example workflow """
     wfname = 'http://geographicknowledge.de/workflowLCP.rdf#lcpwf'
     print('> test_workflow_lights')
     _dir = "workflows/workflow_lcpath/"
@@ -184,10 +184,10 @@ def test_workflow_lcpath( g ):
     return g
 
 def graph_to_file( g, output_filepath = None ):
-	""" Serializes graph g to a n3 file """
-	if not output_filepath:
-    	_outfn = 'output/workflows_output.ttl'
-	else: _outfn = output_filepath
+    """ Serializes graph g to a n3 file """
+    if not output_filepath:
+        _outfn = 'output/workflows_output.ttl'
+    else: _outfn = output_filepath
     g.serialize( _outfn, 'n3' )
     print("Written triples to " + _outfn)
 
@@ -266,7 +266,7 @@ def getNeighbours(wg, n, forward=True):
     return objects
 
 def main():
-	# create inmemory store
+    # create inmemory store
     g = rdflib.ConjunctiveGraph()
     params = sys.argv[1:]
 
@@ -306,8 +306,8 @@ def main():
     print "Tool Toolname input output Test: "
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]
-	
-	print('OK') # end of script
-	
+    
+    print('OK') # end of script
+    
 if __name__ == '__main__':
     main()

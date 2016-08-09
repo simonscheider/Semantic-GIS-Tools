@@ -66,9 +66,9 @@ default3:wf2_3 a gis:Fun,
 
 ada:QualityData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -90,9 +90,9 @@ ada:RefDomain a rdfs:Resource,
 
 ada:SpaceData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -111,9 +111,9 @@ ada:TemporalDataSet a rdfs:Resource,
 
 ada:TimeData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -129,9 +129,9 @@ ada:WGS84_C a rdfs:Resource,
                     rdf:first ada:WGS84 ;
                     rdf:rest () ] ] .
 
-ada:data1 a _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+ada:data1 a _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource,
         rdfs:Resource,
@@ -210,7 +210,7 @@ gis:Cost a rdfs:Resource,
 gis:CostDistance a rdfs:Resource,
         owl:Class ;
     rdfs:comment "a quality that denotes a cost distance to a set of objects defined over a cost surface"@en ;
-    rdfs:subClassOf _:N52bff9e4cdff4552a43d40f4e9772ee5,
+    rdfs:subClassOf _:N5438a70b940942af9165fd68819e1914,
         [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty wf:of ;
@@ -238,7 +238,7 @@ gis:CostPath a rdfs:Resource,
 gis:Density a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A quality that denotes the spatial density of a set of objects"@en ;
-    rdfs:subClassOf _:N52bff9e4cdff4552a43d40f4e9772ee5,
+    rdfs:subClassOf _:N5438a70b940942af9165fd68819e1914,
         ada:Quality,
         ada:Reference,
         gis:RelQ,
@@ -247,7 +247,7 @@ gis:Density a rdfs:Resource,
 gis:EuclDistance a rdfs:Resource,
         owl:Class ;
     rdfs:comment "a quality that denotes Euclidean distance to a set of objects"@en ;
-    rdfs:subClassOf _:N52bff9e4cdff4552a43d40f4e9772ee5,
+    rdfs:subClassOf _:N5438a70b940942af9165fd68819e1914,
         ada:Quality,
         ada:Reference,
         gis:Distance,
@@ -269,7 +269,7 @@ gis:Event a rdfs:Resource,
 gis:Existence a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A quality that denotes the existence of a set of objects in space"@en ;
-    rdfs:subClassOf _:N52bff9e4cdff4552a43d40f4e9772ee5,
+    rdfs:subClassOf _:N5438a70b940942af9165fd68819e1914,
         ada:Quality,
         ada:Reference,
         gis:RelQ,
@@ -303,7 +303,7 @@ gis:LinetoRaster a rdfs:Resource,
 gis:Link a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A quality that denotes a link to a neighboring region "@en ;
-    rdfs:subClassOf _:N52bff9e4cdff4552a43d40f4e9772ee5,
+    rdfs:subClassOf _:N5438a70b940942af9165fd68819e1914,
         ada:Quality,
         ada:Reference,
         gis:RelQ,
@@ -375,7 +375,7 @@ gis:PolygontoRaster a rdfs:Resource,
 gis:QQuality a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A quality derived from another quality (e.g. by copying it)"@en ;
-    rdfs:subClassOf _:N52bff9e4cdff4552a43d40f4e9772ee5,
+    rdfs:subClassOf _:N5438a70b940942af9165fd68819e1914,
         ada:Quality,
         ada:Reference,
         gis:RelQ,
@@ -448,13 +448,13 @@ gis:TableJoin a rdfs:Resource,
 
 gis:TrackData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf [ a rdfs:Resource,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        [ a rdfs:Resource,
                 owl:Restriction ;
             owl:onProperty wf:of ;
             owl:someValuesFrom gis:Trajectory ],
-        _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -550,9 +550,9 @@ default3:Luminosity_change a rdfs:Resource .
 
 ada:ObjectData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -576,9 +576,9 @@ ada:QualityRS a rdfs:Resource,
 
 ada:TemporalData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -639,9 +639,9 @@ gis:Line a rdfs:Resource,
 
 gis:LineData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         ada:SpatialData,
         wf:Resource ;
@@ -652,9 +652,9 @@ gis:LineData a rdfs:Resource,
 
 gis:NetworkData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -664,9 +664,9 @@ gis:NetworkData a rdfs:Resource,
 
 gis:PointData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         ada:SpatialData,
         wf:Resource ;
@@ -685,9 +685,9 @@ gis:Raster a rdfs:Resource,
 
 gis:RegionData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         ada:SpatialData,
         wf:Resource ;
@@ -873,7 +873,7 @@ ada:elementOf a rdfs:Resource,
 gis:Distance a rdfs:Resource,
         owl:Class ;
     rdfs:comment "a quality that denotes the spatial distance to a set of objects"@en ;
-    rdfs:subClassOf _:N52bff9e4cdff4552a43d40f4e9772ee5,
+    rdfs:subClassOf _:N5438a70b940942af9165fd68819e1914,
         ada:Quality,
         ada:Reference,
         gis:RelQ,
@@ -966,9 +966,9 @@ default3:Train_stations a rdfs:Resource .
 
 ada:SpatialData a rdfs:Resource,
         owl:Class ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         ada:Data,
         wf:Resource ;
     owl:equivalentClass [ a rdfs:Resource,
@@ -1053,7 +1053,7 @@ ada:referencedBy a rdf:Property,
 gis:RelQ a rdfs:Resource,
         owl:Class ;
     rdfs:comment "A relational quality"@en ;
-    rdfs:subClassOf _:N52bff9e4cdff4552a43d40f4e9772ee5,
+    rdfs:subClassOf _:N5438a70b940942af9165fd68819e1914,
         ada:Quality,
         ada:Reference,
         wf:Resource .
@@ -1136,9 +1136,9 @@ ada:RefSys a rdfs:Resource,
 ada:Data a rdfs:Resource,
         owl:Class ;
     rdfs:comment "The class of data items. Data items bind together different attributes of an observation, just like table records or primary keys."@en ;
-    rdfs:subClassOf _:N804dd4d0b211475fb05c567679a1aaea,
-        _:N9dcd320e18c844c9843f62669d3dba3c,
-        _:Nb5525c29d49c4d5e9b67631b812775d8,
+    rdfs:subClassOf _:N06047ffe5e134ae2ab58d77813f8a35c,
+        _:N34859868809549c196704cc902e4969b,
+        _:N6097a5010ca3461185e9f43bf6a7a6c3,
         wf:Resource ;
     owl:disjointWith ada:DataSet,
         ada:RefSys,
@@ -1171,22 +1171,22 @@ wf:Resource a rdfs:Resource,
 
 owl:Class a rdfs:Resource .
 
-_:N52bff9e4cdff4552a43d40f4e9772ee5 a rdfs:Resource,
+_:N5438a70b940942af9165fd68819e1914 a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty wf:of ;
     owl:someValuesFrom ada:DataSet .
 
-_:N804dd4d0b211475fb05c567679a1aaea a rdfs:Resource,
-        owl:Restriction ;
-    owl:onProperty ada:hasMeasure ;
-    owl:someValuesFrom owl:Thing .
-
-_:N9dcd320e18c844c9843f62669d3dba3c a rdfs:Resource,
+_:N06047ffe5e134ae2ab58d77813f8a35c a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty ada:hasSupport ;
     owl:someValuesFrom owl:Thing .
 
-_:Nb5525c29d49c4d5e9b67631b812775d8 a rdfs:Resource,
+_:N34859868809549c196704cc902e4969b a rdfs:Resource,
+        owl:Restriction ;
+    owl:onProperty ada:hasMeasure ;
+    owl:someValuesFrom owl:Thing .
+
+_:N6097a5010ca3461185e9f43bf6a7a6c3 a rdfs:Resource,
         owl:Restriction ;
     owl:onProperty ada:elementOf ;
     owl:someValuesFrom owl:Thing .
