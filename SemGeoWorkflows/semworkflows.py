@@ -10,7 +10,13 @@ The script
 2) runs tests
 3) writes the final graph into a file
 
-Based on RDFLib and RDFClosure (Python 2.7)
+
+
+Based on Python 2.7 with:
+
+* RDFLib (# pip install rdflib)
+* RDFClosure (install manually from https://github.com/RDFLib/OWL-RL)
+
 """
 
 __author__      = "Andrea Ballatore; Simon Scheider"
@@ -30,11 +36,16 @@ class tools():
         return str(toolenrichments)
 
 def file_to_str(fn):
+	""" 
+	Loads the content of a text file into a string
+	@return a string
+	"""
     with open(fn, 'r') as f:
         content=f.read().strip()
     return content
 
 def n_triples( g, n=None ):
+	""" Prints the number of triples in graph g """
     if n is None:
         print( 'Triples: '+str(len(g)) )
     else:
@@ -91,7 +102,7 @@ def enrich_workflow( g, propagation ):
     assert propagation
     import glob
     props = glob.glob('enrichments/propagate_'+propagation+'.ru')
-    tests =glob.glob('enrichments/propagate_'+propagation+'_test.ru')
+    tests = glob.glob('enrichments/propagate_'+propagation+'_test.ru')
     for fn in (props):
         print('propagation '+fn)
         g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
@@ -104,6 +115,7 @@ def enrich_workflow( g, propagation ):
     return g
 
 def test_workflow_lights( g ):
+	""" Runs enrichments and tests for China night lights example workflow """
     print('> test_workflow_lights')
     _dir = "workflows/workflow_lights/"
     for fn in [_dir+"workflow_lights.ttl"]:
@@ -114,7 +126,10 @@ def test_workflow_lights( g ):
     return g
 
 def checkTool(operation):
-    """Checks whether enrichment rules are available for operation class"""
+    """
+	Checks whether enrichment rules are available for operation class
+	@param operation a GIS operation
+	"""
     #The list of tools to be used for tool enrichment
     lcptools = [ 'euclideandistance', 'polygontoraster','localmapalgebra','pointtoraster','costdistance','costpath','toline']
     operation = (((str(operation)).rpartition('#'))[2]).lower() #this extracts the toolname from its URI
@@ -127,6 +142,7 @@ def checkTool(operation):
 lcppropagations = ['qquality','path']
 
 def reifyWorkflow(file, wfname):
+	""" Adds reifications necessary to make a workflow wfname searchable """
     edge = rdflib.URIRef('http://geographicknowledge.de/vocab/Workflow.rdf#edge')
     subject = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#subject')
     predicate = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate')
@@ -145,6 +161,7 @@ def reifyWorkflow(file, wfname):
     return wf
 
 def test_workflow_lcpath( g ):
+	""" Runs enrichments and tests for Least Cost Path example workflow """
     wfname = 'http://geographicknowledge.de/workflowLCP.rdf#lcpwf'
     print('> test_workflow_lights')
     _dir = "workflows/workflow_lcpath/"
@@ -166,14 +183,17 @@ def test_workflow_lcpath( g ):
         g = enrich_workflow( g, i )
     return g
 
-def graph_to_file( g ):
-    _outfn = 'output/workflows_output.ttl'
+def graph_to_file( g, output_filepath = None ):
+	""" Serializes graph g to a n3 file """
+	if not output_filepath:
+    	_outfn = 'output/workflows_output.ttl'
+	else: _outfn = output_filepath
     g.serialize( _outfn, 'n3' )
     print("Written triples to " + _outfn)
 
 #Methods for workflow DFS search
 def getWorkflowGraph(g, wfname):
-    print ("extract workflow graph (for DFS):"+wfname)
+    print("extract workflow graph (for DFS):"+wfname)
     """Extracts a separate workflow graph of a given (named) workflow"""
     q = """ \n CONSTRUCT {?subject ?predicate ?object.}
        WHERE {
@@ -217,7 +237,7 @@ def DFSVisit(n, wg, visited, g):
             DFSVisit(v, wg, visited, g)
     #print ('Just Colored Black: '+str(n))
     #Now backtracking starts
-    operation =rdflib.URIRef("http://geographicknowledge.de/vocab/Workflow.rdf#Operation")
+    operation = rdflib.URIRef("http://geographicknowledge.de/vocab/Workflow.rdf#Operation")
     #get the operation types of the current node, check available enrichments for them, then enrich
     if (n, RDF.type, operation) in wg:
         print n
@@ -245,9 +265,6 @@ def getNeighbours(wg, n, forward=True):
                 objects.append(i)
     return objects
 
-
-
-
 def main():
 	# create inmemory store
     g = rdflib.ConjunctiveGraph()
@@ -257,7 +274,7 @@ def main():
     if 'lights' in params: g = test_workflow_lights( g )
     if 'lcpath' in params: g = test_workflow_lcpath( g )
     graph_to_file(g)
-    print('OK')
+    
     print('Tool enrichments and tests:')
     print ("Final size: "+str(len(g)))
     #print "Test node:0"
@@ -289,6 +306,8 @@ def main():
     print "Tool Toolname input output Test: "
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]
-
+	
+	print('OK') # end of script
+	
 if __name__ == '__main__':
     main()
