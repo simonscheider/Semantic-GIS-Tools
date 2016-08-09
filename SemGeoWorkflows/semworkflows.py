@@ -174,7 +174,9 @@ def reifyWorkflow(file, wfname):
     return wf
 
 def enrich_with_backtracking( g, wfname ):
-    print("Search through workflow and enrich!")
+    """
+    Run tool enrichments in the order of DFS backtracking through workflow graph
+    """
     wg = getWorkflowGraph(g,wfname)
     wg = load_ontologies(wg)
     wg = run_rdfs_inferences(wg)
@@ -196,14 +198,6 @@ def test_workflow_lcpath( g ):
         print("Load N3 file: "+fn)
         g = reifyWorkflow(fn, wfname) + g
     g = run_rdfs_inferences( g )
-    #prepare workflowgraph for DFS search. Order is important, because search requires rdfs inference
-    #wg = getWorkflowGraph(g,wfname)
-    #wg = load_ontologies(wg)
-    #wg = run_rdfs_inferences(wg)
-    #root = getRoot(wg)
-    #visited = set()
-    # Run tool enrichments in the order of DFS backtracking through workflow graph
-    #DFSVisit(root, wg, visited, g)
     g = enrich_with_backtracking(g, wfname)
     #Propagations are run in any order
     #list of propagations
