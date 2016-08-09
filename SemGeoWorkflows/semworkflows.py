@@ -104,6 +104,10 @@ def enrich_workflow_tool( g, toolname, tool):
     return g
 
 def enrich_workflow( g, propagation ):
+    """
+    @param g 
+    @param propagation name of propagation
+    """
     n = n_triples(g)
     assert propagation
     import glob
@@ -172,7 +176,9 @@ def reifyWorkflow(file, wfname):
     return wf
 
 def test_workflow_lcpath( g ):
-    """ Runs enrichments and tests for Least Cost Path example workflow """
+    """ 
+    Runs enrichments and tests for Least Cost Path example workflow 
+    """
     print('> test_workflow_lights')
     wfname = 'http://geographicknowledge.de/workflowLCP.rdf#lcpwf'
     _dir = "workflows/workflow_lcpath/"
@@ -206,8 +212,8 @@ def graph_to_file( g, output_filepath = None ):
 
 #Methods for workflow DFS search
 def getWorkflowGraph(g, wfname):
-    print("extract workflow graph (for DFS):"+wfname)
     """Extracts a separate workflow graph of a given (named) workflow"""
+    print("extract workflow graph (for DFS):"+wfname)
     q = """ \n CONSTRUCT {?subject ?predicate ?object.}
        WHERE {
             ?wfname wf:edge ?edge.
@@ -241,7 +247,10 @@ def getRoot(wg):
     return start
 
 def DFSVisit(n, wg, visited, g):
-    """Searches through workflow graph (wg) starting from n and enriches operation nodes in entire graph g in the order of backtracking"""
+    """
+    Searches through workflow graph (wg) starting from n and enriches operation nodes
+    in entire graph g in the order of backtracking
+    """
     # colors this node in grey
     visited.add(n)
     #print ('Just visited: '+str(n))
