@@ -3,8 +3,10 @@
 # Makefile
 #
 
-test:
-	#python semworkflows.py lights lcpath
+all:
+	python semworkflows.py lights lcpath
+
+l:
 	python semworkflows.py lights
 	
 clean:

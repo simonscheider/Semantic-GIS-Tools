@@ -117,10 +117,14 @@ def enrich_workflow( g, propagation ):
 def test_workflow_lights( g ):
     """ Runs enrichments and tests for China night lights example workflow """
     print('> test_workflow_lights')
+    
+    wfname = 'http://geographicknowledge.de/WorkflowExamples#wf2'
+    
     _dir = "workflows/workflow_lights/"
     for fn in [_dir+"workflow_lights.ttl"]:
         print("Load N3 file: "+fn)
         g.parse( fn, format='n3' )
+        g = reifyWorkflow(fn, wfname) + g
     g = run_rdfs_inferences( g )
     #g = enrich_workflow_tool( g, _dir )
     return g
@@ -138,11 +142,12 @@ def checkTool(operation):
     else:
         return 'NA'
 
-#list of propagations
-lcppropagations = ['qquality','path']
-
 def reifyWorkflow(file, wfname):
-    """ Adds reifications necessary to make a workflow wfname searchable """
+    """ 
+    Adds reifications necessary to make workflow wfname searchable
+    @param file source file for workflow
+    @param wfname URI that identifies workflow
+     """
     edge = rdflib.URIRef('http://geographicknowledge.de/vocab/Workflow.rdf#edge')
     subject = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#subject')
     predicate = rdflib.URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate')
@@ -162,12 +167,12 @@ def reifyWorkflow(file, wfname):
 
 def test_workflow_lcpath( g ):
     """ Runs enrichments and tests for Least Cost Path example workflow """
-    wfname = 'http://geographicknowledge.de/workflowLCP.rdf#lcpwf'
     print('> test_workflow_lights')
+    wfname = 'http://geographicknowledge.de/workflowLCP.rdf#lcpwf'
     _dir = "workflows/workflow_lcpath/"
     for fn in [_dir+"workflow_lcpath.ttl"]:
         print("Load N3 file: "+fn)
-        g = reifyWorkflow(fn, wfname)+g
+        g = reifyWorkflow(fn, wfname) + g
     g = run_rdfs_inferences( g )
     #prepare workflowgraph for DFS search. Order is important, because search requires rdfs inference
     wg = getWorkflowGraph(g,wfname)
@@ -176,9 +181,11 @@ def test_workflow_lcpath( g ):
     root = getRoot(wg)
     visited = set()
     # Run tool enrichments in the order of DFS backtracking through workflow graph
-    print "Search through workflow and enrich!"
+    print("Search through workflow and enrich!")
     DFSVisit(root, wg, visited, g)
     #Propagations are run in any order
+    #list of propagations
+    lcppropagations = ['qquality','path']
     for i in lcppropagations:
         g = enrich_workflow( g, i )
     return g
@@ -224,7 +231,7 @@ def getRoot(wg):
     while (len(objects)>0):
         start = objects[0]
         objects = getNeighbours(wg,start)
-    print 'Root: '+ start
+    print('Root: '+ start)
     return start
 
 def DFSVisit(n, wg, visited, g):
@@ -240,11 +247,11 @@ def DFSVisit(n, wg, visited, g):
     operation = rdflib.URIRef("http://geographicknowledge.de/vocab/Workflow.rdf#Operation")
     #get the operation types of the current node, check available enrichments for them, then enrich
     if (n, RDF.type, operation) in wg:
-        print n
+        print(n)
         for i in (wg.objects(subject=n, predicate=RDF.type)):
             op = checkTool(i)
             if (i != operation and op!='NA'):
-                print op
+                print(op)
                 enrich_workflow_tool( g, op, n)
 
 
@@ -299,11 +306,11 @@ def main():
         #pass
         #print i[0], i[1], i[2],i[3], i[4], i[5]
     order = ''
-    print "Order of tool enrichments: "
+    print("Order of tool enrichments: ")
     for j in tools.toolenrichments:
         order += ' :'+((((str(j[0])).rpartition('#'))[2]).lower())+' '
-    print order
-    print "Tool Toolname input output Test: "
+    print(order)
+    print("Tool Toolname input output Test: ")
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]
     
