@@ -69,8 +69,14 @@ def load_ontologies( g ):
     return g
 
 def enrich_workflow_tool( g, toolname, tool):
+    """
+    @param g RDF graph
+    @param toolname name of GIS tool
+    @param tool TODO?
+    """
     n = n_triples(g)
     assert toolname
+    assert g
     import glob
     inputs = glob.glob('enrichments/enrich_'+toolname+'_in*.ru')
     outputs = glob.glob('enrichments/enrich_'+toolname+'_out*.ru')
@@ -86,7 +92,7 @@ def enrich_workflow_tool( g, toolname, tool):
         print('Enrichment '+fn)
         g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
         growout =len(g)-n
-        n= n_triples(g)
+        n = n_triples(g)
     test = None
     for i in tests:
         print('Run test '+i)
