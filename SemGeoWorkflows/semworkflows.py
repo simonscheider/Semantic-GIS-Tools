@@ -116,7 +116,7 @@ def test_workflow_lights( g ):
 def checkTool(operation):
     """Checks whether enrichment rules are available for operation class"""
     #The list of tools to be used for tool enrichment
-    lcptools = [ 'euclideandistance', 'polygontoraster','localmapalgebra','pointtoraster','costdistance','costpath','toline']
+    lcptools = [ 'euclideandistancetool', 'polygontoraster','localmapalgebra','pointtoraster','costdistance','costpath','toline']
     operation = (((str(operation)).rpartition('#'))[2]).lower() #this extracts the toolname from its URI
     if operation in lcptools:
         return operation
