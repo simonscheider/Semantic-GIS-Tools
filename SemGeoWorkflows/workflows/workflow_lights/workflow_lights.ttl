@@ -21,20 +21,67 @@
 :wf2 wf:source :Admin_units.
 :wf2 wf:result :Luminosity_change.
 
-#Reified triples
-#:wf2 wf:edge _:1, _:2, _:3.
-#_:1 rdf:subject :1; rdf:predicate gis:inputdata; rdf:object :China_border.
+:F101993_night_lights a wf:Resource.
+:F102013_night_lights a wf:Resource.
+:China_border a wf:Resource.
+:Gas_flares a wf:Resource.
+:Train_stations a wf:Resource.
+:Admin_units a wf:Resource.
+:Luminosity_change a wf:Resource.
 
+# Workflow Node 1
 :wf2_1 gis:inputdata :China_border;
 	gis:erasefeature :Gas_flares;
 	wf:output :Chn_atm0_erase;
 	rdf:type gis:Erase.
 
+# Workflow Node 2
 :wf2_2 gis:inputdata :Train_stations;
 	wf:output :Ch_Stations_Buffer;
 	rdf:type gis:Buffer.
 
-:wf2_3 gis:inputdata :Chn_atm0_erase;
-	gis:inputdata :Ch_Stations_Buffer;
-	wf:output :CHN_adm0_Erase_Intersect;
-	rdf:type gis:Intersect.
+# Workflow Node 3
+:wf2_3 rdf:type gis:Intersect;
+	gis:inputdata :Chn_atm0_erase;
+	gis:inputdata :Ch_Stations_Buffer; # RENAME PARAMETER?
+	wf:output :CHN_adm0_Erase_Intersect.
+
+# Workflow Node 4
+:wf2_4 rdf:type gis:FeatureToRaster;
+	gis:inputdata :CHN_adm0_Erase_Intersect;
+	wf:output :Feature_Chn_1.
+
+# Workflow Node 5
+:wf2_5 rdf:type gis:ExtractByMask; # ADD TO ONTO
+	gis:inputdata :F102013_night_lights;
+	gis:inputdata :Feature_Chn_1; # MASK, RENAME PARAM
+	wf:output :Extract_tif2.
+
+# Workflow Node 6
+:wf2_6 rdf:type gis:ExtractByMask; # ADD TO ONTO
+	gis:inputdata :F101993_night_lights;
+	gis:inputdata :Feature_Chn_1; # MASK, RENAME PARAM
+	wf:output :Extract_tif1.
+
+# Workflow Node 7
+:wf2_7 rdf:type gis:ZonalStatisticsAsTable; # ADD TO ONTO
+	gis:inputdata :Extract_tif1;
+	gis:inputdata :Admin_units; # ZONES, RENAME PARAM
+	wf:output :ZonalSt_shp2.
+
+# Workflow Node 8
+:wf2_8 rdf:type gis:ZonalStatisticsAsTable; # ADD TO ONTO
+	gis:inputdata :Extract_tif2;
+	gis:inputdata :Admin_units; # ZONES, RENAME PARAM
+	wf:output :ZonalSt_shp1.
+
+# Workflow Node 9
+:wf2_9 rdf:type gis:JoinField; # ADD TO ONTO
+	gis:inputdata :ZonalSt_shp1;
+	gis:inputdata :ZonalSt_shp2; # RENAME PARAM
+	wf:output :ZonalSt_shp1_1.
+
+# Workflow Node 10
+:wf2_10 rdf:type gis:CalculateField; # ADD TO ONTO
+	gis:inputdata :ZonalSt_shp1_1;
+	wf:output :Luminosity_change.
