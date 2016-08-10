@@ -6,11 +6,13 @@
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY AnalysisData "http://geographicknowledge.de/vocab/AnalysisData.rdf#" >
 ]>
 
 
 <rdf:RDF xmlns="http://geographicknowledge.de/vocab/GISConcepts.rdf#"
      xml:base="http://geographicknowledge.de/vocab/GISConcepts.rdf"
+     xmlns:AnalysisData="http://geographicknowledge.de/vocab/AnalysisData.rdf#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
@@ -36,19 +38,26 @@
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#hasElement -->
 
-    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasElement"/>
+    <owl:ObjectProperty rdf:about="&AnalysisData;hasElement">
+        <rdfs:range rdf:resource="&AnalysisData;Data"/>
+        <rdfs:domain rdf:resource="&AnalysisData;DataSet"/>
+    </owl:ObjectProperty>
     
 
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#hasMeasure -->
 
-    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasMeasure"/>
+    <owl:ObjectProperty rdf:about="&AnalysisData;hasMeasure">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
+    </owl:ObjectProperty>
     
 
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#hasSupport -->
 
-    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasSupport"/>
+    <owl:ObjectProperty rdf:about="&AnalysisData;hasSupport">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
+    </owl:ObjectProperty>
     
 
 
@@ -68,10 +77,19 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute">
+        <rdfs:domain rdf:resource="&AnalysisData;Data"/>
+        <rdfs:range rdf:resource="&AnalysisData;Reference"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#hasEnd -->
 
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasEnd">
-        <rdfs:range rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+        <rdfs:range rdf:resource="&AnalysisData;Object"/>
         <rdfs:domain rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Path"/>
     </owl:ObjectProperty>
     
@@ -80,7 +98,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#hasStart -->
 
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasStart">
-        <rdfs:range rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+        <rdfs:range rdf:resource="&AnalysisData;Object"/>
         <rdfs:domain rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Path"/>
     </owl:ObjectProperty>
     
@@ -175,7 +193,7 @@
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#Data -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data">
+    <owl:Class rdf:about="&AnalysisData;Data">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Resource"/>
     </owl:Class>
     
@@ -183,7 +201,7 @@
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#DataSet -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#DataSet">
+    <owl:Class rdf:about="&AnalysisData;DataSet">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Resource"/>
     </owl:Class>
     
@@ -191,8 +209,8 @@
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#Object -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Reference"/>
+    <owl:Class rdf:about="&AnalysisData;Object">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Reference"/>
         <rdfs:comment xml:lang="en">The class of discrete entities (includes objects (endurants) as well as events (occurrents))</rdfs:comment>
     </owl:Class>
     
@@ -200,16 +218,16 @@
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#ObjectData -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#ObjectData">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data"/>
+    <owl:Class rdf:about="&AnalysisData;ObjectData">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Data"/>
     </owl:Class>
     
 
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#Quality -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#Quality">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Reference"/>
+    <owl:Class rdf:about="&AnalysisData;Quality">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Reference"/>
         <rdfs:comment xml:lang="en">The class of values of some quality</rdfs:comment>
     </owl:Class>
     
@@ -217,32 +235,24 @@
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#QualityData -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#QualityData">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data"/>
+    <owl:Class rdf:about="&AnalysisData;QualityData">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Data"/>
     </owl:Class>
     
 
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#Reference -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#Reference">
+    <owl:Class rdf:about="&AnalysisData;Reference">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Resource"/>
-    </owl:Class>
-    
-
-
-    <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#SpaceData -->
-
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpaceData">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data"/>
     </owl:Class>
     
 
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#Spatial -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#Spatial">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Reference"/>
+    <owl:Class rdf:about="&AnalysisData;Spatial">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Reference"/>
         <rdfs:comment xml:lang="en">The class of spatial referents defined in some spatial reference system</rdfs:comment>
     </owl:Class>
     
@@ -250,24 +260,24 @@
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialData -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialData">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data"/>
+    <owl:Class rdf:about="&AnalysisData;SpatialData">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Data"/>
     </owl:Class>
     
 
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialDataSet -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialDataSet">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#DataSet"/>
+    <owl:Class rdf:about="&AnalysisData;SpatialDataSet">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;DataSet"/>
     </owl:Class>
     
 
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#Temporal -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#Temporal">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Reference"/>
+    <owl:Class rdf:about="&AnalysisData;Temporal">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Reference"/>
         <rdfs:comment xml:lang="en">The class of temporal referents defined in some temporal reference system</rdfs:comment>
     </owl:Class>
     
@@ -275,24 +285,16 @@
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#TemporalData -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#TemporalData">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data"/>
+    <owl:Class rdf:about="&AnalysisData;TemporalData">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Data"/>
     </owl:Class>
     
 
 
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#TemporalDataSet -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#TemporalDataSet">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#DataSet"/>
-    </owl:Class>
-    
-
-
-    <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#TimeData -->
-
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/AnalysisData.rdf#TimeData">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data"/>
+    <owl:Class rdf:about="&AnalysisData;TemporalDataSet">
+        <rdfs:subClassOf rdf:resource="&AnalysisData;DataSet"/>
     </owl:Class>
     
 
@@ -340,7 +342,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Cost -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Cost">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Quality"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Quality"/>
         <rdfs:comment>A quality that expresses some cost , e.g. in a cost surface</rdfs:comment>
     </owl:Class>
     
@@ -423,7 +425,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Event -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Event">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Object"/>
     </owl:Class>
     
 
@@ -433,6 +435,48 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Existence">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#RelQ"/>
         <rdfs:comment xml:lang="en">A quality that denotes the existence of a set of objects in space</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldData -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldData">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&AnalysisData;hasMeasure"/>
+                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldQuality"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Data"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldDataSet -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldDataSet">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&AnalysisData;hasElement"/>
+                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldData"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;DataSet"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldQuality -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldQuality">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#of"/>
+                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#SField"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Reference"/>
     </owl:Class>
     
 
@@ -457,7 +501,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Line -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Line">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Spatial"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Spatial"/>
     </owl:Class>
     
 
@@ -467,11 +511,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#LineData">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasSupport"/>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
                 <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Line"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialData"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;SpatialData"/>
     </owl:Class>
     
 
@@ -481,11 +525,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#LineDataSet">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasElement"/>
+                <owl:onProperty rdf:resource="&AnalysisData;hasElement"/>
                 <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#LineData"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialDataSet"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;SpatialDataSet"/>
     </owl:Class>
     
 
@@ -526,11 +570,11 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Neighborhood -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Neighborhood">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Object"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#of"/>
-                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+                <owl:someValuesFrom rdf:resource="&AnalysisData;Object"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">Neighborhood of some spatial object</rdfs:comment>
@@ -543,11 +587,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Network">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasElement"/>
+                <owl:onProperty rdf:resource="&AnalysisData;hasElement"/>
                 <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#NetworkData"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#DataSet"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;DataSet"/>
     </owl:Class>
     
 
@@ -557,11 +601,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#NetworkData">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasSupport"/>
+                <owl:onProperty rdf:resource="&AnalysisData;hasSupport"/>
                 <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Path"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Data"/>
     </owl:Class>
     
 
@@ -571,11 +615,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#ObjectDataSet">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasElement"/>
-                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#ObjectData"/>
+                <owl:onProperty rdf:resource="&AnalysisData;hasElement"/>
+                <owl:someValuesFrom rdf:resource="&AnalysisData;ObjectData"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#DataSet"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;DataSet"/>
     </owl:Class>
     
 
@@ -583,17 +627,17 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Path -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Path">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Object"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasStart"/>
-                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasEnd"/>
+                <owl:someValuesFrom rdf:resource="&AnalysisData;Object"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasEnd"/>
-                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasStart"/>
+                <owl:someValuesFrom rdf:resource="&AnalysisData;Object"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">A single element of a spatial network denoting a spatial path from start object to end object</rdfs:comment>
@@ -604,7 +648,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Point -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Point">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Spatial"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Spatial"/>
     </owl:Class>
     
 
@@ -614,11 +658,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#PointData">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasSupport"/>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
                 <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Point"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialData"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;SpatialData"/>
     </owl:Class>
     
 
@@ -628,11 +672,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#PointDataSet">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasElement"/>
+                <owl:onProperty rdf:resource="&AnalysisData;hasElement"/>
                 <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#PointData"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialDataSet"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;SpatialDataSet"/>
         <rdfs:comment>This is a point sample of a spatial field</rdfs:comment>
     </owl:Class>
     
@@ -699,7 +743,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Region -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Region">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Spatial"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Spatial"/>
     </owl:Class>
     
 
@@ -709,11 +753,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#RegionData">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasSupport"/>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
                 <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Region"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialData"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;SpatialData"/>
     </owl:Class>
     
 
@@ -723,11 +767,11 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#RegionDataSet">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasElement"/>
+                <owl:onProperty rdf:resource="&AnalysisData;hasElement"/>
                 <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#RegionData"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#SpatialDataSet"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;SpatialDataSet"/>
     </owl:Class>
     
 
@@ -735,11 +779,11 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#RelQ -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#RelQ">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Quality"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Quality"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#of"/>
-                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#DataSet"/>
+                <owl:someValuesFrom rdf:resource="&AnalysisData;DataSet"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">A relational quality</rdfs:comment>
@@ -755,11 +799,11 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#in"/>
-                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Spatial"/>
+                        <owl:someValuesFrom rdf:resource="&AnalysisData;Spatial"/>
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#out"/>
-                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Quality"/>
+                        <owl:someValuesFrom rdf:resource="&AnalysisData;Quality"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -768,7 +812,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#of"/>
-                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Temporal"/>
+                <owl:someValuesFrom rdf:resource="&AnalysisData;Temporal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A spatial field (a continuous function defined on space ranging over quality values)</rdfs:comment>
@@ -784,11 +828,11 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#in"/>
-                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Temporal"/>
+                        <owl:someValuesFrom rdf:resource="&AnalysisData;Temporal"/>
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#out"/>
-                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Quality"/>
+                        <owl:someValuesFrom rdf:resource="&AnalysisData;Quality"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -822,17 +866,17 @@
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasMeasure"/>
+                        <owl:onProperty rdf:resource="&AnalysisData;hasMeasure"/>
                         <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Point"/>
                     </owl:Restriction>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#hasSupport"/>
-                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Temporal"/>
+                        <owl:onProperty rdf:resource="&AnalysisData;hasSupport"/>
+                        <owl:someValuesFrom rdf:resource="&AnalysisData;Temporal"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Data"/>
+        <rdfs:subClassOf rdf:resource="&AnalysisData;Data"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#of"/>
@@ -851,11 +895,11 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#in"/>
-                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Temporal"/>
+                        <owl:someValuesFrom rdf:resource="&AnalysisData;Temporal"/>
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#out"/>
-                        <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Spatial"/>
+                        <owl:someValuesFrom rdf:resource="&AnalysisData;Spatial"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -864,7 +908,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#of"/>
-                <owl:someValuesFrom rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#Object"/>
+                <owl:someValuesFrom rdf:resource="&AnalysisData;Object"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A trajectory is a continuous function defined over time and ranging over space</rdfs:comment>
@@ -934,6 +978,41 @@
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Fun"/>
         <rdfs:comment xml:lang="en">GIS Operations </rdfs:comment>
     </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#de -->
+
+    <owl:NamedIndividual rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#de">
+        <AnalysisData:hasMeasure rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#line"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ds -->
+
+    <owl:NamedIndividual rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#ds">
+        <AnalysisData:hasElement rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#de"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#line -->
+
+    <owl:NamedIndividual rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#line">
+        <rdf:type rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Line"/>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 

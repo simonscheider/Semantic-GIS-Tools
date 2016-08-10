@@ -1,0 +1,12 @@
+#comment:Select all datasets and their types
+SELECT DISTINCT ?ds ?class ?ofclass
+WHERE{
+?ds a ada:DataSet; a ?class.
+FILTER (?class IN (gis:Raster, gis:PointDataSet, gis:ObjectDataSet, gis:LineDataSet, gis:RegionDataSet, gis:Network))
+OPTIONAL {?ds  ada:hasElement ?ine. ?ine ada:hasMeasure ?b .
+?b wf:of ?somefield. ?somefield a ?ofclass. 
+FILTER (?ofclass IN (gis:SField, ada:Object, gis:Raster, gis:PointDataSet, gis:ObjectDataSet, gis:LineDataSet, gis:RegionDataSet))
+}
+#OPTIONAL {?ds a gis:FieldDataSet #FILTER(!isblank(?ofclass))
+#}
+}

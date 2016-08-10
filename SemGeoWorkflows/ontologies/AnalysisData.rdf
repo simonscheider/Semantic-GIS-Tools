@@ -55,6 +55,7 @@
     <owl:ObjectProperty rdf:about="&AnalysisData;hasElement">
         <rdfs:comment xml:lang="en">the inverse of elementOf</rdfs:comment>
         <owl:inverseOf rdf:resource="&AnalysisData;elementOf"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
     </owl:ObjectProperty>
     
 
@@ -65,6 +66,7 @@
         <rdfs:comment xml:lang="en">The relation between a data item and its measure</rdfs:comment>
         <rdfs:domain rdf:resource="&AnalysisData;Data"/>
         <rdfs:range rdf:resource="&AnalysisData;Reference"/>
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
     </owl:ObjectProperty>
     
 
@@ -94,12 +96,12 @@
 
     <owl:ObjectProperty rdf:about="&AnalysisData;hasOWindowPart">
         <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="&AnalysisData;hasOWindow"/>
-            <rdf:Description rdf:about="&AnalysisData;hasPart"/>
-        </owl:propertyChainAxiom>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
             <rdf:Description rdf:about="&AnalysisData;hasElement"/>
             <rdf:Description rdf:about="&AnalysisData;hasSupport"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&AnalysisData;hasOWindow"/>
+            <rdf:Description rdf:about="&AnalysisData;hasPart"/>
         </owl:propertyChainAxiom>
     </owl:ObjectProperty>
     
@@ -120,6 +122,7 @@
         <rdfs:comment xml:lang="en">The relation between a data item and its support</rdfs:comment>
         <rdfs:domain rdf:resource="&AnalysisData;Data"/>
         <rdfs:range rdf:resource="&AnalysisData;Reference"/>
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
     </owl:ObjectProperty>
     
 
@@ -168,6 +171,12 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -184,19 +193,7 @@
     <owl:Class rdf:about="&AnalysisData;Data">
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="&AnalysisData;hasMeasure"/>
-                <owl:someValuesFrom rdf:resource="&owl;Thing"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
                 <owl:onProperty rdf:resource="&AnalysisData;elementOf"/>
-                <owl:someValuesFrom rdf:resource="&owl;Thing"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="&AnalysisData;hasSupport"/>
                 <owl:someValuesFrom rdf:resource="&owl;Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -366,19 +363,6 @@
     
 
 
-    <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#SpaceData -->
-
-    <owl:Class rdf:about="&AnalysisData;SpaceData">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="&AnalysisData;hasMeasure"/>
-                <owl:someValuesFrom rdf:resource="&AnalysisData;Spatial"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-    </owl:Class>
-    
-
-
     <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#SpaceRS -->
 
     <owl:Class rdf:about="&AnalysisData;SpaceRS">
@@ -406,7 +390,7 @@
     <owl:Class rdf:about="&AnalysisData;SpatialData">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="&AnalysisData;hasSupport"/>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
                 <owl:someValuesFrom rdf:resource="&AnalysisData;Spatial"/>
             </owl:Restriction>
         </owl:equivalentClass>
@@ -445,7 +429,7 @@
     <owl:Class rdf:about="&AnalysisData;TemporalData">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="&AnalysisData;hasSupport"/>
+                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute"/>
                 <owl:someValuesFrom rdf:resource="&AnalysisData;Temporal"/>
             </owl:Restriction>
         </owl:equivalentClass>
@@ -460,19 +444,6 @@
             <owl:Restriction>
                 <owl:onProperty rdf:resource="&AnalysisData;hasElement"/>
                 <owl:someValuesFrom rdf:resource="&AnalysisData;TemporalData"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-    </owl:Class>
-    
-
-
-    <!-- http://geographicknowledge.de/vocab/AnalysisData.rdf#TimeData -->
-
-    <owl:Class rdf:about="&AnalysisData;TimeData">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="&AnalysisData;hasMeasure"/>
-                <owl:someValuesFrom rdf:resource="&AnalysisData;Temporal"/>
             </owl:Restriction>
         </owl:equivalentClass>
     </owl:Class>

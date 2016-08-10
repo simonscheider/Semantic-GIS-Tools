@@ -1,0 +1,9 @@
+#comment:- Get all workflows that generate networks
+SELECT DISTINCT ?wf ?ds ?class
+WHERE{ 
+?wf a wf:Workflow.
+?wf wf:result ?ds.
+?ds a ?class. FILTER(?class in (gis:Network, gis:ObjectDataSet, gis:LineDataSet)). 
+}
+#OPTIONAL {?ds a gis:FieldDataSet #FILTER(!isblank(?ofclass))
+#}

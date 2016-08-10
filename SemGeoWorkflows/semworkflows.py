@@ -23,11 +23,14 @@ __author__      = "Andrea Ballatore; Simon Scheider"
 __copyright__   = ""
 
 import os
+import re
 import sys
 from sys import argv
 import rdflib
 import RDFClosure
 from rdflib.namespace import RDFS, RDF
+import glob
+from sets import Set
 
 class tools():
     toolenrichments = []
@@ -36,7 +39,7 @@ class tools():
         return str(toolenrichments)
 
 def file_to_str(fn):
-    """ 
+    """
     Loads the content of a text file into a string
     @return a string
     """
@@ -55,7 +58,9 @@ def n_triples( g, n=None ):
 def run_rdfs_inferences( g ):
     print('run_rdfs_inferences')
     # expand deductive closure
-    RDFClosure.DeductiveClosure(RDFClosure.RDFS_Semantics).expand(g)
+    #RDFClosure.DeductiveClosure(RDFClosure.RDFS_Semantics).expand(g)
+    RDFClosure.DeductiveClosure(RDFClosure.OWLRL_Semantics).expand(g)
+
     n_triples(g)
     return g
 
@@ -100,7 +105,6 @@ def enrich_workflow_tool( g, toolname, tool):
 def enrich_workflow( g, propagation ):
     n = n_triples(g)
     assert propagation
-    import glob
     props = glob.glob('enrichments/propagate_'+propagation+'.ru')
     tests = glob.glob('enrichments/propagate_'+propagation+'_test.ru')
     for fn in (props):
@@ -174,13 +178,14 @@ def test_workflow_lcpath( g ):
     wg = load_ontologies(wg)
     wg = run_rdfs_inferences(wg)
     root = getRoot(wg)
-    visited = set()
+    visited = Set([])
     # Run tool enrichments in the order of DFS backtracking through workflow graph
     print "Search through workflow and enrich!"
     DFSVisit(root, wg, visited, g)
     #Propagations are run in any order
     for i in lcppropagations:
         g = enrich_workflow( g, i )
+    g = run_rdfs_inferences( g )
     return g
 
 def graph_to_file( g, output_filepath = None ):
@@ -265,6 +270,43 @@ def getNeighbours(wg, n, forward=True):
                 objects.append(i)
     return objects
 
+def runCompetencyQueries(g):
+    """Questions are posed in terms of SELECT queries, and results are written to standard output in a readable tabular format"""
+    tests = glob.glob('output/competencyquestion*.rq')
+    for i in tests:
+        print('Run competency question '+i)
+        str = (file_to_str(i))
+        print str
+        res = g.query(file_to_str('rdf_prefixes.txt') +'\n'+ file_to_str(i))
+        #print len(res)
+        for i in res:
+            line = ''
+            for j in i:
+                line += ((prefixURI(j)) if (j!=None) else 'None')+' '
+            print line
+
+def prefixURI(str):
+    """Prefixes URI strings"""
+    pref = {}
+    namere = r"\s[a-z]+:"
+    urire = r":\s+<\S+>"
+    pre = file_to_str('rdf_prefixes.txt')
+    for l in pre.split('\n'):
+        uri= ''
+        ns = ''
+        for m in re.findall(urire,l):
+            uri = m[3:-1]
+            break
+        for m in re.findall(namere,l):
+            ns = m[1:]
+            break
+        pref[uri] = ns
+    #print pref.keys()
+    for k in pref.keys():
+        str = str.replace(k, pref[k])
+        #print str
+    return str
+
 def main():
     # create inmemory store
     g = rdflib.ConjunctiveGraph()
@@ -274,30 +316,10 @@ def main():
     if 'lights' in params: g = test_workflow_lights( g )
     if 'lcpath' in params: g = test_workflow_lcpath( g )
     graph_to_file(g)
-    
+
     print('Tool enrichments and tests:')
     print ("Final size: "+str(len(g)))
-    #print "Test node:0"
-    q = """ \n SELECT ?in2 ?ine ?inm ?out ?oute ?outm
-       WHERE {
-            {?node gis:inputdata ?in2.
-            ?in2 ada:hasElement ?ine.
-            ?ine ada:hasMeasure ?inm.
-            FILTER (?node = <http://geographicknowledge.de/workflowLCP.rdf#0>)
-            }
-            UNION
-            {?node wf:output ?out.
-            ?out ada:hasElement ?oute.
-            ?oute ada:hasMeasure ?outm.
-            FILTER (?node = <http://geographicknowledge.de/workflowLCP.rdf#0>)
-            }
 
-       }"""
-    q = file_to_str('rdf_prefixes.txt') + q
-    #res = g.query(q)
-    #for i in res:
-        #pass
-        #print i[0], i[1], i[2],i[3], i[4], i[5]
     order = ''
     print "Order of tool enrichments: "
     for j in tools.toolenrichments:
@@ -306,8 +328,10 @@ def main():
     print "Tool Toolname input output Test: "
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]
-    
+
     print('OK') # end of script
-    
+
+    runCompetencyQueries(g)
+
 if __name__ == '__main__':
     main()

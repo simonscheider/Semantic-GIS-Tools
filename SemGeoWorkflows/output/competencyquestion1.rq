@@ -1,0 +1,7 @@
+#Get all path objects together with their start and end datasets
+SELECT ?ds ?p ?s ?e 
+WHERE{
+?ds ada:hasElement ?de. ?de ada:hasSupport ?p.
+?p a gis:Path;gis:hasStart ?s; gis:hasEnd ?e.
+?s a ada:DataSet.  ?e a ada:DataSet. 
+}
