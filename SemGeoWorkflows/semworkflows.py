@@ -82,6 +82,7 @@ def enrich_workflow_tool( g, toolname, tool):
     import glob
     inputs = glob.glob('enrichments/enrich_'+toolname+'_in*.ru')
     outputs = glob.glob('enrichments/enrich_'+toolname+'_out*.ru')
+    links = glob.glob('enrichments/enrich_'+toolname+'_link*.ru')
     tests =glob.glob('enrichments/enrich_'+toolname+'_test*.ru')
     growin = 0
     growout = 0
@@ -91,6 +92,11 @@ def enrich_workflow_tool( g, toolname, tool):
         growin +=len(g)-n
         n= n_triples(g)
     for fn in (outputs):
+        print('Enrichment '+fn)
+        g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
+        growout =len(g)-n
+        n = n_triples(g)
+    for fn in (links):
         print('Enrichment '+fn)
         g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
         growout =len(g)-n
@@ -107,7 +113,7 @@ def enrich_workflow_tool( g, toolname, tool):
 
 def enrich_workflow( g, propagation ):
     """
-    @param g 
+    @param g
     @param propagation name of propagation
     """
     n = n_triples(g)
@@ -128,9 +134,9 @@ def enrich_workflow( g, propagation ):
 def test_workflow_lights( g ):
     """ Runs enrichments and tests for China night lights example workflow """
     print('> test_workflow_lights')
-    
+
     wfname = 'http://geographicknowledge.de/WorkflowExamples#wf2'
-    
+
     _dir = "workflows/workflow_lights/"
     for fn in [_dir+"workflow_lights.ttl"]:
         print("Load N3 file: "+fn)
@@ -155,7 +161,7 @@ def checkTool(operation):
         return 'NA'
 
 def reifyWorkflow(file, wfname):
-    """ 
+    """
     Adds reifications necessary to make workflow wfname searchable
     @param file source file for workflow
     @param wfname URI that identifies workflow
@@ -192,8 +198,8 @@ def enrich_with_backtracking( g, wfname ):
     return g
 
 def test_workflow_lcpath( g ):
-    """ 
-    Runs enrichments and tests for Least Cost Path example workflow 
+    """
+    Runs enrichments and tests for Least Cost Path example workflow
     """
     print('> test_workflow_lights')
     wfname = 'http://geographicknowledge.de/workflowLCP.rdf#lcpwf'
