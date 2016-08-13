@@ -3,9 +3,13 @@
 INSERT {
 	?out a ada:DataSet;
 		ada:hasElement [ 
-			ada:hasSupport [ a gis:Neighborhood ];
-			ada:hasMeasure [ a gis:Region ]
+			ada:hasSupport _:sup;
+			ada:hasMeasure _:mea
 		].
+	_:sup a gis:Neighborhood.
+	_:mea a gis:Region.
+	# region is of an object
+	_:mea wf:of _:sup .
 } WHERE{
 	?node a gis:Buffer;
 			wf:output ?out.

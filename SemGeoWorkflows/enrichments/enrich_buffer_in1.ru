@@ -4,9 +4,13 @@
 INSERT {
 	?in a ada:DataSet;
 		ada:hasElement [
-			ada:hasSupport [ a ada:Object ]; 
-			ada:hasMeasure [ a ada:Spatial ]
+			ada:hasSupport _:sup ; 
+			ada:hasMeasure _:mea
 		].
+	_:sup a ada:Object.
+	_:mea a ada:Spatial.
+	# region is of an object
+	_:sup wf:of _:mea.
 } WHERE{
 	?node a gis:Buffer;
 		gis:inputdata ?in.
