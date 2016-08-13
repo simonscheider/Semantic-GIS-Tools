@@ -1,10 +1,9 @@
-# Typing gis:Erase
+# Typing gis:Intersect
 # Set inputs
-# Set of region datasets as input
 INSERT {
 	?in ada:hasElement [ ada:hasAttribute [ a gis:Region ] ].
 } WHERE {
-	?node a gis:Erase;
+	?node a gis:Intersect;
 		  gis:inputdata ?in.
 	FILTER NOT EXISTS { 
 		?in ada:hasElement ?in1.

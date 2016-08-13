@@ -1,10 +1,10 @@
-# Typing gis:Erase
+# Typing gis:Intersect
 
 #Set link
 INSERT {
 	?out2 ada:partof ?in2.
 } WHERE {
-	?node a gis:Erase;
+	?node a gis:Intersect;
 	 	gis:inputdata ?in;
 		wf:output ?out.
 	

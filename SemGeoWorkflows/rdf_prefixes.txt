@@ -6,6 +6,5 @@ PREFIX xml: <http://www.w3.org/XML/1998/namespace>
 PREFIX wf: <http://geographicknowledge.de/vocab/Workflow.rdf#>
 PREFIX gis: <http://geographicknowledge.de/vocab/GISConcepts.rdf#>
 PREFIX ada: <http://geographicknowledge.de/vocab/AnalysisData.rdf#>
-PREFIX lcp: <http://geographicknowledge.de/workflowLCP.rdf#>
 # end of rdf_prefixes.txt
 

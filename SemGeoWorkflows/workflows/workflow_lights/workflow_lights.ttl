@@ -13,7 +13,7 @@
 
 # Workflow metadata (result and data sources)
 :wf2 a wf:Workflow.
-:wf2 rdfs:comment "An example of a workflow. It analyses satellite imagery to estimate the change in luminosity in China.".
+:wf2 rdfs:comment "An example of a workflow. It analyses satellite imagery to estimate the change in luminosity in China."@en.
 :wf2 wf:source :F101993_night_lights.
 :wf2 wf:source :F102013_night_lights.
 :wf2 wf:source :China_border.
@@ -21,14 +21,6 @@
 :wf2 wf:source :Train_stations.
 :wf2 wf:source :Admin_units.
 :wf2 wf:result :Luminosity_change.
-
-#:F101993_night_lights a wf:Resource.
-#:F102013_night_lights a wf:Resource.
-#:China_border a wf:Resource.
-#:Gas_flares a wf:Resource.
-#:Train_stations a wf:Resource.
-#:Admin_units a wf:Resource.
-#:Luminosity_change a wf:Resource.
 
 # Workflow Node 1
 :wf2_1 gis:inputdata :China_border;
@@ -44,7 +36,7 @@
 # Workflow Node 3
 :wf2_3 rdf:type gis:Intersect;
 	gis:inputdata :Chn_atm0_erase;
-	gis:inputdata :Ch_Stations_Buffer; # RENAME PARAMETER?
+	gis:inputdata :Ch_Stations_Buffer;
 	wf:output :CHN_adm0_Erase_Intersect.
 
 # Workflow Node 4

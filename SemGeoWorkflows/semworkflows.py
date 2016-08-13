@@ -31,7 +31,7 @@ from sets import Set
 
 class tools():
     toolenrichments = []
-    tests =[]
+    tests = []
     def __str__(self):
         return str(toolenrichments)
 
@@ -47,9 +47,9 @@ def file_to_str(fn):
 def n_triples( g, n=None ):
     """ Prints the number of triples in graph g """
     if n is None:
-        print( 'Triples: '+str(len(g)) )
+        print( '  Triples: '+str(len(g)) )
     else:
-        print( 'Triples: +'+str(len(g)-n) )
+        print( '  Triples: +'+str(len(g)-n) )
     return len(g)
 
 def run_inferences( g ):
@@ -85,6 +85,7 @@ def enrich_workflow_tool( g, toolname, tool):
     tests =glob.glob('enrichments/enrich_'+toolname+'_test*.ru')
     growin = 0
     growout = 0
+    growlink = 0
     for fn in (inputs):
         print('Enrichment '+fn)
         g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
@@ -98,7 +99,7 @@ def enrich_workflow_tool( g, toolname, tool):
     for fn in (links):
         print('Enrichment '+fn)
         g.update( file_to_str('rdf_prefixes.txt') + file_to_str(fn) )
-        growout =len(g)-n
+        growlink = len(g)-n
         n = n_triples(g)
     test = None
     for i in tests:
@@ -107,7 +108,11 @@ def enrich_workflow_tool( g, toolname, tool):
         test = bool(res)
         #assert b
         print(bool(res))
-    tools.toolenrichments.append([str(tool), toolname, growin, growout, test])
+    
+    assert growin >= 0
+    assert growout >= 0
+    assert growlink >= 0
+    tools.toolenrichments.append([str(tool), toolname, growin, growout, growlink, test])
     return g
 
 def enrich_workflow( g, propagation ):
@@ -145,47 +150,20 @@ def test_workflow_lights( g ):
     g = enrich_with_backtracking( g, wfname )
     
     #sys.exit(0) # DEBUG
-    return g # DEBUG
-    
-    # DEBUG
-    # run query
-    #SELECT *
-    q = '''
-    
-    CONSTRUCT { 
-    ?in2 ada:hasElement _:ine. 
-    _:ine ada:hasMeasure _:inm.
-    _:inm a gis:Quality. 
-    # This reuses data blank nodes if present
-} WHERE{
-    ?node a gis:Erase;
-            gis:inputdata ?in2.
-    FILTER NOT EXISTS {?in2 ada:hasElement ?ine. ?ine ada:hasMeasure ?inm.} 
-    #Are data blank nodes present? Then reuse them
-}
-
-    
-    '''
-    print('\nQUERY')
-    q = file_to_str('rdf_prefixes.txt') + q
-    print(q)
-    for r in g.query(q):
-        print(r)
-    
-    sys.exit(0) # DEBUG
-    
     return g
-
+    
 def checkTool(operation):
     """
     Checks whether enrichment rules are available for operation class
     @param operation a GIS operation
     """
     #The list of tools to be used for tool enrichment
-    lcptools = [ 'euclideandistancetool', 'polygontoraster','localmapalgebra','pointtoraster','costdistance','costpath','toline']
-    lightstools = ['erase']
+    available_tools = [ 'euclideandistancetool', 'polygontoraster','localmapalgebra',
+                       'pointtoraster','costdistance','costpath','toline',
+                       'erase','intersect','buffer'] 
     operation = (((str(operation)).rpartition('#'))[2]).lower() #this extracts the toolname from its URI
-    if operation in lcptools or operation in lightstools:
+    #print('operation='+operation)
+    if operation in available_tools:
         return operation
     else:
         return None
@@ -232,7 +210,7 @@ def test_workflow_lcpath( g ):
     Runs enrichments and tests for Least Cost Path example workflow
     """
     print('> test_workflow_lights')
-    wfname = 'http://geographicknowledge.de/workflowLCP.rdf#lcpwf'
+    wfname = 'http://geographicknowledge.de/WorkflowExamples#wf1'
     _dir = "workflows/workflow_lcpath/"
     for fn in [_dir+"workflow_lcpath.ttl"]:
         print("Load N3 file: "+fn)
@@ -376,7 +354,6 @@ def main():
     g = load_ontologies( g )
     if 'lights' in params: g = test_workflow_lights( g )
     if 'lcpath' in params: g = test_workflow_lcpath( g )
-    graph_to_file(g)
 
     print('Tool enrichments and tests:')
     print ("Final size: "+str(len(g)))
@@ -386,12 +363,12 @@ def main():
     for j in tools.toolenrichments:
         order += ' :'+((((str(j[0])).rpartition('#'))[2]).lower())+' '
     print(order)
-    print("Tool Toolname input output Test: ")
+    print("Tool Toolname input output link Test: ")
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]
     
     #runCompetencyQueries(g)
-    
+    graph_to_file(g)
     print('OK') # end of script
 
 if __name__ == '__main__':
