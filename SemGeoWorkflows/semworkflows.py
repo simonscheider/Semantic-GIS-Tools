@@ -41,7 +41,7 @@ def file_to_str(fn):
     @return a string
     """
     with open(fn, 'r') as f:
-        content=f.read().strip()
+        content=f.read()
     return content
 
 def n_triples( g, n=None ):
@@ -52,12 +52,11 @@ def n_triples( g, n=None ):
         print( 'Triples: +'+str(len(g)-n) )
     return len(g)
 
-def run_rdfs_inferences( g ):
-    print('run_rdfs_inferences')
+def run_inferences( g ):
+    print('run_inferences')
     # expand deductive closure
     #RDFClosure.DeductiveClosure(RDFClosure.RDFS_Semantics).expand(g)
     RDFClosure.DeductiveClosure(RDFClosure.OWLRL_Semantics).expand(g)
-
     n_triples(g)
     return g
 
@@ -65,7 +64,7 @@ def load_ontologies( g ):
     print("load_ontologies")
     ontos = ["ontologies/Workflow.rdf","ontologies/GISConcepts.rdf","ontologies/AnalysisData.rdf"]
     for fn in ontos:
-        print("Load RDF file: "+fn)
+        print("  Load RDF file: "+fn)
         g.parse( fn )
     n_triples(g)
     return g
@@ -142,9 +141,39 @@ def test_workflow_lights( g ):
         print("Load N3 file: "+fn)
         g.parse( fn, format='n3' )
         g = reifyWorkflow(fn, wfname) + g
-    g = run_rdfs_inferences( g )
+    g = run_inferences( g )
     g = enrich_with_backtracking( g, wfname )
-    #g = enrich_workflow_tool( g, _dir )
+    
+    #sys.exit(0) # DEBUG
+    return g # DEBUG
+    
+    # DEBUG
+    # run query
+    #SELECT *
+    q = '''
+    
+    CONSTRUCT { 
+    ?in2 ada:hasElement _:ine. 
+    _:ine ada:hasMeasure _:inm.
+    _:inm a gis:Quality. 
+    # This reuses data blank nodes if present
+} WHERE{
+    ?node a gis:Erase;
+            gis:inputdata ?in2.
+    FILTER NOT EXISTS {?in2 ada:hasElement ?ine. ?ine ada:hasMeasure ?inm.} 
+    #Are data blank nodes present? Then reuse them
+}
+
+    
+    '''
+    print('\nQUERY')
+    q = file_to_str('rdf_prefixes.txt') + q
+    print(q)
+    for r in g.query(q):
+        print(r)
+    
+    sys.exit(0) # DEBUG
+    
     return g
 
 def checkTool(operation):
@@ -154,11 +183,12 @@ def checkTool(operation):
     """
     #The list of tools to be used for tool enrichment
     lcptools = [ 'euclideandistancetool', 'polygontoraster','localmapalgebra','pointtoraster','costdistance','costpath','toline']
+    lightstools = ['erase']
     operation = (((str(operation)).rpartition('#'))[2]).lower() #this extracts the toolname from its URI
-    if operation in lcptools:
+    if operation in lcptools or operation in lightstools:
         return operation
     else:
-        return 'NA'
+        return None
 
 def reifyWorkflow(file, wfname):
     """
@@ -189,7 +219,7 @@ def enrich_with_backtracking( g, wfname ):
     """
     wg = getWorkflowGraph(g,wfname)
     wg = load_ontologies(wg)
-    wg = run_rdfs_inferences(wg)
+    wg = run_inferences(wg)
     root = getRoot(wg)
     visited = Set([])
     # Run tool enrichments in the order of DFS backtracking through workflow graph
@@ -207,28 +237,28 @@ def test_workflow_lcpath( g ):
     for fn in [_dir+"workflow_lcpath.ttl"]:
         print("Load N3 file: "+fn)
         g = reifyWorkflow(fn, wfname) + g
-    g = run_rdfs_inferences( g )
+    g = run_inferences( g )
     g = enrich_with_backtracking(g, wfname)
     #Propagations are run in any order
     #list of propagations
     lcppropagations = ['qquality','path']
     for i in lcppropagations:
         g = enrich_workflow( g, i )
-    g = run_rdfs_inferences( g )
+    g = run_inferences( g )
     return g
 
 def graph_to_file( g, output_filepath = None ):
-    """ Serializes graph g to a n3 file """
+    """ Serializes graph g to an XML/RDF file """
     if not output_filepath:
-        _outfn = 'output/workflows_output.ttl'
+        _outfn = 'output/workflows_output.rdf'
     else: _outfn = output_filepath
-    g.serialize( _outfn, 'n3' )
+    g.serialize( _outfn )
     print("Written triples to " + _outfn)
 
 #Methods for workflow DFS search
 def getWorkflowGraph(g, wfname):
     """Extracts a separate workflow graph of a given (named) workflow"""
-    print("extract workflow graph (for DFS):"+wfname)
+    print("extract workflow graph (for DFS): "+wfname)
     q = """ \n CONSTRUCT {?subject ?predicate ?object.}
        WHERE {
             ?wfname wf:edge ?edge.
@@ -277,13 +307,12 @@ def DFSVisit(n, wg, visited, g):
     operation = rdflib.URIRef("http://geographicknowledge.de/vocab/Workflow.rdf#Operation")
     #get the operation types of the current node, check available enrichments for them, then enrich
     if (n, RDF.type, operation) in wg:
-        print('DFS candidate op: '+n)
+        print('  DFS candidate op: '+n)
         for i in (wg.objects(subject=n, predicate=RDF.type)):
             op = checkTool(i)
-            if (i != operation and op!='NA'):
-                print('DFS op: '+op)
+            if (i != operation and op is not None):
+                print('DFS op found: '+op)
                 enrich_workflow_tool( g, op, n)
-
 
 def getNeighbours(wg, n, forward=True):
     """Gets neighbors of nodes in a workflow graph, either forward (in the direction of the output(root)) or backward (in the direction of inputs)"""
@@ -360,10 +389,10 @@ def main():
     print("Tool Toolname input output Test: ")
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]
-
+    
+    #runCompetencyQueries(g)
+    
     print('OK') # end of script
-
-    runCompetencyQueries(g)
 
 if __name__ == '__main__':
     main()

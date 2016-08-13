@@ -51,3 +51,7 @@ SemGeoWorkflows/output/catalog-v001.xml
 SemGeoWorkflows/workflows/workflow_lights/catalog-v001.xml
 
 SemGeoWorkflows/output/workflows_output.ttl
+
+SemGeoWorkflows/output/workflows_output.rdf
+
+SemGeoWorkflows/workflows/workflow_lcpath/catalog-v001.xml
