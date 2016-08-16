@@ -2,11 +2,11 @@
 # if a region is part of a region of an object, that is part of region of that object
 
 INSERT { 
-	?b ada:partof ?something.
+	?b ada:partof ?b.
 } WHERE {
 	?a ^ada:partof+ ?b.
 	FILTER NOT EXISTS{
-		?a ada:partof ?something
+		?a ada:partof ?b
 	}
 }
 
