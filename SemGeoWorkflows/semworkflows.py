@@ -150,8 +150,7 @@ def test_workflow_lights( g ):
         g = reifyWorkflow(fn, wfname) + g
     g = run_inferences( g )
     g = enrich_with_backtracking( g, wfname )
-    
-    #sys.exit(0) # DEBUG
+    g = run_propagations( g )
     return g
     
 def checkTool(operation):
@@ -220,12 +219,7 @@ def test_workflow_lcpath( g ):
         g = reifyWorkflow(fn, wfname) + g
     g = run_inferences( g )
     g = enrich_with_backtracking(g, wfname)
-    #Propagations are run in any order
-    #list of propagations
-    lcppropagations = ['qquality','path']
-    for i in lcppropagations:
-        g = enrich_workflow( g, i )
-    g = run_inferences( g )
+    g = run_propagations( g )
     return g
 
 def graph_to_file( g, output_filepath = None ):
@@ -236,9 +230,23 @@ def graph_to_file( g, output_filepath = None ):
     g.serialize( _outfn )
     print("Written "+str(len(g))+" triples to " + _outfn)
 
+def run_propagations( g ):
+    """
+    Propagations are run in any order
+    """
+    assert g
+    #list of propagations
+    lcppropagations = ['qquality','path']
+    for i in lcppropagations:
+        g = enrich_workflow( g, i )
+    
+    g = run_inferences( g )
+    return g
+
 #Methods for workflow DFS search
 def getWorkflowGraph(g, wfname):
     """Extracts a separate workflow graph of a given (named) workflow"""
+    assert wfname
     print("extract workflow graph (for DFS): "+wfname)
     q = """ \n CONSTRUCT {?subject ?predicate ?object.}
        WHERE {
@@ -361,8 +369,7 @@ def prefixURI(str):
     return str
 
 def main():
-    # create inmemory store
-    g = rdflib.ConjunctiveGraph()
+
     params = sys.argv[1:]
     
     if 'questions' in params:
@@ -373,11 +380,14 @@ def main():
         print('OK')
         return
     
+    # create inmemory store
+    g = rdflib.ConjunctiveGraph()
     g = load_ontologies( g )
     
     if 'lights' in params: g = test_workflow_lights( g )
     if 'lcpath' in params: g = test_workflow_lcpath( g )
 
+    print(80*'=')
     print('Tool enrichments and tests:')
     print ("Final size: "+str(len(g)))
 
@@ -386,6 +396,7 @@ def main():
     for j in tools.toolenrichments:
         order += ' :'+((((str(j[0])).rpartition('#'))[2]).lower())+' '
     print(order)
+    print(80*'=')
     print("Tool Toolname input output link Test: ")
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]

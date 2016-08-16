@@ -3,15 +3,17 @@
 # Makefile
 #
 
-all:
+all: clean
 	python semworkflows.py lcpath lights
-	python semworkflows.py questions
 
-l:
+l: clean
 	python semworkflows.py lights
 
+p: clean
+	python semworkflows.py lcpath
+	
 q:
 	python semworkflows.py questions
 	
 clean:
-	echo "TODO clean temp files"
+	-@rm output/*
