@@ -4,10 +4,14 @@
 #
 
 all:
-	python semworkflows.py lights lcpath
+	python semworkflows.py lcpath lights
+	python semworkflows.py questions
 
 l:
 	python semworkflows.py lights
+
+q:
+	python semworkflows.py questions
 	
 clean:
 	echo "TODO clean temp files"

@@ -9,7 +9,7 @@ INSERT
 ?out a gis:Raster. ?outm a gis:Existence; wf:of ?in; a gis:QQuality; gis:ofprop ?inm. 
 ?outs ada:partof ?ins.
 ?inm wf:of _:gf. # This reuses data blank nodes if present
-?inm a gis:Quality.
+?inm a ada:Quality.
 _:gf a gis:SField.
 }
 #}

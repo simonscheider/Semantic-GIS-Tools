@@ -4,7 +4,7 @@
 INSERT 
 { 
 #GRAPH ?g{
-?out a gis:ObjectData. 
+?out a ada:ObjectData. 
 ?oute ada:hasSupport ?object. 
 ?in a gis:Raster. 
 }

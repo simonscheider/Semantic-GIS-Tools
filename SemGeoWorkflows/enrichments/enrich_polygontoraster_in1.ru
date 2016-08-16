@@ -6,7 +6,7 @@
 INSERT 
 { 
 #GRAPH ?g{ 
-?in2 ada:hasElement _:ine. _:ine ada:hasMeasure _:inm. _:inm a gis:Quality.
+?in2 ada:hasElement _:ine. _:ine ada:hasMeasure _:inm. _:inm a ada:Quality.
 }
 #}
 #SELECT *

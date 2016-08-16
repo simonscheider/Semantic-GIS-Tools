@@ -45,36 +45,36 @@
 	wf:output :Feature_Chn_1.
 
 # Workflow Node 5
-:wf2_5 rdf:type gis:ExtractByMask; # ADD TO ONTO
+:wf2_5 rdf:type gis:ExtractByMask;
 	gis:inputdata :F102013_night_lights;
-	gis:inputdata :Feature_Chn_1; # MASK, RENAME PARAM
+	gis:rastermask :Feature_Chn_1;
 	wf:output :Extract_tif2.
 
 # Workflow Node 6
-:wf2_6 rdf:type gis:ExtractByMask; # ADD TO ONTO
+:wf2_6 rdf:type gis:ExtractByMask;
 	gis:inputdata :F101993_night_lights;
-	gis:inputdata :Feature_Chn_1; # MASK, RENAME PARAM
+	gis:rastermask :Feature_Chn_1;
 	wf:output :Extract_tif1.
 
 # Workflow Node 7
-:wf2_7 rdf:type gis:ZonalStatisticsAsTable; # ADD TO ONTO
+:wf2_7 rdf:type gis:ZonalStatisticsAsTable;
 	gis:inputdata :Extract_tif1;
-	gis:inputdata :Admin_units; # ZONES, RENAME PARAM
+	gis:zones :Admin_units;
 	wf:output :ZonalSt_shp2.
 
 # Workflow Node 8
-:wf2_8 rdf:type gis:ZonalStatisticsAsTable; # ADD TO ONTO
+:wf2_8 rdf:type gis:ZonalStatisticsAsTable;
 	gis:inputdata :Extract_tif2;
-	gis:inputdata :Admin_units; # ZONES, RENAME PARAM
+	gis:zones :Admin_units;
 	wf:output :ZonalSt_shp1.
 
 # Workflow Node 9
-:wf2_9 rdf:type gis:JoinField; # ADD TO ONTO
+:wf2_9 rdf:type gis:JoinField;
 	gis:inputdata :ZonalSt_shp1;
-	gis:inputdata :ZonalSt_shp2; # RENAME PARAM
+	gis:inputdata :ZonalSt_shp2;
 	wf:output :ZonalSt_shp1_1.
 
 # Workflow Node 10
-:wf2_10 rdf:type gis:CalculateField; # ADD TO ONTO
+:wf2_10 rdf:type gis:CalculateField;
 	gis:inputdata :ZonalSt_shp1_1;
 	wf:output :Luminosity_change.

@@ -66,7 +66,6 @@
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#costsurface">
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
     </owl:ObjectProperty>
-    
 
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#erasefeature -->
@@ -75,7 +74,17 @@
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
     </owl:ObjectProperty>
     
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#rastermask -->
 
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#rastermask">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
+    </owl:ObjectProperty>
+    
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#zones -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#zones">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
+    </owl:ObjectProperty>    
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute -->
 
@@ -697,6 +706,17 @@
     </owl:Class>
     
 
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#FeatureToRaster -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#FeatureToRaster">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#toRaster"/>
+    </owl:Class>
+    
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ExtractByMask -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#ExtractByMask">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#RasterOp"/>
+    </owl:Class>
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#QQuality -->
 
@@ -914,15 +934,11 @@
         <rdfs:comment>A trajectory is a continuous function defined over time and ranging over space</rdfs:comment>
     </owl:Class>
     
-
-
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
     </owl:Class>
-    
-
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalMapAlgebra -->
 
@@ -930,6 +946,23 @@
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
     </owl:Class>
     
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalStatisticsAsTable -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalStatisticsAsTable">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#ZonalMapAlgebra"/>
+    </owl:Class>
+    
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#JoinField -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#JoinField">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
+    </owl:Class>
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#CalculateField -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#CalculateField">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
+    </owl:Class>
 
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#toLine -->

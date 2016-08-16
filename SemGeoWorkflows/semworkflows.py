@@ -29,6 +29,8 @@ from rdflib.namespace import RDFS, RDF
 import glob
 from sets import Set
 
+_OUTPUT_RDF = 'output/workflows_output.rdf'
+
 class tools():
     toolenrichments = []
     tests = []
@@ -160,7 +162,8 @@ def checkTool(operation):
     #The list of tools to be used for tool enrichment
     available_tools = [ 'euclideandistancetool', 'polygontoraster','localmapalgebra',
                        'pointtoraster','costdistance','costpath','toline',
-                       'erase','intersect','buffer'] 
+                       'erase','intersect','buffer','featuretoraster',
+                       'extractbymask','zonalstatisticsastable','joinfield','calculatefield'] 
     operation = (((str(operation)).rpartition('#'))[2]).lower() #this extracts the toolname from its URI
     #print('operation='+operation)
     if operation in available_tools:
@@ -231,7 +234,7 @@ def graph_to_file( g, output_filepath = None ):
         _outfn = 'output/workflows_output.rdf'
     else: _outfn = output_filepath
     g.serialize( _outfn )
-    print("Written triples to " + _outfn)
+    print("Written "+str(len(g))+" triples to " + _outfn)
 
 #Methods for workflow DFS search
 def getWorkflowGraph(g, wfname):
@@ -309,20 +312,31 @@ def getNeighbours(wg, n, forward=True):
                 objects.append(i)
     return objects
 
+def load_output_rdf():
+    g = rdflib.ConjunctiveGraph()
+    print('Loading '+_OUTPUT_RDF)
+    g.parse(_OUTPUT_RDF)
+    n_triples(g)
+    return g
+
 def runCompetencyQueries(g):
-    """Questions are posed in terms of SELECT queries, and results are written to standard output in a readable tabular format"""
-    tests = glob.glob('output/competencyquestion*.rq')
+    """
+    Questions are posed in terms of SELECT queries, and
+    results are written to standard output in a readable tabular format
+    """
+    tests = glob.glob('questions/competencyquestion*.rq')
     for i in tests:
-        print('Run competency question '+i)
+        print(80*'=' +'\nRun competency question '+i+'\n')
         str = (file_to_str(i))
-        print str
+        print(str)
         res = g.query(file_to_str('rdf_prefixes.txt') +'\n'+ file_to_str(i))
-        #print len(res)
+        print(80*"-")
+        print('OUTPUT:\n')
         for i in res:
             line = ''
             for j in i:
                 line += ((prefixURI(j)) if (j!=None) else 'None')+' '
-            print line
+            print(line)
 
 def prefixURI(str):
     """Prefixes URI strings"""
@@ -350,8 +364,17 @@ def main():
     # create inmemory store
     g = rdflib.ConjunctiveGraph()
     params = sys.argv[1:]
-
+    
+    if 'questions' in params:
+        # run competency questions
+        assert len(params)==1 
+        g = load_output_rdf()
+        runCompetencyQueries(g)
+        print('OK')
+        return
+    
     g = load_ontologies( g )
+    
     if 'lights' in params: g = test_workflow_lights( g )
     if 'lcpath' in params: g = test_workflow_lcpath( g )
 
@@ -367,7 +390,7 @@ def main():
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]
     
-    #runCompetencyQueries(g)
+    g = run_inferences( g )
     graph_to_file(g)
     print('OK') # end of script
 

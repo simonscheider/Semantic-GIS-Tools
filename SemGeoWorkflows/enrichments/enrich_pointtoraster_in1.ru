@@ -6,7 +6,7 @@
 INSERT
 { 
 #GRAPH ?g{
-?in2 ada:hasElement _:ine. _:ine ada:hasMeasure _:inm.  _:inm a gis:Quality. # This reuses data blank nodes if present
+?in2 ada:hasElement _:ine. _:ine ada:hasMeasure _:inm.  _:inm a ada:Quality. # This reuses data blank nodes if present
 }
 #}
 #SELECT *

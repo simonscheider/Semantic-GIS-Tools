@@ -15,7 +15,7 @@ WHERE{
 ?node a gis:PointtoRaster;
 wf:output ?out;
 gis:inputdata ?in2.
-?in2 ada:hasElement ?ine. ?ine ada:hasMeasure ?inm. ?inm a gis:Quality. #Are data blank nodes present? Then reuse them
+?in2 ada:hasElement ?ine. ?ine ada:hasMeasure ?inm. ?inm a ada:Quality. #Are data blank nodes present? Then reuse them
 FILTER NOT EXISTS{?out ada:hasElement ?oute. ?oute ada:hasMeasure ?outm}
 #}
 }
