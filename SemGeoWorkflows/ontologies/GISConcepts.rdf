@@ -314,8 +314,12 @@
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology"/>
     </owl:Class>
     
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Intersect -->
 
-
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Intersect">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology"/>
+    </owl:Class>
+    
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#CalculateField -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#CalculateField">
