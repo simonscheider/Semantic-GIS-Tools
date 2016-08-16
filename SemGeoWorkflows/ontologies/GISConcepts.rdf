@@ -953,7 +953,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalStatisticsAsTable -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalStatisticsAsTable">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#ZonalMapAlgebra"/>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalMapAlgebra"/>
     </owl:Class>
     
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#JoinField -->
