@@ -1,10 +1,13 @@
 
-#Propagates the provenance of properties (e.g. Fields) across local map algebra and conversions:
+# if a region is part of a region of an object, that is part of region of that object
+
 INSERT { 
-?b wf:of ?something
+	?b ada:partof ?something.
 } WHERE {
-?a wf:of ?something; (^gis:ofprop)+ ?b.
-FILTER NOT EXISTS{?a gis:ofprop ?something}
+	?a ^ada:partof+ ?b.
+	FILTER NOT EXISTS{
+		?a ada:partof ?something
+	}
 }
 
 #Test:

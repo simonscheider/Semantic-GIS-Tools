@@ -117,7 +117,7 @@ def enrich_workflow_tool( g, toolname, tool):
     tools.toolenrichments.append([str(tool), toolname, growin, growout, growlink, test])
     return g
 
-def enrich_workflow( g, propagation ):
+def enrich_workflow_prop( g, propagation ):
     """
     @param g
     @param propagation name of propagation
@@ -235,10 +235,11 @@ def run_propagations( g ):
     Propagations are run in any order
     """
     assert g
+    print('run_propagations')
     #list of propagations
-    lcppropagations = ['qquality','path']
+    lcppropagations = ['qquality','path','partof']
     for i in lcppropagations:
-        g = enrich_workflow( g, i )
+        g = enrich_workflow_prop( g, i )
     
     g = run_inferences( g )
     return g

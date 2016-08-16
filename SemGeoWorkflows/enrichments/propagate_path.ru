@@ -1,16 +1,9 @@
 
-
 # Propagate ends and starts to path
-INSERT 
-{ 
-#GRAPH ?g{
+INSERT {
 ?path gis:hasStart ?sourceds.
 ?path gis:hasEnd ?sinkds.
-}
-#}
-#SELECT *
-WHERE{
-#GRAPH ?g{
+} WHERE {
 ?path ^wf:of ?ex; a gis:Path.
 ?ex a gis:Existence.
 ?ds ada:hasElement ?ine. ?ine ada:hasMeasure ?ex.
@@ -19,7 +12,6 @@ WHERE{
 ?source ada:hasElement ?sourcee. ?sourcee ada:hasMeasure ?sourcem. ?sourcem a gis:Existence; wf:of ?sourceds.
 ?sink ada:hasElement ?sinke. ?sinke ada:hasMeasure ?sinkm. ?sinkm  a gis:Existence; wf:of ?sinkds.
 }
-#}
 
 #Test query:
 #SELECT * 
