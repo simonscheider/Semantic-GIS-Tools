@@ -3,10 +3,10 @@
 
 #Set input
 INSERT {
-	?in2 a gis:RasterDataSet;
+	?in2 a gis:Raster;
 		ada:hasElement _:ine.
 	_:ine ada:hasMeasure _:inm.
-	?zo a ada:ObjectDataSet;
+	?zo a gis:ObjectDataSet;
 		ada:hasElement _:zoe.
 	_:zoe ada:hasMeasure _:zom.
 } WHERE {

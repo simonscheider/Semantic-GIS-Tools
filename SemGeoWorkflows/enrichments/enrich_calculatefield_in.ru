@@ -3,7 +3,7 @@
 
 #Set Input
 INSERT {
-	?in a ada:ObjectDataSet; 
+	?in a gis:ObjectDataSet; 
 		ada:hasElement _:ine. 
 	_:ine ada:hasMeasure _:inm.
 } WHERE {
