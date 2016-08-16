@@ -1,4 +1,4 @@
-#comment:- test for part of 
+# Get part-of hierarchy for all datasets
 SELECT DISTINCT ?a ?b ?part ?whole
 WHERE{
 	?part ada:partof ?whole.
