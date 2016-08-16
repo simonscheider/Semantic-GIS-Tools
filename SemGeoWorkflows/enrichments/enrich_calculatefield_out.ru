@@ -3,7 +3,7 @@
 
 #Set output structure
 INSERT { 
-	?out a ada:ObjectDataSet;
+	?out a gis:ObjectDataSet;
 		ada:hasElement [ ada:hasMeasure _:outm; ada:hasSupport _:outs ].
 } WHERE {
 	?node a gis:CalculateField;
