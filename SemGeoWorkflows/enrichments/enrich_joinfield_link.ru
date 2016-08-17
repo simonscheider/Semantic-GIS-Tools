@@ -1,16 +1,17 @@
 # Typing gis:JoinField
-# Set output structure
-#Set link
+# Set link
+# Input and output have the same support.
 INSERT {
 	?inm a ada:Quality.
-	?out ada:partof ?in.
+	?outs owl:sameAs ?ins.
 } WHERE {
 	?node a gis:JoinField;
 		wf:output ?out;
 		gis:inputdata ?in.
 	
 	?in ada:hasElement ?ine. 
-	?ine ada:hasMeasure ?inm.
+	?ine ada:hasSupport ?ins.
+	
 	?out ada:hasElement ?oute. 
-	?oute ada:hasMeasure ?outm.
+	?oute ada:hasSupport ?outs.
 }

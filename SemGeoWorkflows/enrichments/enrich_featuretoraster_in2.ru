@@ -2,15 +2,16 @@
 # Typing gis:FeatureToRaster
 
 #Set Input
-INSERT { 
+INSERT {
 	?ine ada:hasSupport _:inr.
 	_:inr a gis:Region.
-	?in2 a gis:RegionDataSet.
+	?in a gis:RegionDataSet.
 } WHERE {
 	?node a gis:FeatureToRaster;
-			gis:inputdata ?in2.
-	?in2 ada:hasElement ?ine.
+		gis:inputdata ?in2.
+	?in ada:hasElement ?ine.
 	FILTER NOT EXISTS{
+		?in a gis:Raster.
 		?ine ada:hasSupport ?ins.
 		?ins a gis:Region.
 	}

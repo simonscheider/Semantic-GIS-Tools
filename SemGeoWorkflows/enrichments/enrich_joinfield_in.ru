@@ -3,7 +3,6 @@
 INSERT {
 	?in a ada:DataSet;
 		 ada:hasElement [ 
-			ada:hasSupport [ a ada:Object ];
 			ada:hasMeasure [ a ada:Quality ]
 		  ].
 } WHERE {

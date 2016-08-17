@@ -2,8 +2,7 @@
 # Set output structure
 INSERT {
 	?out a ada:DataSet;
-		 ada:hasElement [ 
-			ada:hasSupport [ a ada:Object ];
+		 ada:hasElement [
 			ada:hasMeasure [ a ada:Quality ]
 		  ].
 } WHERE {
