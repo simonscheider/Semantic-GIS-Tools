@@ -10,7 +10,7 @@ INSERT {
 	_:sup a ada:Object.
 	_:mea a ada:Spatial.
 	# region is of an object
-	_:sup wf:of _:mea.
+	_:mea wf:of  _:sup.
 } WHERE{
 	?node a gis:Buffer;
 		gis:inputdata ?in.

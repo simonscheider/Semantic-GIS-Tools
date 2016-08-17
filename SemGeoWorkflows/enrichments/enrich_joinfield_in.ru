@@ -4,7 +4,7 @@ INSERT {
 	?in a ada:DataSet;
 		 ada:hasElement [ 
 			ada:hasSupport [ a ada:Object ];
-			ada:hasMeasurement [ a ada:Quality ]
+			ada:hasMeasure [ a ada:Quality ]
 		  ].
 } WHERE {
 	?node a gis:JoinField;
