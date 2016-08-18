@@ -9,6 +9,8 @@ INSERT {
 	?outm a gis:QQuality;
 		gis:ofprop ?inm.
 	?out wf:of ?in.
+	?ins ada:partOf ?outs.
+	?zos ada:partOf ?outs.
 } WHERE {
 	?node a gis:ZonalStatisticsAsTable;
 		wf:output ?out;
@@ -17,10 +19,14 @@ INSERT {
 	
 	?in ada:hasElement ?ine. 
 	?ine ada:hasMeasure ?inm.
+	?ine ada:hasSupport ?ins.
 	
 	?zo ada:hasElement ?zoe. 
 	?zoe ada:hasMeasure ?zom.
+	?zoe ada:hasSupport ?zos.
 	
 	?out ada:hasElement ?oute. 
 	?oute ada:hasMeasure ?outm.
+	?oute ada:hasSupport ?outs.
+	
 }

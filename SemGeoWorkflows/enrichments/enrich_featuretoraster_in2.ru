@@ -3,7 +3,7 @@
 
 #Set Input
 INSERT {
-	?ine ada:hasSupport _:inr.
+	?ine gis:hasAttribute _:inr.
 	_:inr a gis:Region.
 	?in a gis:RegionDataSet.
 } WHERE {
@@ -11,7 +11,7 @@ INSERT {
 		gis:inputdata ?in.
 	?in ada:hasElement ?ine.
 	FILTER NOT EXISTS {
-		?ine ada:hasSupport ?ins.
+		?ine gis:hasAttribute ?ins.
 		?ins a gis:Region.
 	}
 }

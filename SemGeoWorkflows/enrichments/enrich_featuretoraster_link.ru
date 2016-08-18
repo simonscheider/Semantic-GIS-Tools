@@ -8,7 +8,7 @@ INSERT {
 			wf:of ?in; 
 			a gis:QQuality; 
 			gis:ofprop ?inm. 
-	?outs ada:partof ?ins. # supports
+	?outs ada:partOf ?ins. # supports
 	?inm wf:of _:gf; # field
 		a ada:Quality.
 	_:gf a gis:SField.
@@ -17,8 +17,8 @@ INSERT {
 		wf:output ?out;
 		gis:inputdata ?in2.
 	?in2 ada:hasElement ?ine. 
-	?ine ada:hasMeasure ?inm.
-	?ine ada:hasSupport ?ins.
+	?ine gis:hasAttribute ?inm. ?inm a ada:Quality. # stay neutral with respect to measure or support
+	?ine gis:hasAttribute ?ins. ?ins a gis:Region.
 	?out ada:hasElement ?oute. 
 	?oute ada:hasMeasure ?outm.
 	?oute ada:hasSupport ?outs.

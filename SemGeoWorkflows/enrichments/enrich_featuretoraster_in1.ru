@@ -3,14 +3,14 @@
 
 #Set Input
 INSERT { 
-	?in2 ada:hasElement _:ine. 
-	_:ine ada:hasMeasure _:inm.
+	?ine gis:hasAttribute _:inm. # We stay here neutral as to whether measure or support
 	_:inm a ada:Quality.
 }WHERE{
 	?node a gis:FeatureToRaster;
 			gis:inputdata ?in2.
-	FILTER NOT EXISTS{
-		?in2 ada:hasElement ?ine. 
-		?ine ada:hasMeasure ?inm.
+		?in2 ada:hasElement ?ine.
+	FILTER NOT EXISTS{		 
+		?ine gis:hasAttribute ?inm.
+		?inm a ada:Quality.
 	}
 }

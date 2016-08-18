@@ -10,12 +10,10 @@ INSERT {
 	_:ine ada:hasMeasure _:inm.
 } WHERE {
 	?node a gis:ExtractByMask;
-		gis:inputraster ?in.
+		gis:inputdata ?in.		
 	FILTER NOT EXISTS {
 		?in ada:hasElement ?ine.
-		?ine ada:hasSupport ?ins.
-		
-		?ina ada:hasElement ?ina1.
-		?ina1 ada:hasMeasure ?ina2.
+		?ine ada:hasSupport ?ins.		
+		?ine ada:hasMeasure ?inm.
 	}
 }
