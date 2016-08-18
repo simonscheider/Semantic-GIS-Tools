@@ -5,7 +5,7 @@
 
 # Set output structure
 INSERT { 
-	?out a gis:ObjectDataSet;
+	?out a gis:SpatialDataSet;
 		ada:hasElement [ 
 			ada:hasMeasure _:outm; 
 			ada:hasSupport _:outs

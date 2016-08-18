@@ -4,19 +4,16 @@
 #Set input
 INSERT {
 	?in a gis:Raster;
-		ada:hasElement _:ine.
-	_:ine ada:hasMeasure _:inm.
-	?zo a gis:ObjectDataSet;
-		ada:hasElement _:zoe.
-	_:zoe ada:hasMeasure _:zom.
+		ada:hasElement _:ine.	
+	?zo a gis:SpatialDataSet;#a gis:ObjectDataSet; This is too restrictive I think
+		ada:hasElement _:zoe.	
 } WHERE {
 	?node a gis:ZonalStatisticsAsTable;
 		gis:inputraster ?in;
 		gis:zones ?zo.
 	FILTER NOT EXISTS {
-		?in ada:hasElement ?ine.
-		?ine ada:hasMeasure ?inm.
+		?in ada:hasElement ?ine.		
 		?zo ada:hasElement ?zoe.
-		?zoe ada:hasMeasure ?zom.
+		
 	}
 }

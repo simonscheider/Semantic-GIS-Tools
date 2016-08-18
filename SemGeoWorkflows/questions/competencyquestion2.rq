@@ -2,10 +2,10 @@
 SELECT DISTINCT ?ds ?class ?ofclass
 WHERE{
 ?ds a ada:DataSet; a ?class.
-FILTER (?class IN (gis:Raster, gis:PointDataSet, gis:ObjectDataSet, gis:LineDataSet, gis:RegionDataSet, gis:Network))
+FILTER (?class IN (gis:Raster, gis:PointDataSet, gis:ObjectDataSet, gis:LineDataSet, gis:RegionDataSet, gis:Network, gis:SpatialDataSet))
 OPTIONAL {?ds  ada:hasElement ?ine. ?ine ada:hasMeasure ?b .
 ?b wf:of ?somefield. ?somefield a ?ofclass. 
-FILTER (?ofclass IN (gis:SField, ada:Object, gis:Raster, gis:PointDataSet, gis:ObjectDataSet, gis:LineDataSet, gis:RegionDataSet))
+FILTER (?ofclass IN (gis:SField, ada:Object, gis:Raster, gis:PointDataSet, gis:ObjectDataSet, gis:LineDataSet, gis:RegionDataSet, gis:SpatialDataSet))
 }
 #OPTIONAL {?ds a gis:FieldDataSet #FILTER(!isblank(?ofclass))
 #}

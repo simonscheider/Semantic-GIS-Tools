@@ -1,9 +1,0 @@
-# Get part-of hierarchy for all datasets
-SELECT DISTINCT ?a ?b ?part ?whole
-WHERE{
-	?part ada:partof ?whole.
-	?b ada:hasElement ?el.
-	?el ada:hasAttribute ?part. 
-	?a ada:hasElement ?el1.
-	?el1 ada:hasAttribute ?whole. 
-}

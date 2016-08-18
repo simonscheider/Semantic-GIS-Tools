@@ -3,12 +3,9 @@
 
 #Set input
 INSERT {
-	?in a gis:Raster;
-		ada:hasElement _:ine.
-	_:ine ada:hasSupport _:ins.
-	?zo a gis:ObjectDataSet;
-		ada:hasElement _:zoe.
-	_:zoe ada:hasSupport _:zos.
+	?in a gis:Raster.
+	?ine ada:hasSupport _:ins.
+	?zoe ada:hasSupport _:zos.
 } WHERE {
 	?node a gis:ZonalStatisticsAsTable;
 		gis:inputraster ?in;

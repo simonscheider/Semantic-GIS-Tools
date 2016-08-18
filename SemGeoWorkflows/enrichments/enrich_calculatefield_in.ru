@@ -5,7 +5,7 @@
 
 #Set Input
 INSERT {
-	?in a gis:ObjectDataSet; 
+	?in a gis:SpatialDataSet; 
 		ada:hasElement _:ine. 
 	_:ine ada:hasMeasure _:inm.
 } WHERE {

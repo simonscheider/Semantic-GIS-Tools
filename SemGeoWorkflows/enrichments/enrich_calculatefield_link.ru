@@ -7,6 +7,7 @@ INSERT {
 	?outm a gis:QQuality;
 		gis:ofprop ?inm.
 	?out wf:of ?in.
+	?outs owl:sameAs ?ins.
 } WHERE {
 	?node a gis:CalculateField;
 		wf:output ?out;

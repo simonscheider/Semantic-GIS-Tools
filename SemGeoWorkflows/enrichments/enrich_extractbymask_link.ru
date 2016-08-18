@@ -3,8 +3,8 @@
 
 INSERT { 
 	?outm gis:ofprop ?inm.
-	?outs ada:partOf ?ins. 	# outcell is part of input raster cell
-	 ?outs ada:partOf ?ms . 	# outcell is part of mask cell
+	?outs owl:sameAs ?ins. 	# outcell = raster cell
+	 ?outs owl:sameAs ?ms . 	# outcell = mask cell
 } WHERE {
 	?node a gis:ExtractByMask;
 		wf:output ?out;
