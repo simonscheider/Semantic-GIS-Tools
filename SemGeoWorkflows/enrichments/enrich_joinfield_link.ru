@@ -1,6 +1,9 @@
 # Typing gis:JoinField
 # Set link
 # Input and output have the same support.
+
+# TODO: fix possible inference problems on sameAs
+
 INSERT {
 	?inm a ada:Quality.
 	?outs owl:sameAs ?ins.

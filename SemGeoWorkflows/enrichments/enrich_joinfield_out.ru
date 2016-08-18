@@ -3,13 +3,15 @@
 INSERT {
 	?out a ada:DataSet;
 		 ada:hasElement [
-			ada:hasMeasure [ a ada:Quality ]
+			ada:hasMeasure [ a ada:Quality ];
+			ada:hasSupport _:outs
 		  ].
 } WHERE {
 	?node a gis:JoinField;
 		  wf:output ?out.
 	FILTER NOT EXISTS { 
 		?out ada:hasElement ?oute.
-		?oute ada:hasAttribute ?outa.
+		?oute ada:hasMeasure ?outm.
+		?oute ada:hasSupport ?outs.
 	}
 }

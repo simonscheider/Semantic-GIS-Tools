@@ -1,0 +1,9 @@
+# see all partof relations between supports and measures (b partof a)
+SELECT DISTINCT ?b ?a ?part ?whole
+WHERE{
+	?part ada:partof ?whole.
+	?b ada:hasElement ?el.
+	?el ada:hasAttribute ?part. 
+	?a ada:hasElement ?el1.
+	?el1 ada:hasAttribute ?whole. 
+}

@@ -1,8 +1,8 @@
 
 # Typing gis:CalculateField
 
-#Set output
-INSERT { 
+#Set link
+INSERT {
 	?inm a ada:Quality.
 	?outm a gis:QQuality;
 		gis:ofprop ?inm.
@@ -10,9 +10,9 @@ INSERT {
 } WHERE {
 	?node a gis:CalculateField;
 		wf:output ?out;
-		gis:inputdata ?in2.
+		gis:inputdata ?in.
 	
-	?in2 ada:hasElement ?ine. 
+	?in ada:hasElement ?ine. 
 	?ine ada:hasMeasure ?inm.
 	?ine ada:hasSupport ?ins.
 	

@@ -8,10 +8,9 @@ INSERT {
 	?in a gis:RegionDataSet.
 } WHERE {
 	?node a gis:FeatureToRaster;
-		gis:inputdata ?in2.
+		gis:inputdata ?in.
 	?in ada:hasElement ?ine.
-	FILTER NOT EXISTS{
-		?in a gis:Raster.
+	FILTER NOT EXISTS {
 		?ine ada:hasSupport ?ins.
 		?ins a gis:Region.
 	}

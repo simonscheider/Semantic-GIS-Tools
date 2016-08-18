@@ -161,12 +161,12 @@
     
 
 
-    <!-- http://www.w3.org/2002/07/owl#sameAs -->
+    <!-- http://www.w3.org/2002/07/owl#sameAs 
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2002/07/owl#sameAs">
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/AnalysisData.rdf#partOf"/>
     </owl:ObjectProperty>
-    
+    -->
 
 
     <!-- 

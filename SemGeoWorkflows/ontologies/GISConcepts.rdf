@@ -79,6 +79,10 @@
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#rastermask">
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
     </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputraster">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
+    </owl:ObjectProperty>
     
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#zones -->
 

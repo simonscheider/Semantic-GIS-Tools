@@ -1,19 +1,23 @@
 
 # Typing gis:ExtractByMask
 
-#Set output
 INSERT { 
-	?outm wf:of ?in;
-		gis:ofprop ?inm.
-	?outs ada:partof ?ins.
+	?outm gis:ofprop ?inm.
+	?ins owl:sameAs ?outs. 	# supports are the same
+	?ins owl:sameAs ?ms. 	# supports are the same
 } WHERE {
 	?node a gis:ExtractByMask;
 		wf:output ?out;
-		gis:inputdata ?in2.
+		gis:inputraster ?ras;
+		gis:rastermask ?mask.
 	
-	?in2 ada:hasElement ?ine. 
+	?ras ada:hasElement ?ine. 
 	?ine ada:hasMeasure ?inm.
 	?ine ada:hasSupport ?ins.
+	
+	?mask ada:hasElement ?me. 
+	?me ada:hasMeasure ?mm.
+	?me ada:hasSupport ?ms.
 	
 	?out ada:hasElement ?oute. 
 	?oute ada:hasMeasure ?outm.

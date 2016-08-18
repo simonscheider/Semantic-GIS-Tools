@@ -1,10 +1,15 @@
 
 # Typing gis:CalculateField
 
-#Set output structure
+# TODO: gis:ObjectDataSet might be too restrictive
+
+# Set output structure
 INSERT { 
 	?out a gis:ObjectDataSet;
-		ada:hasElement [ ada:hasMeasure _:outm; ada:hasSupport _:outs ].
+		ada:hasElement [ 
+			ada:hasMeasure _:outm; 
+			ada:hasSupport _:outs
+		].
 } WHERE {
 	?node a gis:CalculateField;
 			wf:output ?out.

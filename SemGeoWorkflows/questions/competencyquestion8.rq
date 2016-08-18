@@ -1,0 +1,13 @@
+# Test Extract_tif1 dataset
+SELECT DISTINCT ?el ?s ?m ?whole ?ds
+WHERE{
+	<http://geographicknowledge.de/WorkflowExamples#Extract_tif1> ada:hasElement ?el.
+		#a ?type.
+	?el ada:hasSupport ?s.
+	?el ada:hasMeasure ?m.
+	optional {
+		?s ada:partof ?whole.
+		?ds ada:hasElement ?wel.
+		?wel ada:hasAttribute ?whole.
+	}
+}

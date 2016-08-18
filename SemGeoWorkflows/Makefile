@@ -17,3 +17,6 @@ q:
 	
 clean:
 	-@rm output/*
+
+err:
+	-@grep -i error output/workflows_output.rdf

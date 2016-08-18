@@ -2,13 +2,11 @@
 # Typing gis:FeatureToRaster
 
 #Set Input
-INSERT 
-{ 
+INSERT { 
 	?in2 ada:hasElement _:ine. 
-	_:ine ada:hasMeasure _:inm. 
+	_:ine ada:hasMeasure _:inm.
 	_:inm a ada:Quality.
-}
-WHERE{
+}WHERE{
 	?node a gis:FeatureToRaster;
 			gis:inputdata ?in2.
 	FILTER NOT EXISTS{

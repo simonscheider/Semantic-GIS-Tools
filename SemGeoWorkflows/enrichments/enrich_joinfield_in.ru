@@ -2,14 +2,16 @@
 # Set inputs
 INSERT {
 	?in a ada:DataSet;
-		 ada:hasElement [ 
-			ada:hasMeasure [ a ada:Quality ]
+		ada:hasElement [ 
+			ada:hasMeasure [ a ada:Quality ];
+			ada:hasSupport _:ins
 		  ].
 } WHERE {
 	?node a gis:JoinField;
 		  gis:inputdata ?in.
 	FILTER NOT EXISTS { 
-		?in ada:hasElement ?in1.
-		?in1 ada:hasAttribute ?in2.
+		?in ada:hasElement ?ine.
+		?ine ada:hasMeasure ?inm.
+		?ine ada:hasSupport ?ins.
 	}
 }

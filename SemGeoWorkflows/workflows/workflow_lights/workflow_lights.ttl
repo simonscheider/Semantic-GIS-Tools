@@ -52,19 +52,19 @@
 
 # Workflow Node 6
 :wf2_6 rdf:type gis:ExtractByMask;
-	gis:inputdata :F101993_night_lights;
+	gis:inputraster :F101993_night_lights;
 	gis:rastermask :Feature_Chn_1;
 	wf:output :Extract_tif1.
 
 # Workflow Node 7
 :wf2_7 rdf:type gis:ZonalStatisticsAsTable;
-	gis:inputdata :Extract_tif1;
+	gis:inputraster :Extract_tif1;
 	gis:zones :Admin_units;
 	wf:output :ZonalSt_shp2.
 
 # Workflow Node 8
 :wf2_8 rdf:type gis:ZonalStatisticsAsTable;
-	gis:inputdata :Extract_tif2;
+	gis:inputraster :Extract_tif2;
 	gis:zones :Admin_units;
 	wf:output :ZonalSt_shp1.
 
