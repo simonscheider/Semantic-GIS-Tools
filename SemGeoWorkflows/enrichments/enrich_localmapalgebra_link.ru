@@ -6,7 +6,7 @@ INSERT {
 	?outm a gis:QQuality; 
 		gis:ofprop ?inm.
 	?inm a ada:Quality.
-	?ins owl:sameAs ?outs. # supports are the same
+	#?ins owl:sameAs ?outs. # supports are the same
 } WHERE {
 	?node a gis:LocalMapAlgebra;
 		wf:output ?out;

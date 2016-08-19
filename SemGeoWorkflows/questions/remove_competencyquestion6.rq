@@ -1,0 +1,16 @@
+#Get the of property chain
+SELECT ?lumin ?ds ?ofclass #?extracttif ?nightlights
+WHERE {
+?lumin ada:hasElement ?lumine. ?lumine gis:hasAttribute ?luminm.
+FILTER(?lumin = <http://geographicknowledge.de/WorkflowExamples#Luminosity_change>)
+#?zonal2m wf:of ?something. 
+OPTIONAL {
+?b (^gis:ofprop)+ ?luminm.
+FILTER NOT EXISTS{?b gis:ofprop ?somefield}
+?ds  ada:hasElement ?ine. ?ine gis:hasAttribute ?b .
+?b wf:of ?somefield. ?somefield a ?ofclass. 
+FILTER (?ofclass IN (gis:SField, ada:Object, gis:Raster, gis:PointDataSet, gis:ObjectDataSet, gis:LineDataSet, gis:RegionDataSet, gis:SpatialDataSet))
+}
+}
+#?zonal2m wf:ofprop ?zonal1m.
+#?zonal1 ada:hasElememt ?zonal1e. ?zonal1e gis:hasAttribute ?zonal1m.

@@ -110,7 +110,7 @@ def enrich_workflow_tool( g, toolname, tool):
         test = bool(res)
         #assert b
         print(bool(res))
-    
+
     assert growin >= 0
     assert growout >= 0
     assert growlink >= 0
@@ -152,7 +152,7 @@ def test_workflow_lights( g ):
     g = enrich_with_backtracking( g, wfname )
     g = run_propagations( g )
     return g
-    
+
 def checkTool(operation):
     """
     Checks whether enrichment rules are available for operation class
@@ -162,7 +162,7 @@ def checkTool(operation):
     available_tools = [ 'euclideandistancetool', 'polygontoraster','localmapalgebra',
                        'pointtoraster','costdistance','costpath','toline',
                        'erase','intersect','buffer','featuretoraster',
-                       'extractbymask','zonalstatisticsastable','joinfield','calculatefield'] 
+                       'extractbymask','zonalstatisticsastable','joinfield','calculatefield']
     operation = (((str(operation)).rpartition('#'))[2]).lower() #this extracts the toolname from its URI
     #print('operation='+operation)
     if operation in available_tools:
@@ -240,7 +240,7 @@ def run_propagations( g ):
     lcppropagations = ['qquality','path','partof']
     for i in lcppropagations:
         g = enrich_workflow_prop( g, i )
-    
+
     g = run_inferences( g )
     return g
 
@@ -372,19 +372,19 @@ def prefixURI(str):
 def main():
 
     params = sys.argv[1:]
-    
+
     if 'questions' in params:
         # run competency questions
-        assert len(params)==1 
+        assert len(params)==1
         g = load_output_rdf()
         runCompetencyQueries(g)
         print('OK')
         return
-    
+
     # create inmemory store
     g = rdflib.ConjunctiveGraph()
     g = load_ontologies( g )
-    
+
     if 'lights' in params: g = test_workflow_lights( g )
     if 'lcpath' in params: g = test_workflow_lcpath( g )
 
@@ -401,7 +401,7 @@ def main():
     print("Tool Toolname input output link Test: ")
     for i in sorted(tools.toolenrichments, key=lambda wf: wf[0]) :
         print i[0], i[1], i[2], i[3], i[4]
-    
+
     g = run_inferences( g )
     graph_to_file(g)
     print('OK') # end of script

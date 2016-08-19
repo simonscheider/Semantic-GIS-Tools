@@ -3,8 +3,8 @@
 INSERT { 
 ?b wf:of ?something
 } WHERE {
-?a wf:of ?something; (^gis:ofprop)+ ?b.
-FILTER NOT EXISTS{?a gis:ofprop ?something}
+?a wf:of ?something; (^gis:ofprop | owl:sameAs)+ ?b.
+#?a wf:of ?something; (^gis:ofprop)+ ?b.
 }
 
 #Test:
