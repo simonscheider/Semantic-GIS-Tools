@@ -66,6 +66,7 @@
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#costsurface">
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
     </owl:ObjectProperty>
+    
 
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#erasefeature -->
@@ -74,21 +75,7 @@
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
     </owl:ObjectProperty>
     
-    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#rastermask -->
 
-    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#rastermask">
-        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
-    </owl:ObjectProperty>
-
-    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputraster">
-        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
-    </owl:ObjectProperty>
-    
-    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#zones -->
-
-    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#zones">
-        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
-    </owl:ObjectProperty>    
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#hasAttribute -->
 
@@ -102,7 +89,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#hasEnd -->
 
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasEnd">
-        <rdfs:range rdf:resource="&AnalysisData;Object"/>
+        <rdfs:range rdf:resource="&AnalysisData;DataSet"/>
         <rdfs:domain rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Path"/>
     </owl:ObjectProperty>
     
@@ -111,7 +98,7 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#hasStart -->
 
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasStart">
-        <rdfs:range rdf:resource="&AnalysisData;Object"/>
+        <rdfs:range rdf:resource="&AnalysisData;DataSet"/>
         <rdfs:domain rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Path"/>
     </owl:ObjectProperty>
     
@@ -131,6 +118,14 @@
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata">
         <rdfs:comment>Whenever the input is data, and not a single value or a function</rdfs:comment>
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#input"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#inputraster -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputraster">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
     </owl:ObjectProperty>
     
 
@@ -169,6 +164,14 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#rastermask -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#rastermask">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#sink -->
 
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#sink">
@@ -188,6 +191,14 @@
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#source -->
 
     <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#source">
+        <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#zones -->
+
+    <owl:ObjectProperty rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#zones">
         <rdfs:subPropertyOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#inputdata"/>
     </owl:ObjectProperty>
     
@@ -318,16 +329,13 @@
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology"/>
     </owl:Class>
     
-    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Intersect -->
 
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Intersect">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology"/>
-    </owl:Class>
-    
+
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#CalculateField -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#CalculateField">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#Table"/>
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
     </owl:Class>
     
 
@@ -456,6 +464,22 @@
     
 
 
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ExtractByMask -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#ExtractByMask">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#RasterOp"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#FeatureToRaster -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#FeatureToRaster">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#toRaster"/>
+    </owl:Class>
+    
+
+
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldData -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#FieldData">
@@ -511,6 +535,22 @@
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Fun">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Resource"/>
         <rdfs:comment xml:lang="en">The class of functions. This is a general notion for any operation in and outside a database. Has input and output.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#Intersect -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Intersect">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#JoinField -->
+
+    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#JoinField">
+        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
     </owl:Class>
     
 
@@ -645,18 +685,6 @@
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#Path">
         <rdfs:subClassOf rdf:resource="&AnalysisData;Object"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasEnd"/>
-                <owl:someValuesFrom rdf:resource="&AnalysisData;Object"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#hasStart"/>
-                <owl:someValuesFrom rdf:resource="&AnalysisData;Object"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">A single element of a spatial network denoting a spatial path from start object to end object</rdfs:comment>
     </owl:Class>
     
@@ -714,17 +742,6 @@
     </owl:Class>
     
 
-    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#FeatureToRaster -->
-
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#FeatureToRaster">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#toRaster"/>
-    </owl:Class>
-    
-    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ExtractByMask -->
-
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#ExtractByMask">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#RasterOp"/>
-    </owl:Class>
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#QQuality -->
 
@@ -808,12 +825,6 @@
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#RelQ">
         <rdfs:subClassOf rdf:resource="&AnalysisData;Quality"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#of"/>
-                <owl:someValuesFrom rdf:resource="&AnalysisData;DataSet"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">A relational quality</rdfs:comment>
     </owl:Class>
     
@@ -942,11 +953,15 @@
         <rdfs:comment>A trajectory is a continuous function defined over time and ranging over space</rdfs:comment>
     </owl:Class>
     
+
+
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#VectorTopology">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
     </owl:Class>
+    
+
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalMapAlgebra -->
 
@@ -954,23 +969,14 @@
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
     </owl:Class>
     
+
+
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalStatisticsAsTable -->
 
     <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalStatisticsAsTable">
         <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/GISConcepts.rdf#ZonalMapAlgebra"/>
     </owl:Class>
     
-    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#JoinField -->
-
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#JoinField">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
-    </owl:Class>
-
-    <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#CalculateField -->
-
-    <owl:Class rdf:about="http://geographicknowledge.de/vocab/GISConcepts.rdf#CalculateField">
-        <rdfs:subClassOf rdf:resource="http://geographicknowledge.de/vocab/Workflow.rdf#Operation"/>
-    </owl:Class>
 
 
     <!-- http://geographicknowledge.de/vocab/GISConcepts.rdf#toLine -->

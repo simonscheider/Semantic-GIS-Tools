@@ -5,7 +5,7 @@ INSERT
 #GRAPH ?g{
 ?out a gis:Raster. ?outm a gis:Existence ;  wf:of [ a gis:Path].
 ?link2 a gis:Raster. ?linkm a gis:Link.
-?source2 a gis:Raster. ?sourcem a gis:Existence; wf:of [ a ada:Object].
+?source2 a gis:Raster. ?sourcem a gis:Existence; wf:of [ a gis:ObjectDataSet].
 }
 #}
 #SELECT *

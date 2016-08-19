@@ -6,7 +6,7 @@ INSERT
 { 
 #GRAPH ?g{ 
 ?ine ada:hasSupport _:inr. _:inr a gis:Point.
-?in2 a gis:PointDataSet.
+#?in2 a gis:PointDataSet.
 }
 #}
 #SELECT *

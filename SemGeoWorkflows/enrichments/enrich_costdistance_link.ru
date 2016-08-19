@@ -9,7 +9,7 @@ INSERT
 #GRAPH ?g{
 ?out a gis:Raster. ?outm  a gis:Link ; wf:of ?sink2; wf:of ?csm.
 ?cs2 a gis:Raster. ?csm a gis:Cost.
-?sink2 a gis:Raster. ?sinkm a gis:Existence; wf:of _:object. _:object a ada:Object.
+?sink2 a gis:Raster. ?sinkm a gis:Existence; wf:of _:object. _:object a gis:ObjectDataSet.
 }
 #}
 #SELECT *
