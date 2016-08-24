@@ -1,8 +1,6 @@
 
 # Typing gis:ZonalStatisticsAsTable
 
-# TODO: propagate properties of zones?
-
 # Set link
 INSERT {
 	?inm a ada:Quality.
@@ -11,7 +9,8 @@ INSERT {
 	?out wf:of ?in.
 	?ins ada:partOf ?outs.
 	?zos owl:sameAs ?outs.
-	?inm wf:of _:afield . _:afield a gis:SField. #Must be of a field
+	?inm wf:of _:afield. 
+	_:afield a gis:SField. #Must be of a field
 } WHERE {
 	?node a gis:ZonalStatisticsAsTable;
 		wf:output ?out;
