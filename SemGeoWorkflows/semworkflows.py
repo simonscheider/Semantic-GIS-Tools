@@ -148,7 +148,7 @@ def test_workflow_lights( g ):
         print("Load N3 file: "+fn)
         g.parse( fn, format='n3' )
         g = reifyWorkflow(fn, wfname) + g
-    g = run_inferences( g )
+    #g = run_inferences( g )
     g = enrich_with_backtracking( g, wfname )
     g = run_propagations( g )
     return g
@@ -217,7 +217,7 @@ def test_workflow_lcpath( g ):
     for fn in [_dir+"workflow_lcpath.ttl"]:
         print("Load N3 file: "+fn)
         g = reifyWorkflow(fn, wfname) + g
-    g = run_inferences( g )
+    #g = run_inferences( g )
     g = enrich_with_backtracking(g, wfname)
     g = run_propagations( g )
     return g
@@ -370,6 +370,10 @@ def prefixURI(str):
     return str
 
 def main():
+    import time
+
+    start = time.time()
+    # run your code
 
     params = sys.argv[1:]
 
@@ -405,6 +409,9 @@ def main():
     g = run_inferences( g )
     graph_to_file(g)
     print('OK') # end of script
+    end = time.time()
+    elapsed = end - start
+    print('Duration: '+str(elapsed))
 
 if __name__ == '__main__':
     main()

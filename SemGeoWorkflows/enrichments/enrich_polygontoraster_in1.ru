@@ -5,10 +5,9 @@
 #Set Input
 INSERT 
 { 
-#GRAPH ?g{ 
 ?in2 ada:hasElement _:ine. _:ine ada:hasMeasure _:inm. _:inm a ada:Quality.
 }
-#}
+
 #SELECT *
 WHERE{
 #GRAPH ?g{
