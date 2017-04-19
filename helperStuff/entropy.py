@@ -48,6 +48,12 @@ def standardize(n, size):
     max_entropy = np.log(size)
     return (n/max_entropy)
 
+def simpsonIndex(p):
+    p = p/np.sum(p)
+    return np.sum(p*p)
+
+
+
 #This function computes the product of standardized entropy and mean of an array (uniformity level)
 def entropy_measure(p):
     size = len(p)
@@ -84,6 +90,10 @@ def UniformityLevel(fst, snd, trd="", fourth="", fifth=""):
 ## [5.0, 5.0, 5.0, 5.0, 5.0],
 ## [0.0, 0.0, 17.946806, 8.351337]
 ## ]
+##for i in d:
+##    print simpsonIndex(i), standardize(entropyn(i),len(i))
+
+
  #Plot these examples
 ##import matplotlib as mp
 ##import matplotlib.pyplot as plt

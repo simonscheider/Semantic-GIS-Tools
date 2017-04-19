@@ -38,7 +38,7 @@ class OSMLoad(object):
         "station": {"key" : "railway", "value" : "station", "element" : "node"},
         "public transport station": {"key" : "public_transport", "value" : "platform", "element" : "node"},
         "office": {"key" : "office", "value" : "", "element" : "node"},
-        "leasure": {"key" : "leasure", "value" : "", "element" : "node"},
+        "leasure": {"key" : "leisure", "value" : "", "element" : "node"},
         "historic": {"key" : "historic", "value" : "", "element" : "node"},
         "civic building":  {"key" : "building", "value" : "civic", "element" : "area"},
         "school building":  {"key" : "building", "value" : "school", "element" : "area"},
