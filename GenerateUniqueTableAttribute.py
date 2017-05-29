@@ -22,20 +22,15 @@ def updateTableC(table, field):
     for row in cursor:
         number = number + 1
         row[0] = number
-        cursor.updateRow([row])
+        cursor.updateRow(row)
     del row
     del cursor
 
 #updateTableC()
 
-if __name__ == '__main__':
-    #arcpy.env.workspace ='C:\Users\simon\Documents\GitHub\ArcGIS-Tools\TestingStuff'
-    table = 'Roads_2001'
-    field = 'BN2000_'
-    print str(checkUniquness(table, field))
 
+table = 'Roads16'
+field = 'BN2000_'
+print "Test: is the field unique? "+str(checkUniquness(table, field))
+#updateTableC(table, field)
 
-##print arcpy.CheckExtension("spatial")
-##arcpy.env.workspace = "C:\Temp\AdvancedGIS"
-##print arcpy.Describe("endraster").dataType
-##print arcpy.Exists("my_roads_merge.shp")
